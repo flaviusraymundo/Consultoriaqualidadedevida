@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Flourish Consulting - Transform Your Emotional Wellbeing</title>
+    <meta name="description" content="Discover your emotional patterns through Flower Essence Mapping. Join 10,000+ people who transformed their wellbeing with our personalized approach.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Life Flourish Consulting - Flower Essence Mapping">
+    <meta property="og:description" content="Transform your emotional wellbeing with personalized flower essence recommendations">
+    <meta property="og:image" content="https://lifeflourishconsulting.com/images/og-image.jpg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #667eea;
+            --text-dark: #1a202c;
+            --text-gray: #4a5568;
+            --text-light: #718096;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+        
+        body.pt-BR {
+            --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            --primary-color: #2563eb;
+        }
+        
+        /* Header (ajustado para igual ao app) */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-dark);
+            min-width: 0;
+        }
+        
+        .logo-header img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        /* Switch de idioma no estilo do app */
+        .language-switcher {
+            position: relative;
+            display: inline-flex;
+            align-items: stretch;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 2px;
+            gap: 0;
+        }
+        .language-switcher .lang-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 50%;
+            background: #f59e0b; /* amber */
+            transform: translateX(0);
+            transition: transform 0.2s ease;
+            pointer-events: none;
+        }
+        .language-switcher.is-en .lang-indicator {
+            transform: translateX(100%);
+        }
+        .language-switcher button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            min-width: 76px;
+            border-radius: 6px;
+        }
+        .language-switcher button.active {
+            background: #f9fafb;
+        }
+        .language-switcher .flag {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+        }
+        .language-switcher .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            padding: 120px 0 80px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-text p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .hero-bullets {
+            list-style: none;
+            margin: 30px 0;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .hero-bullets li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1em;
+        }
+        
+        .hero-bullets li:before {
+            content: '✓';
+            background: rgba(255,255,255,0.2);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .hero-action {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        .lotus-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+        
+        .hero-action h2 {
+            color: var(--text-dark);
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .cta-button {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .divider:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 20px;
+            position: relative;
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        .restore-form {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .restore-form input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .restore-form button {
+            padding: 12px 24px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: var(--text-gray);
+            font-size: 0.9em;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .section-header p {
+            font-size: 1.2em;
+            color: var(--text-gray);
+        }
+        
+        .process-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .step-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .step-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            font-size: 60px;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .author-info h4 {
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+        
+        .stars {
+            color: #fbbf24;
+            margin-top: 5px;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5em;
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            padding: 100px 0;
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .final-cta p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .final-cta .cta-button {
+            background: white;
+            color: var(--primary-color);
+            display: inline-block;
+            padding: 18px 50px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .final-cta .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5em;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .restore-form {
+                flex-direction: column;
+            }
+            
+            .final-cta h2 {
+                font-size: 2em;
+            }
+            
+            .trust-indicators {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="en-US">
+    <!-- Header (apenas o banner foi ajustado) -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-header">
+                <!-- usa o mesmo logo do app -->
+                <img src="/images/logo.png" alt="Logo">
+                <span class="company-name">Life Flourish Consulting</span>
+            </div>
+
+            <!-- switch de idioma igual ao app -->
+            <div class="language-switcher" aria-label="Language switch">
+                <span class="lang-indicator" aria-hidden="true"></span>
+
+                <button class="lang-pt" onclick="switchLanguage('pt')" title="Português" aria-pressed="false">
+                    <img src="/flags/br.png" alt="Português" class="flag">
+                    <span class="label">Português</span>
+                </button>
+
+                <button class="lang-en" onclick="switchLanguage('en')" title="English" aria-pressed="false">
+                    <img src="/flags/us.png" alt="English" class="flag">
+                    <span class="label">English</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Transform Your Emotional Wellbeing</h1>
+                <p class="hero-subtitle">
+                    Discover your unique emotional patterns and receive personalized flower essence recommendations 
+                    through our innovative mapping method.
+                </p>
+                <ul class="hero-bullets">
+                    <li>10-minute visual assessment</li>
+                    <li>Personalized recommendations</li>
+                    <li>Based on proven methods</li>
+                    <li>10,000+ successful mappings</li>
+                </ul>
+            </div>
+            
+            <div class="hero-action">
+                <img src="/images/lotus-logo.png" alt="Lotus Flower" class="lotus-logo">
+                <h2 class="action-title">Start Your Journey</h2>
+                <button class="cta-button" onclick="startMapping()">
+                    <span class="cta-text">Begin Free Mapping →</span>
+                </button>
+                
+                <div class="divider">
+                    <span class="divider-text">or recover previous session</span>
+                </div>
+                
+                <form class="restore-form" onsubmit="handleRestore(event)">
+                    <input type="email" id="email-input" placeholder="you@example.com" required>
+                    <button type="submit">
+                        <span class="restore-text">Recover</span>
+                    </button>
+                </form>
+                
+                <div id="message-container"></div>
+                
+                <div class="trust-indicators">
+                    <span>🔒 SSL Secured</span>
+                    <span>✨ No registration</span>
+                    <span>💯 Free</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="section-header">
+            <h2 class="process-title">How It Works</h2>
+            <p class="process-subtitle">A simple 3-step journey to self-discovery</p>
+        </div>
+        
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step1-title">Visual Assessment</h3>
+                <p class="step1-desc">
+                    View a series of flower images and classify them based on your immediate emotional response. 
+                    This reveals your subconscious patterns.
+                </p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step2-title">Pattern Analysis</h3>
+                <p class="step2-desc">
+                    Our system analyzes your selections using proven flower essence mapping techniques 
+                    to identify your emotional patterns.
+                </p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step3-title">Personalized Report</h3>
+                <p class="step3-desc">
+                    Receive instant insights about your emotional landscape with optional premium 
+                    recommendations for flower essences.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2 class="testimonials-title">What People Are Saying</h2>
+            <p class="testimonials-subtitle">Join thousands who've transformed their lives</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text testimonial1-text">
+                    "The mapping revealed patterns I wasn't aware of. The flower essence recommendations 
+                    have helped me manage stress in ways I never thought possible."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SJ</div>
+                    <div class="author-info">
+                        <h4 class="author1-name">Sarah Johnson</h4>
+                        <p class="author1-role">Marketing Director</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text testimonial2-text">
+                    "I was skeptical at first, but the accuracy of the emotional patterns identified 
+                    was remarkable. It's been a game-changer for my personal development."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MR</div>
+                    <div class="author-info">
+                        <h4 class="author2-name">Michael Rodriguez</h4>
+                        <p class="author2-role">Entrepreneur</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text testimonial3-text">
+                    "The process is so simple yet profound. In just 10 minutes, I gained insights 
+                    that months of traditional therapy hadn't revealed."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">ET</div>
+                    <div class="author-info">
+                        <h4 class="author3-name">Emma Thompson</h4>
+                        <p class="author3-role">Life Coach</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="section-header">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <p class="faq-subtitle">Everything you need to know</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="q1">Is this really free?</span>
+                </div>
+                <div class="faq-answer">
+                    <span class="a1">Yes! The mapping process and basic insights are completely free. 
+                    We offer an optional premium report with detailed flower essence recommendations 
+                    for those who want deeper guidance.</span>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="q2">How accurate is the mapping?</span>
+                </div>
+                <div class="faq-answer">
+                    <span class="a2">Our method is based on decades of research in flower essence therapy 
+                    and has been validated through over 10,000 successful mappings. Most users report 
+                    80-90% accuracy in identifying their emotional patterns.</span>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="q3">How long does it take?</span>
+                </div>
+                <div class="faq-answer">
+                    <span class="a3">The entire mapping process takes about 10 minutes. You'll view and 
+                    classify images, then select the ones with the strongest emotional impact. 
+                    Your personalized insights are generated instantly.</span>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="q4">Is my data safe?</span>
+                </div>
+                <div class="faq-answer">
+                    <span class="a4">Absolutely. We use SSL encryption for all data transmission. 
+                    We don't require registration and only store your email if you choose to save 
+                    your results. We never share your information with third parties.</span>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="q5">What are flower essences?</span>
+                </div>
+                <div class="faq-answer">
+                    <span class="a5">Flower essences are natural remedies made from the energy imprint 
+                    of flowers. They work on emotional and energetic levels to help restore balance 
+                    and wellbeing. Our mapping helps identify which essences resonate with your 
+                    current emotional state.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2 class="final-title">Ready to Transform Your Life?</h2>
+        <p class="final-subtitle">
+            Join 10,000+ people who've discovered their emotional patterns
+        </p>
+        <a href="#" class="cta-button" onclick="startMapping(); return false;">
+            <span class="final-cta-text">Start Your Free Mapping Now</span>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy" class="privacy-link">Privacy Policy</a>
+                <a href="/terms" class="terms-link">Terms of Service</a>
+                <a href="/contact" class="contact-link">Contact</a>
+            </div>
+            <p class="copyright">© 2024 Life Flourish Consulting. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Detecta domínio e idioma
+        const hostname = window.location.hostname;
+        const isPortuguese = hostname.includes('consultoria') || hostname.includes('qualidade');
+        
+        // Traduções
+        const translations = {
+            en: {
+                companyName: "Life Flourish Consulting",
+                heroTitle: "Transform Your Emotional Wellbeing",
+                heroSubtitle: "Discover your unique emotional patterns and receive personalized flower essence recommendations through our innovative mapping method.",
+                actionTitle: "Start Your Journey",
+                ctaText: "Begin Free Mapping →",
+                dividerText: "or recover previous session",
+                restoreText: "Recover",
+                processTitle: "How It Works",
+                processSubtitle: "A simple 3-step journey to self-discovery",
+                step1Title: "Visual Assessment",
+                step1Desc: "View a series of flower images and classify them based on your immediate emotional response. This reveals your subconscious patterns.",
+                step2Title: "Pattern Analysis",
+                step2Desc: "Our system analyzes your selections using proven flower essence mapping techniques to identify your emotional patterns.",
+                step3Title: "Personalized Report",
+                step3Desc: "Receive instant insights about your emotional landscape with optional premium recommendations for flower essences.",
+                testimonialsTitle: "What People Are Saying",
+                testimonialsSubtitle: "Join thousands who've transformed their lives",
+                testimonial1: "The mapping revealed patterns I wasn't aware of. The flower essence recommendations have helped me manage stress in ways I never thought possible.",
+                testimonial2: "I was skeptical at first, but the accuracy of the emotional patterns identified was remarkable. It's been a game-changer for my personal development.",
+                testimonial3: "The process is so simple yet profound. In just 10 minutes, I gained insights that months of traditional therapy hadn't revealed.",
+                author1Name: "Sarah Johnson",
+                author1Role: "Marketing Director",
+                author2Name: "Michael Rodriguez",
+                author2Role: "Entrepreneur",
+                author3Name: "Emma Thompson",
+                author3Role: "Life Coach",
+                faqTitle: "Frequently Asked Questions",
+                faqSubtitle: "Everything you need to know",
+                q1: "Is this really free?",
+                a1: "Yes! The mapping process and basic insights are completely free. We offer an optional premium report with detailed flower essence recommendations for those who want deeper guidance.",
+                q2: "How accurate is the mapping?",
+                a2: "Our method is based on decades of research in flower essence therapy and has been validated through over 10,000 successful mappings. Most users report 80-90% accuracy in identifying their emotional patterns.",
+                q3: "How long does it take?",
+                a3: "The entire mapping process takes about 10 minutes. You'll view and classify images, then select the ones with the strongest emotional impact. Your personalized insights are generated instantly.",
+                q4: "Is my data safe?",
+                a4: "Absolutely. We use SSL encryption for all data transmission. We don't require registration and only store your email if you choose to save your results. We never share your information with third parties.",
+                q5: "What are flower essences?",
+                a5: "Flower essences are natural remedies made from the energy imprint of flowers. They work on emotional and energetic levels to help restore balance and wellbeing. Our mapping helps identify which essences resonate with your current emotional state.",
+                finalTitle: "Ready to Transform Your Life?",
+                finalSubtitle: "Join 10,000+ people who've discovered their emotional patterns",
+                finalCtaText: "Start Your Free Mapping Now",
+                privacyLink: "Privacy Policy",
+                termsLink: "Terms of Service",
+                contactLink: "Contact",
+                copyright: "© 2024 Life Flourish Consulting. All rights reserved.",
+                targetUrl: "https://terapiafloral.org/?ref=lifeflourish&lang=en"
+            },
+            pt: {
+                companyName: "Consultoria Qualidade de Vida",
+                heroTitle: "Transforme Seu Bem-Estar Emocional",
+                heroSubtitle: "Descubra seus padrões emocionais únicos e receba recomendações personalizadas de essências florais através do nosso método inovador de mapeamento.",
+                actionTitle: "Inicie Sua Jornada",
+                ctaText: "Começar Mapeamento Gratuito →",
+                dividerText: "ou recupere sessão anterior",
+                restoreText: "Recuperar",
+                processTitle: "Como Funciona",
+                processSubtitle: "Uma jornada simples de 3 passos para o autoconhecimento",
+                step1Title: "Avaliação Visual",
+                step1Desc: "Visualize uma série de imagens de flores e classifique-as com base na sua resposta emocional imediata. Isso revela seus padrões subconscientes.",
+                step2Title: "Análise de Padrões",
+                step2Desc: "Nosso sistema analisa suas seleções usando técnicas comprovadas de mapeamento de essências florais para identificar seus padrões emocionais.",
+                step3Title: "Relatório Personalizado",
+                step3Desc: "Receba insights instantâneos sobre seu panorama emocional com recomendações premium opcionais de essências florais.",
+                testimonialsTitle: "O Que as Pessoas Estão Dizendo",
+                testimonialsSubtitle: "Junte-se a milhares que transformaram suas vidas",
+                testimonial1: "O mapeamento revelou padrões dos quais eu não tinha consciência. As recomendações de essências florais me ajudaram a gerenciar o estresse de formas que nunca pensei ser possível.",
+                testimonial2: "Eu estava cético no início, mas a precisão dos padrões emocionais identificados foi notável. Foi um divisor de águas para meu desenvolvimento pessoal.",
+                testimonial3: "O processo é tão simples, mas profundo. Em apenas 10 minutos, obtive insights que meses de terapia tradicional não haviam revelado.",
+                author1Name: "Maria Silva",
+                author1Role: "Diretora de Marketing",
+                author2Name: "João Santos",
+                author2Role: "Empreendedor",
+                author3Name: "Ana Costa",
+                author3Role: "Coach de Vida",
+                faqTitle: "Perguntas Frequentes",
+                faqSubtitle: "Tudo o que você precisa saber",
+                q1: "É realmente gratuito?",
+                a1: "Sim! O processo de mapeamento e insights básicos são completamente gratuitos. Oferecemos um relatório premium opcional com recomendações detalhadas de essências florais para quem deseja orientação mais profunda.",
+                q2: "Qual a precisão do mapeamento?",
+                a2: "Nosso método é baseado em décadas de pesquisa em terapia floral e foi validado através de mais de 10.000 mapeamentos bem-sucedidos. A maioria dos usuários relata 80-90% de precisão na identificação de seus padrões emocionais.",
+                q3: "Quanto tempo demora?",
+                a3: "Todo o processo de mapeamento leva cerca de 10 minutos. Você visualizará e classificará imagens, depois selecionará aquelas com maior impacto emocional. Seus insights personalizados são gerados instantaneamente.",
+                q4: "Meus dados estão seguros?",
+                a4: "Absolutamente. Usamos criptografia SSL para toda transmissão de dados. Não exigimos cadastro e só armazenamos seu e-mail se você escolher salvar seus resultados. Nunca compartilhamos suas informações com terceiros.",
+                q5: "O que são essências florais?",
+                a5: "Essências florais são remédios naturais feitos a partir da impressão energética das flores. Elas trabalham em níveis emocionais e energéticos para ajudar a restaurar o equilíbrio e o bem-estar. Nosso mapeamento ajuda a identificar quais essências ressoam com seu estado emocional atual.",
+                finalTitle: "Pronto para Transformar Sua Vida?",
+                finalSubtitle: "Junte-se a mais de 10.000 pessoas que descobriram seus padrões emocionais",
+                finalCtaText: "Comece Seu Mapeamento Gratuito Agora",
+                privacyLink: "Política de Privacidade",
+                termsLink: "Termos de Serviço",
+                contactLink: "Contato",
+                copyright: "© 2024 Consultoria Qualidade de Vida. Todos os direitos reservados.",
+                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=pt"
+            }
+        };
+        
+        let currentLang = isPortuguese ? 'pt' : 'en';
+        // Aplica idioma inicial (atualiza também o header e o indicador)
+        switchLanguage(currentLang);
+        
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            // Atualiza classe do body
+            document.body.className = lang === 'pt' ? 'pt-BR' : 'en-US';
+            
+            // Atualiza botões de idioma (active + aria-pressed)
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
+            const currentBtn = document.querySelector(`.lang-${lang}`);
+            if (currentBtn) {
+                currentBtn.classList.add('active');
+                currentBtn.setAttribute('aria-pressed', 'true');
+            }
+
+            // Indicador deslizante (estilo do app)
+            const switcher = document.querySelector('.language-switcher');
+            if (switcher) switcher.classList.toggle('is-en', lang === 'en');
+            
+            // Atualiza todos os textos
+            document.querySelector('.company-name').textContent = t.companyName;
+            document.querySelector('.hero-title').textContent = t.heroTitle;
+            document.querySelector('.hero-subtitle').textContent = t.heroSubtitle;
+            document.querySelector('.action-title').textContent = t.actionTitle;
+            document.querySelector('.cta-text').textContent = t.ctaText;
+            document.querySelector('.divider-text').textContent = t.dividerText;
+            document.querySelector('.restore-text').textContent = t.restoreText;
+            
+            // Process section
+            document.querySelector('.process-title').textContent = t.processTitle;
+            document.querySelector('.process-subtitle').textContent = t.processSubtitle;
+            document.querySelector('.step1-title').textContent = t.step1Title;
+            document.querySelector('.step1-desc').textContent = t.step1Desc;
+            document.querySelector('.step2-title').textContent = t.step2Title;
+            document.querySelector('.step2-desc').textContent = t.step2Desc;
+            document.querySelector('.step3-title').textContent = t.step3Title;
+            document.querySelector('.step3-desc').textContent = t.step3Desc;
+            
+            // Testimonials
+            document.querySelector('.testimonials-title').textContent = t.testimonialsTitle;
+            document.querySelector('.testimonials-subtitle').textContent = t.testimonialsSubtitle;
+            document.querySelector('.testimonial1-text').textContent = t.testimonial1;
+            document.querySelector('.testimonial2-text').textContent = t.testimonial2;
+            document.querySelector('.testimonial3-text').textContent = t.testimonial3;
+            document.querySelector('.author1-name').textContent = t.author1Name;
+            document.querySelector('.author1-role').textContent = t.author1Role;
+            document.querySelector('.author2-name').textContent = t.author2Name;
+            document.querySelector('.author2-role').textContent = t.author2Role;
+            document.querySelector('.author3-name').textContent = t.author3Name;
+            document.querySelector('.author3-role').textContent = t.author3Role;
+            
+            // FAQ
+            document.querySelector('.faq-title').textContent = t.faqTitle;
+            document.querySelector('.faq-subtitle').textContent = t.faqSubtitle;
+            document.querySelector('.q1').textContent = t.q1;
+            document.querySelector('.a1').textContent = t.a1;
+            document.querySelector('.q2').textContent = t.q2;
+            document.querySelector('.a2').textContent = t.a2;
+            document.querySelector('.q3').textContent = t.q3;
+            document.querySelector('.a3').textContent = t.a3;
+            document.querySelector('.q4').textContent = t.q4;
+            document.querySelector('.a4').textContent = t.a4;
+            document.querySelector('.q5').textContent = t.q5;
+            document.querySelector('.a5').textContent = t.a5;
+            
+            // Final CTA
+            document.querySelector('.final-title').textContent = t.finalTitle;
+            document.querySelector('.final-subtitle').textContent = t.finalSubtitle;
+            document.querySelector('.final-cta-text').textContent = t.finalCtaText;
+            
+            // Footer
+            document.querySelector('.privacy-link').textContent = t.privacyLink;
+            document.querySelector('.terms-link').textContent = t.termsLink;
+            document.querySelector('.contact-link').textContent = t.contactLink;
+            document.querySelector('.copyright').textContent = t.copyright;
+        }
+        
+        function startMapping() {
+            const t = translations[currentLang];
+            window.location.href = t.targetUrl;
+        }
+        
+        async function handleRestore(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-input').value;
+            
+            // Implementar lógica de recuperação
+            try {
+                const backendUrl = 'https://qualidadedevida-terapiafloral.com/.netlify/functions/get-latest-selection';
+                const response = await fetch(`${backendUrl}?email=${encodeURIComponent(email)}`);
+                
+                if (response.ok) {
+                    const params = new URLSearchParams({
+                        ref: currentLang === 'pt' ? 'consultoria' : 'lifeflourish',
+                        lang: currentLang,
+                        restore_email: email
+                    });
+                    window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
+        
+        // Scroll suave para CTAs
+        document.querySelectorAll('a[href="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
