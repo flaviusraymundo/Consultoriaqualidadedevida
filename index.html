@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultoria Qualidade de Vida - Transforme Seu Bem-Estar Emocional</title>
     <meta name="description" content="Descubra seus padrões emocionais através do Mapeamento de Essências Florais. Junte-se a mais de 10.000 pessoas que transformaram seu bem-estar com nossa abordagem personalizada.">
@@ -342,11 +343,17 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.12);
         }
-        
+        /* ADICIONAR: moldura turquesa nos cards 1 e 3 */
+        .process-steps .step-card:nth-child(1),
+        .process-steps .step-card:nth-child(3) {
+          border: 3px solid var(--primary-color);
+          box-shadow: 0 6px 25px rgba(32, 178, 170, 0.25);
+        }
+
         .step-number {
             width: 50px;
             height: 50px;
-            background: var(--primary-gradient);
+            background: var(--primary-color);
             color: white;
             border-radius: 50%;
             display: flex;
@@ -529,9 +536,20 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
+        /* AJUSTE: botão final turquesa */
+        .final-cta .cta-button {
+          background: var(--primary-color);
+          color: white;
+          display: inline-block;
+          padding: 18px 50px;
+          font-size: 1.2em;
+          text-decoration: none;
+          border-radius: 50px;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
         .final-cta .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+          transform: translateY(-3px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         footer {
