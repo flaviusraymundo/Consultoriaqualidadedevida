@@ -343,12 +343,13 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.12);
         }
-        /* ADICIONAR: moldura turquesa nos cards 1 e 3 */
-        .process-steps .step-card:nth-child(1),
-        .process-steps .step-card:nth-child(3) {
+        
+        /* MOLDURA: todos os step-card */
+        .process-steps .step-card {
           border: 3px solid var(--primary-color);
           box-shadow: 0 6px 25px rgba(32, 178, 170, 0.25);
         }
+
 
         .step-number {
             width: 50px;
@@ -390,11 +391,14 @@
         }
         
         .testimonial-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            position: relative;
+          background: #f8f9fa;
+          border: 3px solid var(--primary-color);
+          border-radius: 15px;
+          padding: 30px;
+          position: relative;
+          box-shadow: 0 6px 25px rgba(32, 178, 170, 0.12);
         }
+
         
         .testimonial-card::before {
             content: '"';
@@ -424,7 +428,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--primary-gradient);
+            background: var(--primary-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -508,10 +512,10 @@
         }
 
         .final-cta {
-            padding: 100px 0;
-            background: var(--primary-gradient);
-            color: white;
-            text-align: center;
+          padding: 100px 0;
+          background: var(--primary-color); /* era var(--primary-gradient) */
+          color: white;
+          text-align: center;
         }
         
         .final-cta h2 {
@@ -526,20 +530,8 @@
         }
         
         .final-cta .cta-button {
-            background: white;
-            color: var(--primary-color);
-            display: inline-block;
-            padding: 18px 50px;
-            font-size: 1.2em;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        /* AJUSTE: botão final turquesa */
-        .final-cta .cta-button {
-          background: var(--primary-color);
-          color: white;
+          background: #ffffff;
+          color: #111111;          /* texto preto */
           display: inline-block;
           padding: 18px 50px;
           font-size: 1.2em;
@@ -547,6 +539,9 @@
           border-radius: 50px;
           transition: transform 0.3s, box-shadow 0.3s;
         }
+        
+        .cta-button { background: var(--primary-color); color: white; }
+
         .final-cta .cta-button:hover {
           transform: translateY(-3px);
           box-shadow: 0 20px 40px rgba(0,0,0,0.2);
