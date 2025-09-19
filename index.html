@@ -1628,50 +1628,92 @@
             });
             window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
+
+        function showMessage(text, type = 'info') {
+            const container = document.getElementById('message-container');
+            if (container) {
+                const bgColor = type === 'error' ? '#fee' : '#efe';
+                const textColor = type === 'error' ? '#c33' : '#363';
+                const borderColor = type === 'error' ? '#fcc' : '#cfc';
+                
+                container.innerHTML = `<div style="padding: 10px; margin-top: 10px; border-radius: 5px; background: ${bgColor}; color: ${textColor}; border: 1px solid ${borderColor}; font-size: 14px;">${text}</div>`;
+                
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 5000);
+            }
+        }
         
         async function handleRestore(event) {
             event.preventDefault();
             const email = document.getElementById('email-input').value;
             
+            if (!email.trim()) return;
+            
             trackLandingEvent('restore_attempted', { email_provided: !!email });
+            
+            // Mostrar estado de carregamento
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.disabled = true;
+            button.textContent = currentLang === 'pt' ? 'Restaurando...' : 'Restoring...';
             
             try {
                 const backendUrl = 'https://qualidadedevida-terapiafloral.netlify.app/.netlify/functions/get-latest-selection';
-                const response = await fetch(`${backendUrl}?email=${encodeURIComponent(email)}`);
+                const url = `${backendUrl}?email=${encodeURIComponent(email)}`;
                 
-                if (response.ok) {
-                    trackLandingEvent('restore_successful');
-                    const params = new URLSearchParams({
-                        ref: 'consultoria',
-                        lang: currentLang,
-                        restore_email: email,
-                        skip_welcome: '1'
-                    });
-                    window.location.href = `https://terapiafloral.org/?${params.toString()}`;
-                } else {
-                    trackLandingEvent('restore_failed', { error: 'not_found' });
-                    const message = currentLang === 'pt' ? 
-                        'E-mail não encontrado. Tente começar um novo mapeamento.' :
-                        'Email not found. Try starting a new mapping.';
-                    showMessage(message, 'error');
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json",
+                    },
+                });
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('NOT_FOUND');
+                    }
+                    throw new Error(`HTTP_${response.status}`);
                 }
+                
+                const data = await response.json();
+                
+                // Verificar se há dados válidos
+                if (data.status === "empty_selection" || !data.selection || data.selection.length === 0) {
+                    throw new Error('NO_SELECTION');
+                }
+                
+                // Sucesso - redirecionar
+                trackLandingEvent('restore_successful');
+                const params = new URLSearchParams({
+                    ref: 'consultoria',
+                    lang: currentLang,
+                    restore_email: email,
+                    skip_welcome: '1'
+                });
+                window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+                
             } catch (error) {
-                console.error('Error:', error);
-                trackLandingEvent('restore_failed', { error: 'network_error' });
-                const message = currentLang === 'pt' ? 
-                    'Erro de conexão. Tente novamente.' :
-                    'Connection error. Please try again.';
+                console.error('Erro na restauração:', error);
+                
+                let message;
+                if (error.message === 'NOT_FOUND' || error.message === 'NO_SELECTION') {
+                    trackLandingEvent('restore_failed', { error: 'not_found' });
+                    message = currentLang === 'pt' ? 
+                        'E-mail não encontrado ou sem seleção salva.' :
+                        'Email not found or no saved selection.';
+                } else {
+                    trackLandingEvent('restore_failed', { error: 'network_error' });
+                    message = currentLang === 'pt' ? 
+                        'Erro de conexão. Tente novamente.' :
+                        'Connection error. Please try again.';
+                }
+                
                 showMessage(message, 'error');
-            }
-        }
-
-        function showMessage(text, type = 'info') {
-            const container = document.getElementById('message-container');
-            if (container) {
-                container.innerHTML = `<div class="message ${type}" style="padding: 10px; margin-top: 10px; border-radius: 5px; ${type === 'error' ? 'background: #fee; color: #c33; border: 1px solid #fcc;' : 'background: #efe; color: #363; border: 1px solid #cfc;'}">${text}</div>`;
-                setTimeout(() => {
-                    container.innerHTML = '';
-                }, 5000);
+            } finally {
+                // Restaurar botão
+                button.disabled = false;
+                button.textContent = originalText;
             }
         }
 
