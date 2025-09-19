@@ -1628,110 +1628,25 @@
             });
             window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
-
-        function showMessage(text, type = 'info') {
-            const container = document.getElementById('message-container');
-            if (container) {
-                const bgColor = type === 'error' ? '#fee' : '#efe';
-                const textColor = type === 'error' ? '#c33' : '#363';
-                const borderColor = type === 'error' ? '#fcc' : '#cfc';
                 
-                container.innerHTML = `<div style="padding: 10px; margin-top: 10px; border-radius: 5px; background: ${bgColor}; color: ${textColor}; border: 1px solid ${borderColor}; font-size: 14px;">${text}</div>`;
-                
-                setTimeout(() => {
-                    container.innerHTML = '';
-                }, 5000);
-            }
-        }
-        
         async function handleRestore(event) {
             event.preventDefault();
             const email = document.getElementById('email-input').value;
             
-            console.log('=== DEBUG RESTORE ===');
-            console.log('Email:', email);
-            
-            if (!email.trim()) {
-                console.log('Email vazio');
-                return;
-            }
+            if (!email.trim()) return;
             
             trackLandingEvent('restore_attempted', { email_provided: !!email });
             
-            try {
-                const backendUrl = 'https://qualidadedevida-terapiafloral.netlify.app/.netlify/functions/get-latest-selection';
-                const url = `${backendUrl}?email=${encodeURIComponent(email)}`;
-                
-                console.log('URL completa:', url);
-                console.log('Iniciando fetch...');
-                
-                const response = await fetch(url, {
-                    method: "GET",
-                    headers: {
-                        "Accept": "application/json",
-                    },
-                });
-                
-                console.log('Response recebida:', {
-                    status: response.status,
-                    statusText: response.statusText,
-                    ok: response.ok,
-                    headers: Object.fromEntries(response.headers.entries())
-                });
-                
-                if (!response.ok) {
-                    console.log('Response não OK');
-                    if (response.status === 404) {
-                        throw new Error('NOT_FOUND');
-                    }
-                    throw new Error(`HTTP_${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log('Dados recebidos:', data);
-                
-                if (data.status === "empty_selection" || !data.selection || data.selection.length === 0) {
-                    console.log('Sem seleção válida');
-                    throw new Error('NO_SELECTION');
-                }
-                
-                console.log('Sucesso! Redirecionando...');
-                trackLandingEvent('restore_successful');
-                
-                const params = new URLSearchParams({
-                    ref: 'consultoria',
-                    lang: currentLang,
-                    restore_email: email,
-                    skip_welcome: '1'
-                });
-                
-                const redirectUrl = `https://terapiafloral.org/?${params.toString()}`;
-                console.log('URL de redirecionamento:', redirectUrl);
-                
-                window.location.href = redirectUrl;
-                
-            } catch (error) {
-                console.error('=== ERRO DETALHADO ===');
-                console.error('Tipo do erro:', typeof error);
-                console.error('Message:', error.message);
-                console.error('Stack:', error.stack);
-                console.error('Error completo:', error);
-                
-                let message;
-                if (error.message === 'NOT_FOUND' || error.message === 'NO_SELECTION') {
-                    trackLandingEvent('restore_failed', { error: 'not_found' });
-                    message = currentLang === 'pt' ? 
-                        'E-mail não encontrado ou sem seleção salva.' :
-                        'Email not found or no saved selection.';
-                } else {
-                    trackLandingEvent('restore_failed', { error: 'network_error' });
-                    message = currentLang === 'pt' ? 
-                        'Erro de conexão. Tente novamente.' :
-                        'Connection error. Please try again.';
-                }
-                
-                showMessage(message, 'error');
-            }
+            // Em vez de fazer fetch aqui, redireciona direto para o app com o email
+            // O app fará a requisição (que funciona porque ele está no domínio correto)
+            const params = new URLSearchParams({
+                ref: 'consultoria',
+                lang: currentLang,
+                restore_email: email,
+                skip_welcome: '1'
+            });
+            
+            window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
 
         // FAQ functionality
