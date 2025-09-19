@@ -160,41 +160,11 @@
             z-index: 1;
         }
         
-        /* Flower decorative elements */
-        .flower-decor {
-            position: absolute;
-            z-index: 0;
-            opacity: 0.8;
-            pointer-events: none;
-        }
-
-        .flower-hero-1 {
-            width: 120px;
-            top: -40px;
-            left: -40px;
-            transform: rotate(-15deg);
-        }
-
-        .flower-hero-2 {
-            width: 80px;
-            bottom: 20px;
-            right: 20px;
-            transform: rotate(25deg);
-        }
-
-        .flower-divider {
-            width: 60px;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-
-        .hero-text {
-            position: relative;
-        }
-
-        .hero-text h1, .hero-text p, .hero-bullets {
-            position: relative;
-            z-index: 1;
+        .hero-text h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .hero-text p {
@@ -443,7 +413,7 @@
 
         .benefit-card {
             padding: 30px;
-            text-align: center;
+            text-align: left;
             border-radius: 15px;
             background: #f8f9fa;
             border: 2px solid #e9ecef;
@@ -872,8 +842,6 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <img src="./images/flower-pink.jpg" alt="Flor rosa" class="flower-decor flower-hero-1">
-                <img src="./images/flower-purple.jpg" alt="Flor roxa" class="flower-decor flower-hero-2">
                 <h1 class="hero-title">Transforme seu bem-estar mental e emocional</h1>
                 <p class="hero-subtitle">
                     Faça seu auto-mapeamento online gratuitamente e receba sua fórmula em casa (opcional). 
@@ -1003,9 +971,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Flower Divider -->
-    <div class="flower-divider"></div>
 
     <section class="about-therapist">
         <div class="section-header">
@@ -1503,7 +1468,7 @@
             
             const credentialItems = document.querySelectorAll('.credential-item');
             if (credentialItems.length >= 6) {
-                credentialItems[0].innerHTML = `<strong>20+ ${lang === 'pt' ? 'anos' : 'years'}</strong> ${lang === 'pt' ? 'em consultoria de Terapia Floral (indivíduos e empresas)' : 'in Flower Therapy consulting (individuals and companies)'}`;
+                credentialItems[0].innerHTML = `<strong>20+ anos</strong> ${t.credential1.replace('20+ anos em consultoria de Terapia Floral (indivíduos e empresas)', 'em consultoria de Terapia Floral (indivíduos e empresas)')}`;
                 credentialItems[1].innerHTML = `<strong>${lang === 'pt' ? 'Pós-graduação em Terapia Floral' : 'Postgraduate in Flower Therapy'}</strong> FACIS/IBEHE (2002)`;
                 credentialItems[2].innerHTML = `<strong>${lang === 'pt' ? 'Formação na Academia LiFE Australiana' : 'Training at LiFE Australian Academy'}</strong> (2006)`;
                 credentialItems[3].innerHTML = `<strong>${lang === 'pt' ? 'Congresso Internacional' : 'International Congress'}</strong> (2000)`;
