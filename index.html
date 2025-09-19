@@ -798,6 +798,38 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Override white text - Option 1: Cinza azulado #334155 */
+        .hero,
+        .hero h1,
+        .hero p,
+        .hero li,
+        .final-cta,
+        .final-cta h2,
+        .final-cta p,
+        .cookie-banner,
+        .cookie-text,
+        footer,
+        footer p,
+        footer a,
+        .author-avatar {
+            color: #334155 !important;
+        }
+
+        /* Button text adjustments */
+        .hero .cta-button,
+        .hero .cta-button .cta-text {
+            color: #334155 !important;
+        }
+
+        .final-cta .cta-button {
+            color: #111111 !important;
+        }
+
+        /* Keep some elements white on dark backgrounds */
+        .step-number {
+            color: white !important;
+        }
     </style>
 </head>
 <body class="pt-BR">
@@ -1123,11 +1155,11 @@
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="https://www.terapiafloral.org/politica-privacidade.html">Política de Privacidade</a>
-                <a href="https://www.terapiafloral.org/termos-de-servico.html">Termos de Serviço</a>
+                <a href="/privacy">Política de Privacidade</a>
+                <a href="/terms">Termos de Serviço</a>
                 <a href="/contact">Contato</a>
             </div>
-            <p>© 2025 Flavius Raymundo. Todos os direitos reservados.</p>
+            <p>© 2024 Consultoria Qualidade de Vida. Todos os direitos reservados.</p>
         </div>
     </footer>
 
