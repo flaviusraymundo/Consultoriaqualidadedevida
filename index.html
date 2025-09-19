@@ -1637,13 +1637,12 @@
             
             trackLandingEvent('restore_attempted', { email_provided: !!email });
             
-            // Em vez de fazer fetch aqui, redireciona direto para o app com o email
-            // O app fará a requisição (que funciona porque ele está no domínio correto)
+            // Usar parâmetro específico para restauração
             const params = new URLSearchParams({
                 ref: 'consultoria',
                 lang: currentLang,
                 restore_email: email,
-                skip_welcome: '1'
+                action: 'restore'  // Parâmetro específico para restauração
             });
             
             window.location.href = `https://terapiafloral.org/?${params.toString()}`;
