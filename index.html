@@ -1619,7 +1619,14 @@
                 button_type: 'main_cta',
                 target_url: t.targetUrl 
             });
-            window.location.href = t.targetUrl;
+            
+            // Adicionar parâmetros para pular welcome page e manter idioma
+            const params = new URLSearchParams({
+                ref: 'consultoria',
+                lang: currentLang,
+                skip_welcome: '1'
+            });
+            window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
         
         async function handleRestore(event) {
@@ -1629,7 +1636,7 @@
             trackLandingEvent('restore_attempted', { email_provided: !!email });
             
             try {
-                const backendUrl = 'https://qualidadedevida-terapiafloral.com/.netlify/functions/get-latest-selection';
+                const backendUrl = 'https://qualidadedevida-terapiafloral.netlify.app/.netlify/functions/get-latest-selection';
                 const response = await fetch(`${backendUrl}?email=${encodeURIComponent(email)}`);
                 
                 if (response.ok) {
@@ -1637,7 +1644,8 @@
                     const params = new URLSearchParams({
                         ref: 'consultoria',
                         lang: currentLang,
-                        restore_email: email
+                        restore_email: email,
+                        skip_welcome: '1'
                     });
                     window.location.href = `https://terapiafloral.org/?${params.toString()}`;
                 } else {
