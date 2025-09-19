@@ -142,20 +142,6 @@
             background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
             animation: float 20s infinite linear;
         }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            background: url('/images/flower-purple.jpg') no-repeat center;
-            background-size: contain;
-            opacity: 0.1;
-            filter: brightness(2);
-            z-index: 0;
-        }
         
         @keyframes float {
             0% { transform: translateX(0); }
@@ -427,55 +413,11 @@
 
         .benefit-card {
             padding: 30px;
-            text-align: center;
+            text-align: left;
             border-radius: 15px;
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .benefit-card::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.15;
-            z-index: 0;
-        }
-
-        .benefit-card:nth-child(1)::before {
-            background-image: url('/images/flower-kangaroo.jpg');
-        }
-
-        .benefit-card:nth-child(2)::before {
-            background-image: url('/images/flower-red.jpg');
-        }
-
-        .benefit-card:nth-child(3)::before {
-            background-image: url('/images/aborigine-australian.jpg');
-        }
-
-        .benefit-card:nth-child(4)::before {
-            background-image: url('/images/flower-yellow.jpg');
-        }
-
-        .benefit-card:nth-child(5)::before {
-            background-image: url('/images/flower-eucalyptus.jpg');
-        }
-
-        .benefit-card:nth-child(6)::before {
-            background-image: url('/images/flower-pink.jpg');
-        }
-
-        .benefit-card h3, .benefit-card p {
-            position: relative;
-            z-index: 1;
         }
 
         .benefit-card:hover {
@@ -1030,9 +972,6 @@
         </div>
     </section>
 
-    <!-- Flower Divider -->
-    <div class="flower-divider"></div>
-
     <section class="about-therapist">
         <div class="section-header">
             <h2>Sobre o terapeuta</h2>
@@ -1529,7 +1468,7 @@
             
             const credentialItems = document.querySelectorAll('.credential-item');
             if (credentialItems.length >= 6) {
-                credentialItems[0].innerHTML = `<strong>20+ ${lang === 'pt' ? 'anos' : 'years'}</strong> ${lang === 'pt' ? 'em consultoria de Terapia Floral (indivíduos e empresas)' : 'in Flower Therapy consulting (individuals and companies)'}`;
+                credentialItems[0].innerHTML = `<strong>20+ anos</strong> ${t.credential1.replace('20+ anos em consultoria de Terapia Floral (indivíduos e empresas)', 'em consultoria de Terapia Floral (indivíduos e empresas)')}`;
                 credentialItems[1].innerHTML = `<strong>${lang === 'pt' ? 'Pós-graduação em Terapia Floral' : 'Postgraduate in Flower Therapy'}</strong> FACIS/IBEHE (2002)`;
                 credentialItems[2].innerHTML = `<strong>${lang === 'pt' ? 'Formação na Academia LiFE Australiana' : 'Training at LiFE Australian Academy'}</strong> (2006)`;
                 credentialItems[3].innerHTML = `<strong>${lang === 'pt' ? 'Congresso Internacional' : 'International Congress'}</strong> (2000)`;
