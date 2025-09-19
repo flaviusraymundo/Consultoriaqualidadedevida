@@ -1648,19 +1648,22 @@
             event.preventDefault();
             const email = document.getElementById('email-input').value;
             
-            if (!email.trim()) return;
+            console.log('=== DEBUG RESTORE ===');
+            console.log('Email:', email);
+            
+            if (!email.trim()) {
+                console.log('Email vazio');
+                return;
+            }
             
             trackLandingEvent('restore_attempted', { email_provided: !!email });
-            
-            // Mostrar estado de carregamento
-            const button = event.target.querySelector('button[type="submit"]');
-            const originalText = button.textContent;
-            button.disabled = true;
-            button.textContent = currentLang === 'pt' ? 'Restaurando...' : 'Restoring...';
             
             try {
                 const backendUrl = 'https://qualidadedevida-terapiafloral.netlify.app/.netlify/functions/get-latest-selection';
                 const url = `${backendUrl}?email=${encodeURIComponent(email)}`;
+                
+                console.log('URL completa:', url);
+                console.log('Iniciando fetch...');
                 
                 const response = await fetch(url, {
                     method: "GET",
@@ -1669,7 +1672,15 @@
                     },
                 });
                 
+                console.log('Response recebida:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    ok: response.ok,
+                    headers: Object.fromEntries(response.headers.entries())
+                });
+                
                 if (!response.ok) {
+                    console.log('Response não OK');
                     if (response.status === 404) {
                         throw new Error('NOT_FOUND');
                     }
@@ -1677,24 +1688,34 @@
                 }
                 
                 const data = await response.json();
+                console.log('Dados recebidos:', data);
                 
-                // Verificar se há dados válidos
                 if (data.status === "empty_selection" || !data.selection || data.selection.length === 0) {
+                    console.log('Sem seleção válida');
                     throw new Error('NO_SELECTION');
                 }
                 
-                // Sucesso - redirecionar
+                console.log('Sucesso! Redirecionando...');
                 trackLandingEvent('restore_successful');
+                
                 const params = new URLSearchParams({
                     ref: 'consultoria',
                     lang: currentLang,
                     restore_email: email,
                     skip_welcome: '1'
                 });
-                window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+                
+                const redirectUrl = `https://terapiafloral.org/?${params.toString()}`;
+                console.log('URL de redirecionamento:', redirectUrl);
+                
+                window.location.href = redirectUrl;
                 
             } catch (error) {
-                console.error('Erro na restauração:', error);
+                console.error('=== ERRO DETALHADO ===');
+                console.error('Tipo do erro:', typeof error);
+                console.error('Message:', error.message);
+                console.error('Stack:', error.stack);
+                console.error('Error completo:', error);
                 
                 let message;
                 if (error.message === 'NOT_FOUND' || error.message === 'NO_SELECTION') {
@@ -1710,10 +1731,6 @@
                 }
                 
                 showMessage(message, 'error');
-            } finally {
-                // Restaurar botão
-                button.disabled = false;
-                button.textContent = originalText;
             }
         }
 
