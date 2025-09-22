@@ -171,13 +171,15 @@
           letter-spacing: -0.01em;
         }
         
-        /* subtítulo: sem <br> no desktop, com <br> no mobile */
+        /* Subtítulo: 3 linhas no desktop; sem <br> */
         .hero-subtitle { text-wrap: pretty; }
-        .hero-subtitle br { display: none; }
-        @media (max-width: 768px) {
-          .hero-subtitle br { display: inline; }
-        }
+        .hero-subtitle .l1,
+        .hero-subtitle .l2,
+        .hero-subtitle .l3 { display: block; }
         
+        @media (max-width: 768px) {
+          .hero-subtitle { text-wrap: balance; }
+        }       
         .hero-text p {
           font-size: 1.3em;
           margin-bottom: 30px;
@@ -939,7 +941,9 @@
             <div class="hero-text">
                 <h1 class="hero-title">Transforme seu bem-estar mental e emocional</h1>
                 <p class="hero-subtitle">
-                    Auto-mapeamento online gratuito. Método rápido e profundo que<br>indica essências florais sob medida.
+                  <span class="l1">Auto-mapeamento online gratuito.</span>
+                  <span class="l2">Método rápido e profundo que indica</span>
+                  <span class="l3">essências florais sob medida.</span>                    
                 </p>
                 <ul class="hero-bullets">
                     <li class="bullet-1">Avaliação visual gratuita<br>em ~10 minutos</li>
