@@ -187,18 +187,25 @@
           animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
-        .hero-bullets {
-          list-style: none;
-          margin: 30px 0;
-          animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-        /* bullets com <br>: só no mobile */
-        .hero-bullets li br { display: none; }
-        @media (max-width: 768px) {
-          .hero-bullets li br { display: inline; }
+        /* === HERO: bullets alinhados === */
+        .hero-bullets { 
+          list-style: none; 
+          margin: 30px 0; 
+          padding-left: 0;
         }
         
-        .hero-bullets li:before {
+        /* Ícone e texto na mesma linha */
+        .hero-bullets li {
+          display: flex;
+          align-items: center;   /* verticalmente central */
+          gap: 12px;
+          padding: 10px 0;
+          font-size: 1.1em;
+          line-height: 1.4;
+        }
+        
+        /* Seu ícone (mantém o que já tinha) */
+        .hero-bullets li::before {
           content: '✓';
           background: rgba(255,255,255,0.2);
           width: 24px;
@@ -208,6 +215,20 @@
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+        }
+        
+        /* Quebra do bullet-1: 1 linha desktop, 2 no mobile (se estiver usando spans L1/L2) */
+        .bullet-1 .l1, .bullet-1 .l2 { display: inline; }
+        .bullet-1 .l1::after { content: " "; }
+        @media (max-width: 768px) {
+          .bullet-1 .l1, .bullet-1 .l2 { display: block; }
+          .bullet-1 .l1::after { content: ""; }
+        }
+        
+        /* Se ainda usar <br> nos bullets, mantém: oculto no desktop, visível no mobile */
+        .hero-bullets li br { display: none; }
+        @media (max-width: 768px) {
+          .hero-bullets li br { display: inline; }
         }
         
         /* card lateral */
