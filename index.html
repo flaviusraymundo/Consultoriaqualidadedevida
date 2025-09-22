@@ -1365,7 +1365,11 @@
             pt: {
                 companyName: "Consultoria Qualidade de Vida",
                 heroTitle: "Transforme seu bem-estar mental e emocional",
-                heroSubtitle: "Faça seu auto-mapeamento online gratuitamente. Método rápido e profundo que indica essências florais sob medida.",
+                heroSubtitleL1: "Auto-mapeamento online gratuito.",
+                heroSubtitleL2: "Método rápido e profundo que indica",
+                heroSubtitleL3: "essências florais sob medida.",
+                bullet1L1: "Avaliação visual gratuita",
+                bullet1L2: "em ~10 minutos",
                 actionTitle: "Começar agora",
                 ctaText: "Começar Mapeamento Gratuito →",
                 dividerText: "ou retomar sessão",
@@ -1515,221 +1519,188 @@
         let currentLang = 'pt'; // Default Portuguese for this domain
 
         function switchLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
-            
-            // Update body class
-            document.body.className = lang === 'pt' ? 'pt-BR' : 'en-US';
-            
-            // Update language buttons
-            document.querySelectorAll('.language-switcher button').forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-pressed', 'false');
-            });
-            const currentBtn = document.querySelector(`.lang-${lang}`);
-            if (currentBtn) {
-                currentBtn.classList.add('active');
-                currentBtn.setAttribute('aria-pressed', 'true');
-            }
-
-            // Update language indicator
-            const switcher = document.querySelector('.language-switcher');
-            if (switcher) switcher.classList.toggle('is-en', lang === 'en');
-            
-            // Update texts
-            document.querySelector('.company-name').textContent = t.companyName;
-            document.querySelector('.hero-title').textContent = t.heroTitle;
-            
-            const sub = document.querySelector('.hero-subtitle');
-            const b1  = document.querySelector('.bullet-1');
-            
-            if (lang === 'pt') {
-              // PT: 3 linhas fixas no subtítulo + bullet sem <br>
-              if (sub) {
-                sub.innerHTML = `
-                  <span class="l1">${t.heroSubtitleL1}</span>
-                  <span class="l2">${t.heroSubtitleL2}</span>
-                  <span class="l3">${t.heroSubtitleL3}</span>
-                `;
-              }
-              if (b1) {
-                b1.innerHTML = `
-                  <span class="l1">${t.bullet1L1}</span>
-                  <span class="l2">${t.bullet1L2}</span>
-                `;
-              }
-            } else {
-              // EN: mantém como já estava
-              if (sub) sub.textContent = t.heroSubtitle;
-              if (b1)  b1.innerHTML   = t.bullet1;
-            }
-            
-            document.querySelector('.action-title').textContent = t.actionTitle;
-            document.querySelector('.cta-text').textContent = t.ctaText;
-            document.querySelector('.divider-text').textContent = t.dividerText;
-            document.querySelector('.restore-text').textContent = t.restoreText;
-            
-            // Outros bullets
-            document.querySelector('.bullet-2').innerHTML = t.bullet2;
-            document.querySelector('.bullet-3').innerHTML = t.bullet3;
-            document.querySelector('.bullet-4').innerHTML = t.bullet4;
-
-            
-            // Subtítulo em 3 linhas fixas (usa t.heroSubtitleL1/2/3)
-            const sub = document.querySelector('.hero-subtitle');
-            if (sub) {
-              sub.innerHTML = `
+          currentLang = lang;
+          const t = translations[lang];
+        
+          // body class
+          document.body.className = lang === 'pt' ? 'pt-BR' : 'en-US';
+        
+          // buttons
+          document.querySelectorAll('.language-switcher button').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+          });
+          const currentBtn = document.querySelector(`.lang-${lang}`);
+          if (currentBtn) {
+            currentBtn.classList.add('active');
+            currentBtn.setAttribute('aria-pressed', 'true');
+          }
+        
+          // indicator
+          const switcher = document.querySelector('.language-switcher');
+          if (switcher) switcher.classList.toggle('is-en', lang === 'en');
+        
+          // textos principais
+          document.querySelector('.company-name').textContent = t.companyName;
+          document.querySelector('.hero-title').textContent  = t.heroTitle;
+        
+          const subEl     = document.querySelector('.hero-subtitle');
+          const bullet1El = document.querySelector('.bullet-1');
+        
+          if (lang === 'pt') {
+            // PT: 3 linhas fixas no subtítulo + bullet-1 em 2 linhas
+            if (subEl) {
+              subEl.innerHTML = `
                 <span class="l1">${t.heroSubtitleL1}</span>
                 <span class="l2">${t.heroSubtitleL2}</span>
                 <span class="l3">${t.heroSubtitleL3}</span>
               `;
             }
-            
-            document.querySelector('.action-title').textContent = t.actionTitle;
-            document.querySelector('.cta-text').textContent = t.ctaText;
-            document.querySelector('.divider-text').textContent = t.dividerText;
-            document.querySelector('.restore-text').textContent = t.restoreText;
-            
-            // Update hero bullets
-            const b1 = document.querySelector('.bullet-1'); // usa t.bullet1L1/2
-            if (b1) {
-              b1.innerHTML = `
+            if (bullet1El) {
+              bullet1El.innerHTML = `
                 <span class="l1">${t.bullet1L1}</span>
                 <span class="l2">${t.bullet1L2}</span>
               `;
             }
-            document.querySelector('.bullet-2').innerHTML = t.bullet2;
-            document.querySelector('.bullet-3').innerHTML = t.bullet3;
-            document.querySelector('.bullet-4').innerHTML = t.bullet4;
-
-            
-            // Update process section
-            document.querySelector('.process-title').innerHTML = t.processTitle;
-            document.querySelector('.process-subtitle').textContent = t.processSubtitle;
-            document.querySelector('.step-1-title').textContent = t.step1Title;
-            document.querySelector('.step-1-desc').textContent = t.step1Desc;
-            document.querySelector('.step-2-title').textContent = t.step2Title;
-            document.querySelector('.step-2-desc').textContent = t.step2Desc;
-            document.querySelector('.step-3-title').textContent = t.step3Title;
-            document.querySelector('.step-3-desc').innerHTML = t.step3Desc;
-
-            // Update why method section
-            const whySection = document.querySelector('.why-method .section-header h2');
-            const whySubtitle = document.querySelector('.why-method .section-header p');
-            if (whySection) whySection.textContent = t.whyTitle;
-            if (whySubtitle) whySubtitle.innerHTML = t.whySubtitle;
-
-            // Update benefit cards
-            const benefitCards = document.querySelectorAll('.benefit-card');
-            if (benefitCards.length >= 6) {
-                benefitCards[0].querySelector('h3').textContent = t.benefitEfficiency;
-                benefitCards[0].querySelector('p').textContent = t.benefitEfficiencyDesc;
-                benefitCards[1].querySelector('h3').textContent = t.benefitPersonalization;
-                benefitCards[1].querySelector('p').textContent = t.benefitPersonalizationDesc;
-                benefitCards[2].querySelector('h3').textContent = t.benefitTradition;
-                benefitCards[2].querySelector('p').textContent = t.benefitTraditionDesc;
-                benefitCards[3].querySelector('h3').textContent = t.benefitConvenience;
-                benefitCards[3].querySelector('p').textContent = t.benefitConvenienceDesc;
-                benefitCards[4].querySelector('h3').textContent = t.benefitMapping;
-                benefitCards[4].querySelector('p').textContent = t.benefitMappingDesc;
-                benefitCards[5].querySelector('h3').textContent = t.benefitPrivacy;
-                benefitCards[5].querySelector('p').textContent = t.benefitPrivacyDesc;
+          } else {
+            // EN: mantém original
+            if (subEl)     subEl.textContent   = t.heroSubtitle;
+            if (bullet1El) bullet1El.innerHTML = t.bullet1;
+          }
+        
+          document.querySelector('.action-title').textContent   = t.actionTitle;
+          document.querySelector('.cta-text').textContent       = t.ctaText;
+          document.querySelector('.divider-text').textContent   = t.dividerText;
+          document.querySelector('.restore-text').textContent   = t.restoreText;
+        
+          // outros bullets
+          document.querySelector('.bullet-2').innerHTML = t.bullet2;
+          document.querySelector('.bullet-3').innerHTML = t.bullet3;
+          document.querySelector('.bullet-4').innerHTML = t.bullet4;
+        
+          // Process
+          document.querySelector('.process-title').innerHTML        = t.processTitle;
+          document.querySelector('.process-subtitle').textContent   = t.processSubtitle;
+          document.querySelector('.step-1-title').textContent       = t.step1Title;
+          document.querySelector('.step-1-desc').textContent        = t.step1Desc;
+          document.querySelector('.step-2-title').textContent       = t.step2Title;
+          document.querySelector('.step-2-desc').textContent        = t.step2Desc;
+          document.querySelector('.step-3-title').textContent       = t.step3Title;
+          document.querySelector('.step-3-desc').innerHTML          = t.step3Desc;
+        
+          // Why
+          const whySection  = document.querySelector('.why-method .section-header h2');
+          const whySubtitle = document.querySelector('.why-method .section-header p');
+          if (whySection)  whySection.textContent  = t.whyTitle;
+          if (whySubtitle) whySubtitle.innerHTML   = t.whySubtitle;
+        
+          // Benefits
+          const benefitCards = document.querySelectorAll('.benefit-card');
+          if (benefitCards.length >= 6) {
+            benefitCards[0].querySelector('h3').textContent = t.benefitEfficiency;
+            benefitCards[0].querySelector('p').textContent  = t.benefitEfficiencyDesc;
+            benefitCards[1].querySelector('h3').textContent = t.benefitPersonalization;
+            benefitCards[1].querySelector('p').textContent  = t.benefitPersonalizationDesc;
+            benefitCards[2].querySelector('h3').textContent = t.benefitTradition;
+            benefitCards[2].querySelector('p').textContent  = t.benefitTraditionDesc;
+            benefitCards[3].querySelector('h3').textContent = t.benefitConvenience;
+            benefitCards[3].querySelector('p').textContent  = t.benefitConvenienceDesc;
+            benefitCards[4].querySelector('h3').textContent = t.benefitMapping;
+            benefitCards[4].querySelector('p').textContent  = t.benefitMappingDesc;
+            benefitCards[5].querySelector('h3').textContent = t.benefitPrivacy;
+            benefitCards[5].querySelector('p').textContent  = t.benefitPrivacyDesc;
+          }
+        
+          // Feel
+          const feelTitle    = document.querySelector('.feel-section .section-header h2');
+          const feelSubtitle = document.querySelector('.feel-section .section-header p');
+          if (feelTitle)    feelTitle.textContent    = t.feelTitle;
+          if (feelSubtitle) feelSubtitle.textContent = t.feelSubtitle;
+          const feelItems = document.querySelectorAll('.feel-item span');
+          if (feelItems.length >= 4) {
+            feelItems[0].textContent = t.feel1;
+            feelItems[1].textContent = t.feel2;
+            feelItems[2].textContent = t.feel3;
+            feelItems[3].textContent = t.feel4;
+          }
+        
+          // Therapist
+          const therapistTitle    = document.querySelector('.about-therapist .section-header h2');
+          const therapistSubtitle = document.querySelector('.about-therapist .section-header p');
+          if (therapistTitle)    therapistTitle.textContent    = t.therapistTitle;
+          if (therapistSubtitle) therapistSubtitle.textContent = t.therapistSubtitle;
+        
+          const credentialItems = document.querySelectorAll('.credential-item');
+          if (credentialItems.length >= 5) {
+            credentialItems[0].innerHTML = `<strong>${t.credential1.split(' ')[0]} ${t.credential1.split(' ')[1]}</strong> ${t.credential1.split(' ').slice(2).join(' ')}`;
+            credentialItems[1].innerHTML = `<strong>${t.credential2.split(' FACIS')[0]}</strong> FACIS/IBEHE (2002)`;
+            credentialItems[2].innerHTML = `<strong>${t.credential3.split(' (')[0]}</strong> (2006)`;
+            credentialItems[3].innerHTML = `<strong>${t.credential4.split(' (')[0]}</strong> (2001)`;
+            credentialItems[4].innerHTML = `<strong>${lang === 'pt' ? 'Professor' : 'Professor'}</strong> ${lang === 'pt' ? 'de Diagnóstico Avançado em Terapia Floral' : 'of Advanced Diagnosis in Flower Therapy'}`;
+            const courseImg = document.querySelector('.credential-photo img');
+            if (courseImg) {
+              courseImg.alt = lang === 'pt' ? 'Curso de Terapia Floral' : 'Flower Therapy Course';
             }
-
-            // Update feel section
-            const feelTitle = document.querySelector('.feel-section .section-header h2');
-            const feelSubtitle = document.querySelector('.feel-section .section-header p');
-            if (feelTitle) feelTitle.textContent = t.feelTitle;
-            if (feelSubtitle) feelSubtitle.textContent = t.feelSubtitle;
-            
-            const feelItems = document.querySelectorAll('.feel-item span');
-            if (feelItems.length >= 4) {
-                feelItems[0].textContent = t.feel1;
-                feelItems[1].textContent = t.feel2;
-                feelItems[2].textContent = t.feel3;
-                feelItems[3].textContent = t.feel4;
-            }
-
-            // Update therapist section
-            const therapistTitle = document.querySelector('.about-therapist .section-header h2');
-            const therapistSubtitle = document.querySelector('.about-therapist .section-header p');
-            if (therapistTitle) therapistTitle.textContent = t.therapistTitle;
-            if (therapistSubtitle) therapistSubtitle.textContent = t.therapistSubtitle;
-            
-            const credentialItems = document.querySelectorAll('.credential-item');
-            if (credentialItems.length >= 5) {
-                credentialItems[0].innerHTML = `<strong>${t.credential1.split(' ')[0]} ${t.credential1.split(' ')[1]}</strong> ${t.credential1.split(' ').slice(2).join(' ')}`;
-                credentialItems[1].innerHTML = `<strong>${t.credential2.split(' FACIS')[0]}</strong> FACIS/IBEHE (2002)`;
-                credentialItems[2].innerHTML = `<strong>${t.credential3.split(' (')[0]}</strong> (2006)`;
-                credentialItems[3].innerHTML = `<strong>${t.credential4.split(' (')[0]}</strong> (2001)`;
-                credentialItems[4].innerHTML = `<strong>${lang === 'pt' ? 'Professor' : 'Professor'}</strong> ${lang === 'pt' ? 'de Diagnóstico Avançado em Terapia Floral' : 'of Advanced Diagnosis in Flower Therapy'}`;
-                
-                // Update only the image alt text, not the innerHTML
-                const courseImg = document.querySelector('.credential-photo img');
-                if (courseImg) {
-                    courseImg.alt = lang === 'pt' ? 'Curso de Terapia Floral' : 'Flower Therapy Course';
-                }
-            }         
-
-            // Update testimonials section
-            const testimonialsTitle = document.querySelector('.testimonials .section-header h2');
-            const testimonialsSubtitle = document.querySelector('.testimonials .section-header p');
-            if (testimonialsTitle) testimonialsTitle.textContent = t.testimonialsTitle;
-            if (testimonialsSubtitle) testimonialsSubtitle.textContent = t.testimonialsSubtitle;
-
-            // Update testimonial texts and jobs
-            const testimonialTexts = document.querySelectorAll('.testimonial-text');
-            const testimonialJobs = document.querySelectorAll('.testimonial-author .author-info p');
-            if (testimonialTexts.length >= 3) {
-                testimonialTexts[0].textContent = `"${t.testimonial1}"`;
-                testimonialTexts[1].textContent = `"${t.testimonial2}"`;
-                testimonialTexts[2].textContent = `"${t.testimonial3}"`;
-            }
-            if (testimonialJobs.length >= 3) {
-                testimonialJobs[0].textContent = t.job1;
-                testimonialJobs[1].textContent = t.job2;
-                testimonialJobs[2].textContent = t.job3;
-            }
-
-            // Update FAQ section
-            const faqTitle = document.querySelector('.faq .section-header h2');
-            const faqSubtitle = document.querySelector('.faq .section-header p');
-            if (faqTitle) faqTitle.textContent = t.faqTitle;
-            if (faqSubtitle) faqSubtitle.textContent = t.faqSubtitle;
-
-            const faqQuestions = document.querySelectorAll('.faq-question span');
-            const faqAnswers = document.querySelectorAll('.faq-answer span');
-            if (faqQuestions.length >= 4 && faqAnswers.length >= 4) {
-                faqQuestions[0].textContent = t.faqQ1;
-                faqAnswers[0].innerHTML = t.faqA1;
-                faqQuestions[1].textContent = t.faqQ2;
-                faqAnswers[1].innerHTML = t.faqA2;
-                faqQuestions[2].textContent = t.faqQ3;
-                faqAnswers[2].textContent = t.faqA3;
-                faqQuestions[3].textContent = t.faqQ4;
-                faqAnswers[3].textContent = t.faqA4;
-            }
-
-            // Update final CTA section
-            const finalTitle = document.querySelector('.final-cta h2');
-            const finalSubtitle = document.querySelector('.final-cta p');
-            const finalCtaButton = document.querySelector('.final-cta .cta-button');
-            const disclaimer = document.querySelector('.disclaimer small');
-            if (finalTitle) finalTitle.textContent = t.finalTitle;
-            if (finalSubtitle) finalSubtitle.innerHTML = t.finalSubtitle;
-            if (finalCtaButton) finalCtaButton.textContent = t.finalCtaText;
-            if (disclaimer) disclaimer.textContent = t.disclaimerText;
-
-            // Update trust indicators
-            const trustSsl = document.querySelector('.trust-ssl');
-            const trustNoSignup = document.querySelector('.trust-no-signup');
-            const trustFree = document.querySelector('.trust-free');
-            if (trustSsl) trustSsl.innerHTML = `🔒 ${t.trustSsl}`;
-            if (trustNoSignup) trustNoSignup.innerHTML = `✨ ${t.trustNoCadastro}`;
-            if (trustFree) trustFree.innerHTML = `💯 ${t.trustGratuito}`;
-
-            // Track language change
-            trackLandingEvent('language_changed', { new_language: lang });
+          }
+        
+          // Testimonials
+          const testimonialsTitle    = document.querySelector('.testimonials .section-header h2');
+          const testimonialsSubtitle = document.querySelector('.testimonials .section-header p');
+          if (testimonialsTitle)    testimonialsTitle.textContent    = t.testimonialsTitle;
+          if (testimonialsSubtitle) testimonialsSubtitle.textContent = t.testimonialsSubtitle;
+        
+          const testimonialTexts = document.querySelectorAll('.testimonial-text');
+          const testimonialJobs  = document.querySelectorAll('.testimonial-author .author-info p');
+          if (testimonialTexts.length >= 3) {
+            testimonialTexts[0].textContent = `"${t.testimonial1}"`;
+            testimonialTexts[1].textContent = `"${t.testimonial2}"`;
+            testimonialTexts[2].textContent = `"${t.testimonial3}"`;
+          }
+          if (testimonialJobs.length >= 3) {
+            testimonialJobs[0].textContent = t.job1;
+            testimonialJobs[1].textContent = t.job2;
+            testimonialJobs[2].textContent = t.job3;
+          }
+        
+          // FAQ
+          const faqTitleEl    = document.querySelector('.faq .section-header h2');
+          const faqSubtitleEl = document.querySelector('.faq .section-header p');
+          if (faqTitleEl)    faqTitleEl.textContent    = t.faqTitle;
+          if (faqSubtitleEl) faqSubtitleEl.textContent = t.faqSubtitle;
+        
+          const faqQuestions = document.querySelectorAll('.faq-question span');
+          const faqAnswers   = document.querySelectorAll('.faq-answer span');
+          if (faqQuestions.length >= 4 && faqAnswers.length >= 4) {
+            faqQuestions[0].textContent = t.faqQ1;
+            faqAnswers[0].innerHTML     = t.faqA1;
+            faqQuestions[1].textContent = t.faqQ2;
+            faqAnswers[1].innerHTML     = t.faqA2;
+            faqQuestions[2].textContent = t.faqQ3;
+            faqAnswers[2].textContent   = t.faqA3;
+            faqQuestions[3].textContent = t.faqQ4;
+            faqAnswers[3].textContent   = t.faqA4;
+          }
+        
+          // Final CTA
+          const finalTitle    = document.querySelector('.final-cta h2');
+          const finalSubtitle = document.querySelector('.final-cta p');
+          const finalCtaBtn   = document.querySelector('.final-cta .cta-button');
+          const disclaimer    = document.querySelector('.disclaimer small');
+          if (finalTitle)    finalTitle.textContent    = t.finalTitle;
+          if (finalSubtitle) finalSubtitle.innerHTML   = t.finalSubtitle;
+          if (finalCtaBtn)   finalCtaBtn.textContent   = t.finalCtaText;
+          if (disclaimer)    disclaimer.textContent    = t.disclaimerText;
+        
+          // Trust indicators
+          const trustSsl       = document.querySelector('.trust-ssl');
+          const trustNoSignup  = document.querySelector('.trust-no-signup');
+          const trustFree      = document.querySelector('.trust-free');
+          if (trustSsl)      trustSsl.innerHTML      = `🔒 ${t.trustSsl}`;
+          if (trustNoSignup) trustNoSignup.innerHTML = `✨ ${t.trustNoCadastro}`;
+          if (trustFree)     trustFree.innerHTML     = `💯 ${t.trustGratuito}`;
+        
+          // Track
+          trackLandingEvent('language_changed', { new_language: lang });
         }
         
         function startMapping() {
