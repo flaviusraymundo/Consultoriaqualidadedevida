@@ -1011,7 +1011,7 @@
     <section class="why-method">
         <div class="section-header">
             <h2>Por que este método?</h2>
-            <p>Tradição ancestral encontra precisão moderna</p>
+            <p>Tradição ancestral encontra<br class="mobile-break">precisão moderna</p>
         </div>
         
         <div class="benefits-grid">
@@ -1562,7 +1562,7 @@
             const whySection = document.querySelector('.why-method .section-header h2');
             const whySubtitle = document.querySelector('.why-method .section-header p');
             if (whySection) whySection.textContent = t.whyTitle;
-            if (whySubtitle) whySubtitle.textContent = t.whySubtitle;
+            if (whySubtitle) whySubtitle.innerHTML = t.whySubtitle;
 
             // Update benefit cards
             const benefitCards = document.querySelectorAll('.benefit-card');
