@@ -1621,38 +1621,33 @@ v<!DOCTYPE html>
         }
         
         function startMapping() {
-            const t = translations[currentLang];
-            trackLandingEvent('cta_clicked', { 
-                button_type: 'main_cta',
-                target_url: t.targetUrl 
-            });
-            
-            // Adicionar parâmetros para pular welcome page e manter idioma
-            const params = new URLSearchParams({
-                ref: 'consultoria',
-                lang: currentLang,
-                skip_welcome: '1'
-            });
-            window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+          const params = new URLSearchParams({
+            ref: 'consultoria',
+            lang: currentLang,
+            skip_welcome: '1',
+            step: 'instruction'
+          });
+          trackLandingEvent('cta_clicked', { button_type: 'main_cta', target_url: `https://terapiafloral.org/?${params.toString()}` });
+          window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
-                
+               
         async function handleRestore(event) {
-            event.preventDefault();
-            const email = document.getElementById('email-input').value;
-            
-            if (!email.trim()) return;
-            
-            trackLandingEvent('restore_attempted', { email_provided: !!email });
-            
-            // Usar parâmetro específico para restauração
-            const params = new URLSearchParams({
-                ref: 'consultoria',
-                lang: currentLang,
-                restore_email: email,
-                action: 'restore'  // Parâmetro específico para restauração
-            });
-            
-            window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+          event.preventDefault();
+          const email = document.getElementById('email-input').value.trim();
+          if (!email) return;
+
+          // Sinais para ambos os lados: app e backend
+          const params = new URLSearchParams({
+            ref: 'consultoria',
+            lang: currentLang,
+            skip_welcome: '1',   // pula welcome
+            resume: '1',         // força caminho de retomada no app
+            action: 'restore',   // pista para o backend
+            restore_email: email // chave usada para buscar no Sheets
+          });
+        
+          trackLandingEvent('restore_attempted', { email_provided: true, mode: 'redirect_with_email' });
+          window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
 
         // FAQ functionality
