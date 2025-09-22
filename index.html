@@ -1539,17 +1539,69 @@
             // Update texts
             document.querySelector('.company-name').textContent = t.companyName;
             document.querySelector('.hero-title').textContent = t.heroTitle;
-            document.querySelector('.hero-subtitle').textContent = t.heroSubtitle;
+            
+            const sub = document.querySelector('.hero-subtitle');
+            const b1  = document.querySelector('.bullet-1');
+            
+            if (lang === 'pt') {
+              // PT: 3 linhas fixas no subtítulo + bullet sem <br>
+              if (sub) {
+                sub.innerHTML = `
+                  <span class="l1">${t.heroSubtitleL1}</span>
+                  <span class="l2">${t.heroSubtitleL2}</span>
+                  <span class="l3">${t.heroSubtitleL3}</span>
+                `;
+              }
+              if (b1) {
+                b1.innerHTML = `
+                  <span class="l1">${t.bullet1L1}</span>
+                  <span class="l2">${t.bullet1L2}</span>
+                `;
+              }
+            } else {
+              // EN: mantém como já estava
+              if (sub) sub.textContent = t.heroSubtitle;
+              if (b1)  b1.innerHTML   = t.bullet1;
+            }
+            
+            document.querySelector('.action-title').textContent = t.actionTitle;
+            document.querySelector('.cta-text').textContent = t.ctaText;
+            document.querySelector('.divider-text').textContent = t.dividerText;
+            document.querySelector('.restore-text').textContent = t.restoreText;
+            
+            // Outros bullets
+            document.querySelector('.bullet-2').innerHTML = t.bullet2;
+            document.querySelector('.bullet-3').innerHTML = t.bullet3;
+            document.querySelector('.bullet-4').innerHTML = t.bullet4;
+
+            
+            // Subtítulo em 3 linhas fixas (usa t.heroSubtitleL1/2/3)
+            const sub = document.querySelector('.hero-subtitle');
+            if (sub) {
+              sub.innerHTML = `
+                <span class="l1">${t.heroSubtitleL1}</span>
+                <span class="l2">${t.heroSubtitleL2}</span>
+                <span class="l3">${t.heroSubtitleL3}</span>
+              `;
+            }
+            
             document.querySelector('.action-title').textContent = t.actionTitle;
             document.querySelector('.cta-text').textContent = t.ctaText;
             document.querySelector('.divider-text').textContent = t.dividerText;
             document.querySelector('.restore-text').textContent = t.restoreText;
             
             // Update hero bullets
-            document.querySelector('.bullet-1').innerHTML = t.bullet1;
+            const b1 = document.querySelector('.bullet-1'); // usa t.bullet1L1/2
+            if (b1) {
+              b1.innerHTML = `
+                <span class="l1">${t.bullet1L1}</span>
+                <span class="l2">${t.bullet1L2}</span>
+              `;
+            }
             document.querySelector('.bullet-2').innerHTML = t.bullet2;
             document.querySelector('.bullet-3').innerHTML = t.bullet3;
             document.querySelector('.bullet-4').innerHTML = t.bullet4;
+
             
             // Update process section
             document.querySelector('.process-title').innerHTML = t.processTitle;
