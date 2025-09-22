@@ -824,6 +824,41 @@
             .feel-list, .credentials-list {
                 grid-template-columns: 1fr;
             }
+            @media (max-width: 768px) {
+            /* Reduzir altura do header no mobile */
+            .header {
+                padding: 8px 0; /* era 12px */
+            }
+            
+            .logo-header {
+                font-size: 0.9rem; /* era 1rem */
+            }
+            
+            .logo-header img {
+                width: 32px; /* era 40px */
+                height: 32px;
+            }
+            
+            .language-switcher {
+                transform: scale(0.9); /* reduzir tamanho */
+            }
+            
+            /* Ajustar padding do conteúdo principal */
+            .hero {
+                padding: 100px 0 60px; /* era 120px */
+            }
+            
+            .subtitle-steps {
+            font-size: 0.8em;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .process-title {
+                font-size: 2em; /* menor no mobile */
+                line-height: 1.2;
+            }
         }
 
         /* Override white text - Option 1: Cinza azulado #334155 */
@@ -947,7 +982,7 @@
     <!-- Process Section -->
     <section class="process">
         <div class="section-header">
-            <h2 class="process-title">Como funciona (3 passos)</h2>
+            <h2 class="process-title">Como funciona<br><span class="subtitle-steps">(3 passos)</span></h2>
             <p class="process-subtitle">Uma jornada simples e profunda para seu auto-conhecimento</p>
         </div>
         
