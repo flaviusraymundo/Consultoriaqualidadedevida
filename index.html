@@ -1638,16 +1638,14 @@
         
           const params = new URLSearchParams({
             ref: 'consultoria',
-            lang: currentLang,
-            skip_welcome: '1',
-            action: 'restore',       // usado pelo PATCH B
-            restore_email: email     // usado pelo PATCH B
+            lang: currentLang,      // mantém idioma
+            action: 'restore',      // app detecta restauração
+            restore_email: email    // e-mail para lookup no backend
           });
         
-          trackLandingEvent('restore_attempted', { email_provided: true });
+          trackLandingEvent('restore_attempted', { email_provided: true, mode: 'redirect_with_email' });
           window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
-
 
         // FAQ functionality
         function toggleFAQ(element) {
