@@ -233,11 +233,12 @@
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(32, 178, 170, 0.3); /* ← Adicionar esta linha */
         }
         
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(32, 178, 170, 0.4); /* ← Intensificar no hover */
         }
         
         .divider {
@@ -688,9 +689,10 @@
         
         /* Forçar textos do footer em branco */
         footer,
-        footer p,
-        footer a,
-        footer .footer-links a {
+        footer *,
+        footer h1, footer h2, footer h3, footer h4, footer h5, footer h6,
+        footer p, footer span, footer div,
+        footer a, footer .footer-links a {
             color: white !important;
         }
 
@@ -860,16 +862,16 @@
         }
 
         /* Override white text - Option 1: Cinza azulado #334155 */
-        .hero,
+        .hero *:not(.cta-button):not(.cta-text):not(.step-number),
         .hero h1,
         .hero p,
         .hero li,
+        .hero-title,
+        .hero-subtitle,
+        .hero-bullets li,
         .final-cta,
         .final-cta h2,
-        .final-cta p,
-        .cookie-banner,
-        .cookie-text,        
-        .author-avatar {
+        .final-cta p {
             color: #334155 !important;
         }
 
