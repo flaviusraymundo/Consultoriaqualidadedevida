@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+v<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -753,28 +753,6 @@
             background: #374151;
         }
 
-        /* Message container for feedback */
-        #message-container {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            display: none;
-        }
-        
-        #message-container.success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-            display: block;
-        }
-        
-        #message-container.error {
-            background: #fef2f2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-            display: block;
-        }
-
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -858,7 +836,6 @@
         /* Keep some elements white on dark backgrounds */
         .step-number {
             color: white !important;
-        }
         /* Forçar TUDO do footer em branco */
         footer * {
             color: white !important;
@@ -1400,7 +1377,8 @@
                 disclaimerText: "Este serviço não substitui acompanhamento médico ou psicológico. Em caso de sintomas persistentes, procure um profissional de saúde.",
                 trustSsl: "SSL Seguro",
                 trustNoCadastro: "Sem cadastro",
-                trustGratuito: "Gratuito"
+                trustGratuito: "Gratuito",
+                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=pt"
             },
             en: {
                 companyName: "Life Quality Consulting",
@@ -1474,7 +1452,8 @@
                 disclaimerText: "This service does not replace medical or psychological follow-up. In case of persistent symptoms, seek a health professional.",
                 trustSsl: "SSL Secure",
                 trustNoCadastro: "No registration",
-                trustGratuito: "Free"
+                trustGratuito: "Free",
+                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=en"
             }
         };
 
@@ -1641,90 +1620,39 @@
             trackLandingEvent('language_changed', { new_language: lang });
         }
         
-        // FIXED FUNCTION: Start mapping with correct parameters
         function startMapping() {
+            const t = translations[currentLang];
             trackLandingEvent('cta_clicked', { 
                 button_type: 'main_cta',
-                language: currentLang
+                target_url: t.targetUrl 
             });
             
-            // Construct URL with correct parameters to skip welcome and go directly to instructions
+            // Adicionar parâmetros para pular welcome page e manter idioma
             const params = new URLSearchParams({
                 ref: 'consultoria',
                 lang: currentLang,
-                step: 'instructions' // This should take user directly to first instruction step
+                skip_welcome: '1'
             });
-            
             window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
-        
-        // FIXED FUNCTION: Handle restore with proper email validation and redirect
+                
         async function handleRestore(event) {
             event.preventDefault();
+            const email = document.getElementById('email-input').value;
             
-            const emailInput = document.getElementById('email-input');
-            const messageContainer = document.getElementById('message-container');
-            const email = emailInput.value.trim();
-            
-            // Clear previous messages
-            messageContainer.className = '';
-            messageContainer.style.display = 'none';
-            messageContainer.textContent = '';
-            
-            if (!email) {
-                showMessage('Por favor, digite um email válido', 'error');
-                return;
-            }
-            
-            // Simple email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showMessage('Por favor, digite um email válido', 'error');
-                return;
-            }
-            
-            // Show loading state
-            const submitBtn = event.target.querySelector('button');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = currentLang === 'pt' ? 'Procurando...' : 'Searching...';
-            submitBtn.disabled = true;
+            if (!email.trim()) return;
             
             trackLandingEvent('restore_attempted', { email_provided: !!email });
             
-            try {
-                // Construct URL with restore parameters
-                const params = new URLSearchParams({
-                    ref: 'consultoria',
-                    lang: currentLang,
-                    action: 'restore',
-                    email: email
-                });
-                
-                // Redirect to the main site with restore parameters
-                window.location.href = `https://terapiafloral.org/?${params.toString()}`;
-                
-            } catch (error) {
-                console.error('Restore error:', error);
-                showMessage(currentLang === 'pt' ? 'Erro ao tentar recuperar sessão' : 'Error trying to restore session', 'error');
-                
-                // Reset button state
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        }
-        
-        // Helper function to show messages
-        function showMessage(message, type) {
-            const messageContainer = document.getElementById('message-container');
-            messageContainer.textContent = message;
-            messageContainer.className = type;
-            messageContainer.style.display = 'block';
+            // Usar parâmetro específico para restauração
+            const params = new URLSearchParams({
+                ref: 'consultoria',
+                lang: currentLang,
+                restore_email: email,
+                action: 'restore'  // Parâmetro específico para restauração
+            });
             
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                messageContainer.style.display = 'none';
-                messageContainer.className = '';
-            }, 5000);
+            window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
 
         // FAQ functionality
