@@ -943,7 +943,7 @@
                     Faça seu auto-mapeamento online gratuitamente. Mapeamento rápido e profundo que indica essências florais sob medida.
                 </p>
                 <ul class="hero-bullets">
-                    <li class="bullet-1">Avaliação visual gratuíta em ~10 minutos</li>
+                    <li class="bullet-1">Avaliação visual gratuita<br>em ~10 minutos</li>
                     <li class="bullet-2">Recomendações personalizadas</li>
                     <li class="bullet-3">Baseado em métodos comprovados</li>
                     <li class="bullet-4">Mais de 10.000 mapeamentos realizados</li>
@@ -1367,11 +1367,11 @@
                 ctaText: "Começar Mapeamento Gratuito →",
                 dividerText: "ou retomar sessão",
                 restoreText: "Recuperar",
-                bullet1: "Avaliação visual gratuíta em ~10 minutos",
+                bullet1: "Avaliação visual gratuita<br>em ~10 minutos",
                 bullet2: "Recomendações personalizadas",
                 bullet3: "Baseado em métodos comprovados",
                 bullet4: "Mais de 10.000 mapeamentos realizados",
-                processTitle: "Como funciona (3 passos)",
+                processTitle: "Como funciona<br><span class=\"subtitle-steps\">(3 passos)</span>",
                 processSubtitle: "Uma jornada simples e profunda para o autoconhecimento",
                 step1Title: "Avaliação visual",
                 step1Desc: "Você classifica imagens de flores pela sua resposta imediata — simples, direto e intuitivo.",
@@ -1404,9 +1404,8 @@
                 credential1: "20+ anos em consultoria de Terapia Floral (indivíduos e empresas)",
                 credential2: "Pós-graduação em Terapia Floral FACIS/IBEHE (2002)",
                 credential3: "Formação na Academia LiFE Australiana (2006)",
-                credential4: "Congresso Internacional (2000)",
-                credential5: "Formação no Alaska (2001)",
-                credential6: "Professor de Diagnóstico Avançado em Terapia Floral",
+                credential4: "Formação no Alaska (2001)",
+                credential5: "Professor de Diagnóstico Avançado em Terapia Floral",                
                 testimonialsTitle: "Depoimentos",
                 testimonialsSubtitle: "Experiências reais de transformação",
                 testimonial1: "Flavius tem uma sensibilidade incrível. É uma pessoa muito cuidadosa, muito comprometido com o seu trabalho, além disso tem grande habilidade para suscitar questões profundas de forma muito amorosa. Recomendo!",
@@ -1442,11 +1441,11 @@
                 ctaText: "Start Free Mapping →",
                 dividerText: "or resume session",
                 restoreText: "Recover",
-                bullet1: "Free visual assessment in ~10 minutes",
+                bullet1: "Free visual assessment<br>in ~10 minutes",
                 bullet2: "Personalized recommendations",
                 bullet3: "Based on proven methods",
                 bullet4: "Over 10,000 mappings completed",
-                processTitle: "How it works (3 steps)",
+                processTitle: "How it works<br><span class=\"subtitle-steps\">(3 steps)</span>",
                 processSubtitle: "A simple and profound journey to self-discovery",
                 step1Title: "Visual assessment",
                 step1Desc: "You classify flower images by your immediate response — simple, direct and intuitive.",
@@ -1479,9 +1478,8 @@
                 credential1: "20+ years in Flower Therapy consulting (individuals and companies)",
                 credential2: "Postgraduate in Flower Therapy FACIS/IBEHE (2002)",
                 credential3: "Training at LiFE Australian Academy (2006)",
-                credential4: "International Congress (2000)",
-                credential5: "Alaska Training (2001)",
-                credential6: "Professor of Advanced Diagnosis in Flower Therapy",
+                credential4: "Alaska Training (2001)",
+                credential5: "Professor of Advanced Diagnosis in Flower Therapy",                
                 testimonialsTitle: "Testimonials",
                 testimonialsSubtitle: "Real transformation experiences",
                 testimonial1: "Flavius has incredible sensitivity. He is a very careful person, very committed to his work, and also has great ability to raise deep questions in a very loving way. I recommend!",
@@ -1604,14 +1602,19 @@
             if (therapistSubtitle) therapistSubtitle.textContent = t.therapistSubtitle;
             
             const credentialItems = document.querySelectorAll('.credential-item');
-            if (credentialItems.length >= 6) {
-                credentialItems[0].innerHTML = `<strong>20+ ${lang === 'pt' ? 'anos' : 'years'}</strong> ${lang === 'pt' ? 'em consultoria de Terapia Floral (indivíduos e empresas)' : 'in Flower Therapy consulting (individuals and companies)'}`;
-                credentialItems[1].innerHTML = `<strong>${lang === 'pt' ? 'Pós-graduação em Terapia Floral' : 'Postgraduate in Flower Therapy'}</strong> FACIS/IBEHE (2002)`;
-                credentialItems[2].innerHTML = `<strong>${lang === 'pt' ? 'Formação na Academia LiFE Australiana' : 'Training at LiFE Australian Academy'}</strong> (2006)`;
-                credentialItems[3].innerHTML = `<strong>${lang === 'pt' ? 'Congresso Internacional' : 'International Congress'}</strong> (2000)`;
-                credentialItems[4].innerHTML = `<strong>${lang === 'pt' ? 'Formação no Alaska' : 'Alaska Training'}</strong> (2001)`;
-                credentialItems[5].innerHTML = `<strong>${lang === 'pt' ? 'Professor' : 'Professor'}</strong> ${lang === 'pt' ? 'de Diagnóstico Avançado em Terapia Floral' : 'of Advanced Diagnosis in Flower Therapy'}`;
-            }
+            if (credentialItems.length >= 5) {
+                credentialItems[0].innerHTML = `<strong>${t.credential1.split(' ')[0]} ${t.credential1.split(' ')[1]}</strong> ${t.credential1.split(' ').slice(2).join(' ')}`;
+                credentialItems[1].innerHTML = `<strong>${t.credential2.split(' FACIS')[0]}</strong> FACIS/IBEHE (2002)`;
+                credentialItems[2].innerHTML = `<strong>${t.credential3.split(' (')[0]}</strong> (2006)`;
+                credentialItems[3].innerHTML = `<strong>${t.credential4.split(' (')[0]}</strong> (2001)`;
+                credentialItems[4].innerHTML = `<strong>${lang === 'pt' ? 'Professor' : 'Professor'}</strong> ${lang === 'pt' ? 'de Diagnóstico Avançado em Terapia Floral' : 'of Advanced Diagnosis in Flower Therapy'}`;
+                
+                // Update only the image alt text, not the innerHTML
+                const courseImg = document.querySelector('.credential-photo img');
+                if (courseImg) {
+                    courseImg.alt = lang === 'pt' ? 'Curso de Terapia Floral' : 'Flower Therapy Course';
+                }
+            }         
 
             // Update testimonials section
             const testimonialsTitle = document.querySelector('.testimonials .section-header h2');
