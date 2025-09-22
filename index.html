@@ -863,6 +863,10 @@ v<!DOCTYPE html>
         <div class="header-content">
             <div class="logo-header">
                 <img src="/images/logo.png" alt="Logo">
+                <link rel="icon" href="/favicon.ico" sizes="any">
+                <link rel="icon" type="image/png" href="/images/logo-32.png" sizes="32x32">
+                <link rel="icon" type="image/png" href="/images/logo-16.png" sizes="16x16">
+                <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
                 <span class="company-name">Consultoria Qualidade de Vida</span>
             </div>
 
@@ -1627,7 +1631,10 @@ v<!DOCTYPE html>
             skip_welcome: '1',
             step: 'instruction'
           });
-          trackLandingEvent('cta_clicked', { button_type: 'main_cta', target_url: `https://terapiafloral.org/?${params.toString()}` });
+          trackLandingEvent('cta_clicked', {
+            button_type: 'main_cta',
+            target_url: `https://terapiafloral.org/?${params.toString()}`
+          });
           window.location.href = `https://terapiafloral.org/?${params.toString()}`;
         }
                
@@ -1635,15 +1642,14 @@ v<!DOCTYPE html>
           event.preventDefault();
           const email = document.getElementById('email-input').value.trim();
           if (!email) return;
-
-          // Sinais para ambos os lados: app e backend
+        
           const params = new URLSearchParams({
             ref: 'consultoria',
             lang: currentLang,
-            skip_welcome: '1',   // pula welcome
-            resume: '1',         // força caminho de retomada no app
-            action: 'restore',   // pista para o backend
-            restore_email: email // chave usada para buscar no Sheets
+            skip_welcome: '1',
+            resume: '1',
+            action: 'restore',
+            restore_email: email
           });
         
           trackLandingEvent('restore_attempted', { email_provided: true, mode: 'redirect_with_email' });
