@@ -307,9 +307,10 @@
           border-radius: 8px;
           font-size: 1em;
         }
+        
         .restore-form button {
           padding: 12px 24px;
-          background: #6366f1;
+          background: #20b2aa; /* teal sólido */
           color: white;
           border: none;
           border-radius: 8px;
@@ -836,7 +837,8 @@
                 font-size: 2em;
             }
             
-            .trust-indicators {
+            .trust-indicators 
+                color: #dc2626 !important; /* vermelho */
                 flex-direction: column;
                 gap: 10px;
             }
@@ -1459,7 +1461,7 @@
                 disclaimerText: "Este serviço não substitui acompanhamento médico ou psicológico. Em caso de sintomas persistentes, procure um profissional de saúde.",
                 trustSsl: "SSL Seguro",
                 trustNoCadastro: "Sem cadastro",
-                trustGratuito: "Gratuito",
+                trustGratuito: "<span style='color: #dc2626;'>💯</span>% Gratuito"
                 targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=pt"
             },
             en: {
@@ -1533,7 +1535,7 @@
                 disclaimerText: "This service does not replace medical or psychological follow-up. In case of persistent symptoms, seek a health professional.",
                 trustSsl: "SSL Secure",
                 trustNoCadastro: "No registration",
-                trustGratuito: "Free",
+                trustGratuito: "<span style='color: #dc2626;'>💯</span>% Free"
                 targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=en"
             }
         };
