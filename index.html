@@ -648,24 +648,28 @@
             padding: 100px 0;
             background: var(--primary-gradient);
             color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6) !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6); /* sombra suave para o texto */
             text-align: center;
         }
-              
+        
         .final-cta h2 {
             font-size: 3em;
             margin-bottom: 20px;
+            font-weight: 700; /* garante destaque do título */
         }
         
         .final-cta p {
             font-size: 1.3em;
             margin-bottom: 40px;
             opacity: 0.95;
+            font-weight: 400; /* leitura mais solta, sem ficar "pesado" */
         }
         
         .final-cta .cta-button {
             background: #ffffff;
-            color: #334155;
+            color: #334155 !important; /* cinza-azulado padrão */
+            font-weight: 600;          /* mantém botão firme */
+            text-shadow: none;         /* evita poluição visual no fundo branco */
             display: inline-block;
             padding: 15px 40px;
             font-size: 1.1em;
@@ -675,7 +679,7 @@
             margin-bottom: 20px;
             max-width: 400px;
         }
-
+        
         .final-cta .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
