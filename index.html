@@ -1255,13 +1255,13 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
+        <div class="footer-content">            
             <div class="footer-links">
-                <a href="https://www.terapiafloral.org/politica-privacidade.html">Política de Privacidade</a>
-                <a href="https://www.terapiafloral.org/termos-de-servico.html">Termos de Serviço</a>
-                <a href="/contact">Contato</a>
+                <a id="footer-privacy" href="https://www.terapiafloral.org/politica-privacidade.html">Política de Privacidade</a>
+                <a id="footer-terms"   href="https://www.terapiafloral.org/termos-de-servico.html">Termos de Serviço</a>
+                <a id="footer-contact" href="/contact">Contato</a>
             </div>
-            <p>© 2025 Flavius Raymundo. Todos os direitos reservados.</p>
+            <p id="footer-copy">© 2025 Flavius Raymundo. Todos os direitos reservados.</p>                
         </div>
     </footer>
 
@@ -1473,7 +1473,11 @@
                 trustSsl: "SSL Seguro",
                 trustNoCadastro: "Acesso imediato",
                 trustGratuito: "% Gratuito",
-                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=pt"
+                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=pt",
+                footerPrivacy: "Política de Privacidade",
+                footerTerms: "Termos de Serviço",
+                footerContact: "Contato",
+                footerCopyright: "© {year} Flavius Raymundo. Todos os direitos reservados."
             },
             en: {
                 companyName: "Life Flourish Consulting",
@@ -1547,7 +1551,11 @@
                 trustSsl: "SSL Secure",
                 trustNoCadastro: "Instant access",
                 trustGratuito: "<span style='color: #dc2626;'>% Free</span>",
-                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=en"
+                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=en",
+                footerPrivacy: "Privacy Policy",
+                footerTerms: "Terms of Service",
+                footerContact: "Contact",
+                footerCopyright: "© {year} Flavius Raymundo. All rights reserved."
             }
         };
 
@@ -1725,6 +1733,16 @@
           if (finalSubtitle) finalSubtitle.innerHTML   = t.finalSubtitle;
           if (finalCtaBtn)   finalCtaBtn.textContent   = t.finalCtaText;
           if (disclaimer)    disclaimer.textContent    = t.disclaimerText;
+
+          // Footer texts (preserva URLs)
+          const fp = document.getElementById('footer-privacy');
+          const ft = document.getElementById('footer-terms');
+          const fc = document.getElementById('footer-contact');
+          const fy = document.getElementById('footer-copy');
+          if (fp) fp.textContent = t.footerPrivacy;
+          if (ft) ft.textContent = t.footerTerms;
+          if (fc) fc.textContent = t.footerContact;
+          if (fy) fy.textContent = t.footerCopyright.replace('{year}', String(new Date().getFullYear()));
         
           // Trust indicators
           const trustSsl       = document.querySelector('.trust-ssl');
@@ -1861,14 +1879,25 @@
                 });
             }
         }
-
+        // Preenche rodapé já no 1º load        
+          const t  = translations[currentLang];
+          const fp = document.getElementById('footer-privacy');
+          const ft = document.getElementById('footer-terms');
+          const fc = document.getElementById('footer-contact');
+          const fy = document.getElementById('footer-copy');
+          if (fp) fp.textContent = t.footerPrivacy;
+          if (ft) ft.textContent = t.footerTerms;
+          if (fc) fc.textContent = t.footerContact;
+          if (fy) fy.textContent = t.footerCopyright.replace('{year}', String(new Date().getFullYear()));
+        }
+        
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializePage);
         } else {
             initializePage();
         }
-
+                
         // Track page visibility changes
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden') {
