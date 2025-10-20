@@ -1564,7 +1564,7 @@
         function switchLanguage(lang) {
           currentLang = lang;
           const t = translations[lang];
-        
+                
           // body class
           document.body.className = lang === 'pt' ? 'pt-BR' : 'en-US';
         
@@ -1578,6 +1578,9 @@
             currentBtn.classList.add('active');
             currentBtn.setAttribute('aria-pressed', 'true');
           }
+
+          // Torna acessível ao onclick="switchLanguage('en')"
+          window.switchLanguage = switchLanguage;
         
           // indicator
           const switcher = document.querySelector('.language-switcher');
@@ -1878,18 +1881,18 @@
                     viewport_height: window.innerHeight
                 });
             }
-        }
-        // Preenche rodapé já no 1º load        
-          const t  = translations[currentLang];
-          const fp = document.getElementById('footer-privacy');
-          const ft = document.getElementById('footer-terms');
-          const fc = document.getElementById('footer-contact');
-          const fy = document.getElementById('footer-copy');
-          if (fp) fp.textContent = t.footerPrivacy;
-          if (ft) ft.textContent = t.footerTerms;
-          if (fc) fc.textContent = t.footerContact;
-          if (fy) fy.textContent = t.footerCopyright.replace('{year}', String(new Date().getFullYear()));
-        }
+        
+           // Preenche rodapé já no 1º load        
+           const t  = translations[currentLang];
+           const fp = document.getElementById('footer-privacy');
+           const ft = document.getElementById('footer-terms');
+           const fc = document.getElementById('footer-contact');
+           const fy = document.getElementById('footer-copy');
+           if (fp) fp.textContent = t.footerPrivacy;
+           if (ft) ft.textContent = t.footerTerms;
+           if (fc) fc.textContent = t.footerContact;
+           if (fy) fy.textContent = t.footerCopyright.replace('{year}', String(new Date().getFullYear()));
+        }             
         
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
