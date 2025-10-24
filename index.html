@@ -1,311 +1,1932 @@
-// src/components/WelcomeStep.tsx
-import React, { useState, useEffect, FormEvent } from "react";
-import { getBasePath } from "../utils/images";
-import { useTranslation, Trans } from "react-i18next";
-import { applyAuthTenant, getTenant, setTenantFromCode } from "../utils/tenant";
-import { buildFunctionUrl } from "../utils/functions";
-import { fetchAuthMe } from "../utils/auth";
-import SiteFooter from "./SiteFooter";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultoria Qualidade de Vida - Transforme Seu Bem-Estar Mental e Emocional</title>
+    <meta name="description" content="Auto-mapeamento online gratuito. Método rápido e profundo que<br>indica essências florais sob medida.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Consultoria Qualidade de Vida - Auto-Mapeamento de Essências Florais">
+    <meta property="og:description" content="Transforme seu bem-estar mental e emocional com recomendações personalizadas de essências florais">
+    <meta property="og:image" content="https://consultoriaqualidadedevida.com/images/og-image.jpg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #20b2aa 0%, #b3d9ff 100%);
+            --primary-color: #20b2aa;
+            --text-dark: #1a202c;
+            --text-gray: #4a5568;
+            --text-light: #718096;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
 
-type Props = {
-  startProcess: () => void;
-  isPro: boolean;
-  onRequestRestore: (email: string) => Promise<void>;
-  restoreLoading: boolean;
-  restoreError: string | null;
-  onRoleChange?: (role: "basic" | "pro") => void;
-};
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-dark);
+            min-width: 0;
+        }
+        
+        .logo-header img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
 
-export default function WelcomeStep({
-  startProcess,
-  isPro,
-  onRequestRestore,
-  restoreLoading,
-  restoreError,
-  onRoleChange,
-}: Props) {
-  const logoUrl = `${getBasePath()}/images/logo.png`;
-  const { t, i18n } = useTranslation();
-  const [emailInput, setEmailInput] = useState("");
-  const [refCode, setRefCode] = useState("");
-  const [proPin, setProPin] = useState("");
-  const [proMsg, setProMsg] = useState("");
-  const [role, setRole] = useState<"basic" | "pro">(isPro ? "pro" : "basic");
-  const isEN = i18n.language?.toLowerCase().startsWith("en");
-  const effectivePro = role === "pro";
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+            display: inline-flex;
+            align-items: stretch;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 2px;
+            gap: 0;
+        }
+        .language-switcher .lang-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 50%;
+            background: #f59e0b;
+            transform: translateX(0);
+            transition: transform 0.2s ease;
+            pointer-events: none;
+        }
+        .language-switcher.is-en .lang-indicator {
+            transform: translateX(100%);
+        }
+        .language-switcher button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            min-width: 76px;
+            border-radius: 6px;
+        }
+        .language-switcher button.active {
+            background: #f9fafb;
+        }
+        .language-switcher .flag {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+        }
+        .language-switcher .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        /* Hero Section */
+        .hero {
+          background: var(--primary-gradient);
+          padding: 120px 0 80px;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -50%;
+          width: 200%;
+          height: 100%;
+          background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+          animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        
+        .hero-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+          position: relative;
+          z-index: 1;
+        }
+        
+        /* largura e quebras no desktop */
+        .hero-text { max-width: 680px; }
+        
+        /* título balanceado, hifenização e tipografia */
+        .hero-text h1 {
+          text-wrap: balance;
+          hyphens: auto;
+          font-size: clamp(2.2rem, 4vw + 1rem, 3.2rem);
+          line-height: 1.15;
+          letter-spacing: -0.01em;
+        }
+        
+        /* Subtítulo: 3 linhas no desktop; sem <br> */
+        .hero-subtitle { text-wrap: pretty; }
+        .hero-subtitle .l1,
+        .hero-subtitle .l2,
+        .hero-subtitle .l3 { display: block; }
+        
+        @media (max-width: 768px) {
+          .hero-subtitle { text-wrap: balance; }
+        }       
+        .hero-text p {
+          font-size: 1.3em;
+          margin-bottom: 30px;
+          opacity: 0.95;
+          animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        /* === HERO: bullets alinhados === */
+        .hero-bullets { 
+          list-style: none; 
+          margin: 30px 0; 
+          padding-left: 0;
+        }
+        
+        /* Ícone e texto na mesma linha */
+        .hero-bullets li{
+          display: grid;
+          grid-template-columns: 24px 1fr; /* círculo | texto */
+          align-items: center;
+          column-gap: 12px;
+          padding: 10px 0;
+          font-size: 1.1em;
+          line-height: 1.4;
+        }
 
-  useEffect(() => {
-    try {
-      const tenant = getTenant();
-      setRefCode((tenant.code || "").trim());
-    } catch {}
-  }, []);
+        
+        /* Seu ícone (mantém o que já tinha) */
+        .hero-bullets li::before {
+          content: '✓';
+          background: rgba(255,255,255,0.2);
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        
+        /* Quebra do bullet-1: 1 linha desktop, 2 no mobile (se estiver usando spans L1/L2) */
+        .bullet-1 .l1, .bullet-1 .l2 { display: inline; }
+        .bullet-1 .l1::after { content: " "; }
+        @media (max-width: 768px) {
+          .bullet-1 .l1, .bullet-1 .l2 { display: block; }
+          .bullet-1 .l1::after { content: ""; }
+        }
+        
+        /* Se ainda usar <br> nos bullets, mantém: oculto no desktop, visível no mobile */
+        .hero-bullets li br { display: none; }
+        @media (max-width: 768px) {
+          .hero-bullets li br { display: inline; }
+        }
+        
+        /* card lateral */
+        .hero-action {
+          background: white;
+          border-radius: 20px;
+          padding: 40px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+          animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        .lotus-logo {
+          width: 200px;
+          height: 200px;
+          margin: 0 auto 30px;
+          display: block;
+        }
+        
+        .hero-action h2 {
+          color: var(--text-dark);
+          font-size: 2em;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        
+        /* CTA do herói com texto branco + sombra */
+        .cta-button {
+          width: 100%;
+          padding: 18px;
+          background: var(--primary-gradient);
+          color: white;
+          border: none;
+          border-radius: 12px;
+          font-size: 1.2em;
+          font-weight: 600;
+          cursor: pointer;
+          transition: transform 0.3s, box-shadow 0.3s;
+          margin-bottom: 20px;
+          box-shadow: 0 4px 15px rgba(32,178,170,0.6) !important;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+        }
+        .cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(32,178,170,0.7) !important;
+        }
+        
+        .divider {
+          text-align: center;
+          margin: 20px 0;
+          position: relative;
+        }
+        .divider:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: #e0e0e0;
+        }
+        .divider span {
+          background: white;
+          padding: 0 20px;
+          position: relative;
+          color: #888;
+          font-size: 0.9em;
+        }
+        
+        .restore-form { display: flex; gap: 10px; }
+        .restore-form input {
+          flex: 1;
+          padding: 12px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 1em;
+        }
+        
+        .restore-form button {
+          padding: 12px 28px; /* um pouco mais de respiro lateral */
+          background: #20b2aa; /* teal sólido */
+          color: white;
+          text-shadow: 0 1px 2px rgba(0,0,0,0.4); /* sombra mais sutil */
+          border: none;
+          border-radius: 8px;
+          font-weight: 500; /* mais leve que 600 */
+          letter-spacing: 0.5px; /* abre ligeiramente as letras */
+          cursor: pointer;
+          line-height: 1.3; /* melhora a legibilidade */
+          box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+                
+        .trust-indicators {
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          margin-top: 30px;
+          padding-top: 20px;
+          border-top: 1px solid #e0e0e0;
+          color: var(--text-gray);
+          font-size: 0.9em;
+        }
+        
+        .trust-free {
+          color: #dc2626 !important;
+          font-weight: 600;
+        }
 
-  useEffect(() => {
-    let active = true;
-    (async () => {
-      const info = await fetchAuthMe();
-      if (!active) return;
-      const detected = info?.role === "pro" || isPro ? "pro" : "basic";
-      setRole(detected);
-      onRoleChange?.(detected);
-    })();
-    return () => {
-      active = false;
-    };
-  }, [isPro, onRoleChange]);
+        .process {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .section-header p {
+            font-size: 1.2em;
+            color: var(--text-gray);
+        }
+        
+        .process-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
 
-  useEffect(() => {
-    if (isPro && role !== "pro") {
-      setRole("pro");
-    }
-  }, [isPro, role]);
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .step-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .step-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
 
-  const applyRole = (nextRole: "basic" | "pro", message?: string) => {
-    setRole(nextRole);
-    onRoleChange?.(nextRole);
-    if (typeof message === "string") setProMsg(message);
-  };
+        /* New sections */
+        .why-method, .feel-section, .about-therapist {
+            padding: 80px 0;
+        }
 
-  const handleRestore = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!emailInput.trim() || restoreLoading) return;
-    await onRequestRestore(emailInput.trim());
-  };
+        .why-method {
+            background: white;
+        }
 
-  return (
-    <div className="min-h-screen w-full flex flex-col">
-      <div className="flex-1 w-full flex items-center justify-center px-4">
-        <div className="text-center space-y-8 max-w-xl mx-auto w-full">
-          <div className="flex justify-center mb-6">
-            <img
-              src={logoUrl}
-              alt="Logo"
-              className="h-72 w-auto md:h-[21rem] object-contain"
-              draggable={false}
-              loading="eager"
-              fetchPriority="high"
-              width={672}
-              height={672}
-            />
-          </div>
+        .feel-section {
+            background: #f8f9fa;
+        }
 
-          <div className="space-y-4">
-            <h1 className="text-5xl font-bold text-gray-800 mb-2 whitespace-pre-line">
-              {t("welcome.title")}
-            </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              {effectivePro ? t("welcome.subtitlePro") : t("welcome.subtitleOnline")}
-            </p>
-          </div>
+        .about-therapist {
+            background: white;
+        }
 
-          {!effectivePro && (
-            <p className="text-sm text-gray-500 max-w-xl mx-auto">
-              {t("welcome.methodNote")}
-            </p>
-          )}
+        .benefits-grid, .feel-list, .credentials-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            gap: 30px;
+        }
 
-          {/* PRIMEIRO: Botão de iniciar */}
-          <div className="space-y-4">
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                const trimmed = refCode.trim();
-                setRefCode(trimmed);
-                if (trimmed) {
-                  await setTenantFromCode(trimmed);
-                } else {
-                  await setTenantFromCode("");
-                }
-                startProcess();
-              }}
-              className="space-y-3"
-            >
-              <input
-                id="ther-code"
-                type="text"
-                value={refCode}
-                onChange={(e) => setRefCode(e.target.value)}
-                placeholder={isEN ? "Therapist code (optional)" : "Código do terapeuta (opcional)"}
-                className="w-56 sm:w-64 rounded-md border px-3 py-2 text-sm"
-                autoCapitalize="off"
-                autoCorrect="off"
-                spellCheck={false}
-              />
-              <button
-                type="submit"
-                className="w-full px-12 py-4 bg-blue-600 text-white text-xl font-semibold rounded-xl hover:bg-blue-700 transform hover:scale-[1.015] transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                {t("welcome.start", isEN ? "Start mapping" : "Iniciar Novo Mapeamento")}
-              </button>
-            </form>
+        .benefits-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
 
-            <p className="text-sm text-gray-500">
-              <Trans
-                i18nKey="welcome.pressEnterHint"
-                components={[
-                  <kbd
-                    key="k"
-                    className="px-2 py-1 bg-gray-200 rounded text-xs font-mono"
-                  />,
-                ]}
-              />
-            </p>
-          </div>
+        .feel-list {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+        }
 
-          {/* DEPOIS: Recuperação por e-mail */}
-          <form
-            onSubmit={handleRestore}
-            className="bg-white/70 backdrop-blur rounded-xl border border-gray-200 p-6 text-left shadow-sm space-y-4 mb-0"
-          >
-            <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-              {isEN ? "Recover Previous Mapping" : "Recuperar Mapeamento Anterior"}
-            </h3>
-            <p className="text-sm text-gray-600">
-              {isEN
-                ? "Enter your e-mail. If a record exists, we'll preload your last selection."
-                : "Digite seu e-mail. Se houver registro, vamos recuperar sua última seleção."}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                id="welcome-email"
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                inputMode="email"
-                autoCapitalize="off"
-                autoCorrect="off"
-                spellCheck={false}
-                placeholder={isEN ? "you@example.com" : "voce@exemplo.com"}
-                className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                disabled={restoreLoading}
-              />
-              <button
-                type="submit"
-                disabled={restoreLoading || !emailInput.trim()}
-                className="px-5 py-2.5 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
-              >
-                {restoreLoading
-                  ? isEN
-                    ? "Restoring..."
-                    : "Restaurando..."
-                  : isEN
-                  ? "Recover"
-                  : "Recuperar"}
-              </button>
+        .credentials-list {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            max-width: 1000px;
+        }
+
+        .benefit-card {
+            padding: 30px;
+            text-align: left;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .benefit-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .feel-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feel-item::before {
+            content: '✨';
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .credential-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .credential-item strong {
+            color: var(--primary-color);
+        }
+
+        /* Estilo especial para o item com foto */
+        .credential-photo {
+            padding: 0;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .credential-photo img {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 3px solid var(--primary-color);
+        }
+
+        .testimonials {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border: 3px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 6px 25px rgba(32, 178, 170, 0.12);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            font-size: 60px;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .author-info h4 {
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .stars {
+            color: #fbbf24;
+        }
+
+        .faq {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .faq-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5em;
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .final-cta {
+            padding: 100px 0;
+            background: var(--primary-gradient);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6); /* sombra suave para o texto */
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700; /* garante destaque do título */
+        }
+        
+        .final-cta p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 400; /* leitura mais solta, sem ficar "pesado" */
+        }
+        
+        .final-cta .cta-button {
+            background: #20b2aa;              /* fundo turquesa */
+            color: #ffffff !important;        /* texto branco */
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3); /* sombra no texto */
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            max-width: 400px;
+             /* contorno leve */
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+        
+        .final-cta .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .disclaimer {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: #1a202c;
+            color: white; 
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Forçar textos do footer em branco */
+        
+        footer,
+        footer * {
+          color: white !important;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+        }        
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 32, 44, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 20px;
+            z-index: 2000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+        
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cookie-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .cookie-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .cookie-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn-accept {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .btn-accept:hover {
+            background: #15803d;
+        }
+        
+        .btn-decline {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .btn-decline:hover {
+            background: #4b5563;
+        }
+        
+        .btn-settings {
+            background: transparent;
+            color: white;
+            border: 1px solid #4b5563;
+        }
+        
+        .btn-settings:hover {
+            background: #374151;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5em;
+            }
+            
+            .process-steps, .benefits-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .restore-form {
+                flex-direction: column;
+            }
+            
+            .final-cta h2 {
+                font-size: 2em;
+            }
+            
+            .trust-indicators 
+                color: #dc2626 !important; /* vermelho */
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cookie-actions {
+                justify-content: center;
+            }
+
+            .feel-list, .credentials-list {
+                grid-template-columns: 1fr;
+            }            
+            /* Reduzir altura do header no mobile */
+            .header {
+                padding: 8px 0; /* era 12px */
+            }
+            
+            .logo-header {
+                font-size: 0.9rem; /* era 1rem */
+            }
+            
+            .logo-header img {
+                width: 32px; /* era 40px */
+                height: 32px;
+            }
+            
+            .language-switcher {
+                transform: scale(0.9); /* reduzir tamanho */
+            }
+            
+            /* Ajustar padding do conteúdo principal */
+            .hero {
+                padding: 100px 0 60px; /* era 120px */
+            }
+            
+            .subtitle-steps {
+            font-size: 0.8em;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+                
+            .process-title {
+                font-size: 2em; /* menor no mobile */
+                line-height: 1.2;
+            }
+        }
+
+        /* Override white text - Option 1: Cinza azulado #334155 */
+        .hero *:not(.cta-button):not(.cta-text):not(.step-number):not(.trust-free),
+        .hero h1,
+        .hero p,
+        .hero li,
+        .hero-title,
+        .hero-subtitle,
+        .hero-bullets li,
+        .final-cta,
+        .final-cta h2,
+        .final-cta p {
+            color: #334155 !important;
+        }
+
+        /* Button text adjustments */
+        .hero .cta-button,
+        .hero .cta-button .cta-text {
+            color: white !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+        }     
+
+        /* Keep some elements white on dark backgrounds */
+        .step-number {
+            color: white !important;        
+        }        
+    </style>
+</head>
+<body class="pt-BR">
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <strong>🍪 Privacidade em primeiro lugar</strong><br>
+                Usamos cookies para melhorar sua experiência e analisar o uso do site. Você pode escolher quais cookies aceitar.
             </div>
-            {restoreError && (
-              <p className="text-xs text-red-600">{restoreError}</p>
-            )}
-            <p className="text-xs text-gray-500">
-              {isEN
-                ? "We do not store passwords; only last selection labels."
-                : "Não armazenamos senha; apenas a última seleção rotulada."}
-            </p>
-            <p className="text-[11px] text-gray-400 -mt-3">
-              {isEN
-                ? "If no previous record exists for this email, just start a new mapping."
-                : "Se não existir registro para esse e-mail, basta iniciar um novo mapeamento."}
-            </p>
-          </form>
-
-          {/* BLOCO DO TERAPEUTA */}
-          <div className="mt-6 mb-12 flex justify-end">
-            <div className="space-y-3 border border-gray-300 rounded-lg p-6 text-center bg-gray-50/80 backdrop-blur max-w-sm w-full sm:w-auto">
-              <h3 className="text-base font-semibold">
-                {isEN ? "Therapist access" : "Acesso do terapeuta"}
-              </h3>
-              {effectivePro ? (
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-gray-700">
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      setProMsg(isEN ? "Ending session..." : "Encerrando sessão...");
-                      try {
-                        await fetch(buildFunctionUrl("/.netlify/functions/auth-logout"), {
-                          method: "POST",
-                          credentials: "include",
-                        });
-                      } catch {}
-                      try { localStorage.setItem("mode", "online"); } catch {}
-                      setProPin("");
-                      applyAuthTenant({ therapist_id: null });
-                      applyRole("basic", isEN ? "Session ended." : "Sessão encerrada.");
-                    }}
-                    className="w-64 py-2.5 rounded-md bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
-                  >
-                    {isEN ? "Exit Pro mode" : "Sair do modo Pro"}
-                  </button>
-                  {proMsg && <p className="text-xs text-gray-600">{proMsg}</p>}
-                </div>
-              ) : (
-                <form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    setProMsg(isEN ? "Checking PIN..." : "Validando PIN...");
-                    try {
-                      const response = await fetch(buildFunctionUrl("/.netlify/functions/auth-pin-login"), {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        credentials: "include",
-                        body: JSON.stringify({ pin: proPin }),
-                      });
-                      if (!response.ok) throw new Error("invalid");
-                      let payload: { tenant_id?: string; therapist_id?: string | null } | null = null;
-                      try {
-                        payload = await response.json();
-                      } catch {
-                        payload = null;
-                      }
-                      setProPin("");
-                      try { localStorage.setItem("mode", "terapeuta"); } catch {}
-                      if (payload?.tenant_id) {
-                        applyAuthTenant({
-                          tenant_id: payload.tenant_id,
-                          therapist_id: payload.therapist_id ?? undefined,
-                        });
-                      }
-                      applyRole("pro", isEN ? "Pro mode enabled." : "Modo Pro ativado.");
-                    } catch {
-                      setProMsg(isEN ? "Invalid PIN." : "PIN inválido.");
-                    }
-                  }}
-                  className="space-y-3 flex flex-col items-center"
-                >
-                  <input
-                    type="password"
-                    required
-                    value={proPin}
-                    onChange={(e) => setProPin(e.target.value)}
-                    placeholder={isEN ? "PIN" : "PIN"}
-                    className="w-64 rounded-md border px-3 py-2 text-sm text-center"
-                    autoComplete="one-time-code"
-                    inputMode="numeric"
-                  />
-                  <div className="flex flex-col items-center gap-2">
-                    <button
-                      type="submit"
-                      className="w-64 py-2.5 rounded-md bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
-                    >
-                      {isEN ? "Enter Pro mode" : "Entrar no modo Pro"}
-                    </button>
-                    {proMsg && <p className="text-xs text-gray-600">{proMsg}</p>}
-                  </div>
-                </form>
-              )}
+            <div class="cookie-actions">
+                <button class="btn-accept" onclick="acceptAllCookies()">Aceitar Todos</button>
+                <button class="btn-decline" onclick="declineAllCookies()">Apenas Essenciais</button>
+                <button class="btn-settings" onclick="showCookieSettings()">Configurar</button>
             </div>
-          </div>
         </div>
-      </div>
-
-      {/* Espaço visual entre área e pre-footer */}
-      <div className="pb-12"></div>
-
-      {/* Footer fora do container interno */}
-      <SiteFooter isEN={isEN} />
     </div>
-  );
-}
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-header">
+                <img src="/images/logo.png" alt="Logo">
+                <span class="company-name">Consultoria Qualidade de Vida</span>
+            </div>
+            <a href="/blog" style="color: #1a202c; text-decoration: none; font-weight: 500; margin-left: auto; margin-right: 98px;">Blog</a>
+
+            <div class="language-switcher" aria-label="Language switch">
+                <span class="lang-indicator" aria-hidden="true"></span>
+                <button class="lang-pt active" onclick="switchLanguage('pt')" title="Português" aria-pressed="true">
+                    <img src="/flags/br.png" alt="Português" class="flag">
+                    <span class="label">Português</span>
+                </button>
+                <button class="lang-en" onclick="switchLanguage('en')" title="English" aria-pressed="false">
+                    <img src="/flags/us.png" alt="English" class="flag">
+                    <span class="label">English</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Transforme seu bem-estar mental e emocional</h1>
+                <p class="hero-subtitle">
+                  <span class="l1">Auto-mapeamento online gratuito.</span>
+                  <span class="l2">Método rápido e profundo que indica</span>
+                  <span class="l3">essências florais sob medida.</span>                    
+                </p>
+                <ul class="hero-bullets">
+                    <li class="bullet-1">Avaliação gratuita</li>
+                    <li class="bullet-2">Recomendações personalizadas</li>
+                    <li class="bullet-3">Baseado em métodos comprovados</li>
+                    <li class="bullet-4">Mais de 10.000 mapeamentos realizados</li>
+                </ul>
+            </div>
+            
+            <div class="hero-action">
+                <img src="/images/lotus-logo.png" alt="Flor de Lótus" class="lotus-logo">
+                <h2 class="action-title">Começar agora</h2>
+                <button class="cta-button" onclick="startMapping()">
+                    <span class="cta-text">Começar Mapeamento Gratuito →</span>
+                </button>
+                
+                <div class="divider">
+                    <span class="divider-text">ou retomar sessão</span>
+                </div>
+                
+                <form class="restore-form" onsubmit="handleRestore(event)">
+                    <input type="email" id="email-input" placeholder="seu@email.com" required>
+                    <button type="submit">
+                        <span class="restore-text">Recuperar</span>
+                    </button>
+                </form>
+                
+                <div id="message-container"></div>
+                
+                <div class="trust-indicators">
+                    <span class="trust-ssl">🔒 SSL Seguro</span>
+                    <span class="trust-no-signup">✨ Acesso imediato</span>
+                    <span class="trust-free">💯% Gratuito</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="section-header">
+            <h2 class="process-title">Como funciona<br><span class="subtitle-steps">(3 passos)</span></h2>
+            <p class="process-subtitle">Uma jornada simples e profunda para seu auto-conhecimento</p>
+        </div>
+        
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-1-title">Avaliação visual</h3>
+                <p class="step-1-desc">Você classifica imagens de flores pela sua resposta imediata — simples, direto e intuitivo.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-2-title">Análise de padrões</h3>
+                <p class="step-2-desc">O sistema cruza suas escolhas com um método de mapeamento utilizado na Terapia Floral para identificar tendências e padrões centrais.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-3-title">Relatório + próximo passo</h3>
+                <p class="step-3-desc">Receba insights instantâneos e, se quiser, <strong>sua fórmula personalizada</strong> preparada e enviada para sua casa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Method Section -->
+    <section class="why-method">
+        <div class="section-header">
+            <h2>Por que este método?</h2>
+            <p>Tradição ancestral encontra<br class="mobile-break">precisão moderna</p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3>Tradição + Ciência</h3>
+                <p>Saberes ancestrais (com destaque aos Aborígenes Australianos) unidos à prática clínica.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>Eficiência</h3>
+                <p>Foca na causa-raiz dos problemas, não só nos sintomas.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3>Jornada Personalizada</h3>
+                <p>Traz clareza sobre seu momento e gera fórmula sob medida para você.</p>
+            </div>
+
+            <div class="benefit-card">
+                <h3>Mapeamento profundo</h3>
+                <p>Mapeamento visual que acessa padrões além do relato verbal.</p>
+            </div>
+                                    
+            <div class="benefit-card">
+                <h3>Conveniência</h3>
+                <p>100% online, com entrega em casa.</p>
+            </div>
+                                    
+            <div class="benefit-card">
+                <h3>Privacidade & Clareza</h3>
+                <p>Dados protegidos e sob seu controle.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feel Section -->
+    <section class="feel-section">
+        <div class="section-header">
+            <h2>O que você pode sentir</h2>
+            <p>Benefícios relatados pelos usuários</p>
+        </div>
+        
+        <div class="feel-list">
+            <div class="feel-item">
+                <span>Menos estresse e reatividade</span>
+            </div>
+            <div class="feel-item">
+                <span>Mais centramento, foco e leveza</span>
+            </div>
+            <div class="feel-item">
+                <span>Coragem para atravessar transições</span>
+            </div>
+            <div class="feel-item">
+                <span>Reconexão com propósito e direção</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Therapist Section -->
+    <section class="about-therapist">
+        <div class="section-header">
+            <h2>Sobre o terapeuta</h2>
+            <p>Experiência e formação especializada</p>
+        </div>
+        
+        <div class="therapist-content">
+            <div class="credentials-list">
+                <div class="credential-item">
+                    <strong>20+ anos</strong> em consultoria de Terapia Floral (indivíduos e empresas)
+                </div>
+                <div class="credential-item">
+                    <strong>Pós-graduação em Terapia Floral</strong> FACIS/IBEHE (2002)
+                </div>
+                <div class="credential-item">
+                    <strong>Formação na Academia LiFE Australiana</strong> (2006)
+                </div>
+                <div class="credential-item">
+                    <strong>Formação no Alaska</strong> (2001)
+                </div>
+                <div class="credential-item">
+                    <strong>Professor</strong> de Diagnóstico Avançado na Terapia Floral - autorizado pela <strong>Academia LiFE</strong> da Austrália
+                </div>
+                <div class="credential-item credential-photo">
+                    <img src="/images/curso.jpg" alt="Curso de Terapia Floral" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>Depoimentos</h2>
+            <p>Experiências reais de transformação</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Flavius tem uma sensibilidade incrível. É uma pessoa muito cuidadosa, muito comprometido com o seu trabalho, além disso tem grande habilidade para suscitar questões profundas de forma muito amorosa. Recomendo!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MD</div>
+                    <div class="author-info">
+                        <h4>Marina D.</h4>
+                        <p>Advogada</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "O mapeamento foi preciso e direto. Trouxe clareza, catalisou mudanças, e abriu novos caminhos."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JS</div>
+                    <div class="author-info">
+                        <h4>João S.</h4>
+                        <p>Corretor de Imóveis</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Os benefícios foram imensos no meu processo pessoal a ponto de eu decidir fazer formação básica de aplicação do método. Tenho utilizado em familiares e amigos trazendo os mesmos benefícios que me aportaram. Recomendo muito."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JM</div>
+                    <div class="author-info">
+                        <h4>Jane M.</h4>
+                        <p>Empresária</p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="section-header">
+            <h2>Perguntas frequentes</h2>
+            <p></p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>É realmente gratuito?</span>
+                </div>
+                <div class="faq-answer">
+                    <span>Sim, o mapeamento e o relatório básico são gratuitos. Oferecemos como serviços complementares: recomendações premium, frascos de dosagem e consultorias especializadas..</span>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Qual a precisão do mapeamento?</span>
+                </div>
+                <div class="faq-answer">
+                    <span>Nosso método é baseado em décadas de pesquisa na Academia LiFE da Austrália e foi validado através de mais de 10.000 mapeamentos bem-sucedidos. A maioria dos usuários relata 90% de precisão na identificação de seus padrões, potenciais, qualidades e desafios. Não é diagnóstico médico, mas um <strong>guia prático</strong> para seu autoconhecimento.</span>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Quanto tempo leva?</span>
+                </div>
+                <div class="faq-answer">
+                    <span>Todo o processo de mapeamento leva cerca de 10 minutos. Você visualizará e classificará imagens, depois selecionará aquelas com maior impacto. Seus insights personalizados são gerados instantaneamente.</span>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Meus dados estão seguros?</span>
+                </div>
+                <div class="faq-answer">
+                    <span>Sim. Uso restrito para atendimento e melhoria do serviço. Você pode solicitar acesso ou exclusão a qualquer momento.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <h2>Pronto para começar?</h2>
+        <p class="cta-description">
+            <span class="flores-text">Deixe a força vital das flores<br class="mobile-break"> guiar seu processo.</span><br>
+            E junte-se a milhares de pessoas<br class="mobile-break">que já fizeram o mapeamento e deram o próximo passo<br class="mobile-break">na realização de seu potencial.
+        </p>
+        <button class="cta-button" onclick="startMapping()">
+            Fazer Auto-Mapeamento
+        </button>
+        <div class="disclaimer">
+            <small>Este serviço não substitui acompanhamento médico ou psicológico. Em caso de sintomas persistentes, procure um profissional de saúde.</small>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">            
+        <div class="footer-links">
+          <a id="footer-privacy" href="https://www.terapiafloral.org/politica-privacidade.html">Política de Privacidade</a>
+          <a id="footer-terms" href="https://www.terapiafloral.org/termos-de-servico.html">Termos de Serviço</a>
+          <a 
+            id="footer-contact" 
+            href="https://wa.me/5548988674471?text=Olá%20Flavius,%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais." 
+            target="_blank" 
+            rel="noopener"
+          >
+            Contato️
+          </a>
+        </div>
+        <p id="footer-copy">© 2025 Flavius Raymundo. Todos os direitos reservados.</p>                
+      </div>
+    </footer>
+
+
+    <script>
+        // Google Analytics 4 Configuration
+        const GA_MEASUREMENT_ID = 'G-PQ6KTN7WQZ';
+        let analyticsInitialized = false;
+        let consentGiven = false;
+
+        // Initialize GA4 without consent
+        function initializeGA() {
+            if (analyticsInitialized) return;
+            
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function() {
+                window.dataLayer.push(arguments);
+            };
+
+            window.gtag('js', new Date());
+            window.gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                functionality_storage: 'granted',
+                personalization_storage: 'denied',
+                security_storage: 'granted',
+                wait_for_update: 500,
+            });
+
+            window.gtag('config', GA_MEASUREMENT_ID, {
+                anonymize_ip: true,
+                cookie_flags: 'SameSite=Lax;Secure',
+                send_page_view: false
+            });
+
+            analyticsInitialized = true;
+        }
+
+        // Update consent
+        function updateGAConsent(analyticsConsent, marketingConsent) {
+            if (!window.gtag) return;
+
+            window.gtag('consent', 'update', {
+                analytics_storage: analyticsConsent ? 'granted' : 'denied',
+                ad_storage: marketingConsent ? 'granted' : 'denied',
+                personalization_storage: marketingConsent ? 'granted' : 'denied',
+            });
+
+            if (analyticsConsent) {
+                trackPageView();
+                consentGiven = true;
+            }
+        }
+
+        // Track page view
+        function trackPageView(page_title, page_location) {
+            if (!window.gtag || !consentGiven) return;
+
+            window.gtag('event', 'page_view', {
+                page_title: page_title || document.title,
+                page_location: page_location || window.location.href,
+            });
+        }
+
+        // Track custom events
+        function trackEvent(eventName, eventParameters) {
+            if (!window.gtag || !consentGiven) return;
+
+            const { custom_parameters, ...standardParameters } = eventParameters || {};
+
+            window.gtag('event', eventName, {
+                ...standardParameters,
+                ...custom_parameters,
+            });
+        }
+
+        // Track landing page specific events
+        function trackLandingEvent(action, properties = {}) {
+            trackEvent('landing_page_action', {
+                event_category: 'Landing Page',
+                event_label: action,
+                custom_parameters: {
+                    page_type: 'landing',
+                    language: currentLang,
+                    ...properties,
+                },
+            });
+        }
+
+        // Cookie banner functions
+        function showCookieBanner() {
+            const banner = document.getElementById('cookieBanner');
+            if (banner && !localStorage.getItem('cookieConsent')) {
+                banner.classList.add('show');
+            }
+        }
+
+        function acceptAllCookies() {
+            localStorage.setItem('cookieConsent', 'all');
+            updateGAConsent(true, true);
+            hideCookieBanner();
+            trackEvent('consent_changed', {
+                event_category: 'Privacy',
+                custom_parameters: { consent_type: 'all' }
+            });
+        }
+
+        function declineAllCookies() {
+            localStorage.setItem('cookieConsent', 'essential');
+            updateGAConsent(false, false);
+            hideCookieBanner();
+            trackEvent('consent_changed', {
+                event_category: 'Privacy',
+                custom_parameters: { consent_type: 'essential' }
+            });
+        }
+
+        function showCookieSettings() {
+            trackEvent('privacy_settings_clicked', {
+                event_category: 'Privacy'
+            });
+        }
+
+        function hideCookieBanner() {
+            const banner = document.getElementById('cookieBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
+        }
+
+        // Language and translations
+        const translations = {
+            pt: {
+                companyName: "Consultoria Qualidade de Vida",
+                heroTitle: "Transforme seu bem-estar mental e emocional",
+                heroSubtitleL1: "Auto-mapeamento online gratuito.",
+                heroSubtitleL2: "Método rápido e profundo que indica",
+                heroSubtitleL3: "essências florais sob medida.",
+                bullet1L1: "Avaliação gratuita",
+                actionTitle: "Começar agora",
+                ctaText: "Começar Mapeamento Gratuito →",
+                dividerText: "ou retomar sessão",
+                restoreText: "Recuperar",
+                bullet1: "Avaliação gratuita",
+                bullet2: "Recomendações personalizadas",
+                bullet3: "Baseado em métodos comprovados",
+                bullet4: "Mais de 10.000 mapeamentos realizados",
+                processTitle: "Como funciona<br><span class=\"subtitle-steps\">(3 passos)</span>",
+                processSubtitle: "Uma jornada simples e profunda para o autoconhecimento",
+                step1Title: "Avaliação visual",
+                step1Desc: "Você classifica imagens de flores pela sua resposta imediata — simples, direto e intuitivo.",
+                step2Title: "Análise de padrões",
+                step2Desc: "Método de mapeamento utilizado na Terapia Floral para identificar tendências e padrões centrais.",
+                step3Title: "Relatório",
+                step3Desc: "Receba insights instantâneos e, se quiser, <strong>sua fórmula personalizada</strong> preparada e enviada para sua casa.",
+                whyTitle: "Por que este método?",
+                whySubtitle: "Tradição ancestral encontra precisão moderna",
+                benefitTradition: "Tradição + Ciência",
+                benefitTraditionDesc: "Saberes ancestrais (com destaque aos Aborígenes Australianos) unidos à prática clínica.",
+                benefitEfficiency: "Eficiência",
+                benefitEfficiencyDesc: "Foca na causa-raiz dos problemas, não só nos sintomas.",
+                benefitPersonalization: "Jornada Personalizada",
+                benefitPersonalizationDesc: "Traz clareza sobre seu momento e gera fórmula sob medida para você.",
+                benefitMapping: "Mapeamento profundo",
+                benefitMappingDesc: "Mapeamento visual que acessa padrões além do relato verbal.",                
+                benefitConvenience: "Conveniência",
+                benefitConvenienceDesc: "100% online, com entrega em casa.",                
+                benefitPrivacy: "Privacidade & Clareza",
+                benefitPrivacyDesc: "Dados protegidos e sob seu controle.",
+                feelTitle: "O que você pode sentir",
+                feelSubtitle: "Benefícios relatados pelos usuários",
+                feel1: "Menos estresse e reatividade",
+                feel2: "Mais centramento, foco e leveza",
+                feel3: "Coragem para atravessar transições e desafios",
+                feel4: "Reconexão com propósito e direção",
+                therapistTitle: "Sobre o terapeuta",
+                therapistSubtitle: "Experiência e formação especializada",
+                credential1: "20+ anos em consultoria de Terapia Floral (indivíduos e empresas)",
+                credential2: "Pós-graduação em Terapia Floral FACIS/IBEHE (2002)",
+                credential3: "Formação na Academia LiFE Australiana (2006)",
+                credential4: "Formação no Alaska (2001)",
+                credential5: "Professor de Diagnóstico Avançado em Terapia Floral",                
+                testimonialsTitle: "Depoimentos",
+                testimonialsSubtitle: "Experiências reais de transformação",
+                testimonial1: "Flavius tem uma sensibilidade incrível. É uma pessoa muito cuidadosa, muito comprometido com o seu trabalho, além disso tem grande habilidade para suscitar questões profundas de forma muito amorosa. Recomendo!",
+                testimonial2: "O mapeamento foi preciso e direto. Trouxe clareza, catalisou mudanças, e abriu novos caminhos.",
+                testimonial3: "Os benefícios foram imensos no meu processo pessoal a ponto de eu decidir fazer formação básica de aplicação do método. Tenho utilizado em familiares e amigos trazendo os mesmos benefícios que me aportaram. Recomendo muito.",
+                job1: "Advogada",
+                job2: "Corretor de Imóveis",
+                job3: "Empresária",
+                faqTitle: "Perguntas frequentes",
+                faqSubtitle: "",
+                faqQ1: "É realmente gratuito?",
+                faqA1: "Sim, o mapeamento e o relatório básico são gratuitos. Oferecemos como serviços complementares: recomendações premium, frascos de dosagem e consultorias especializadas.",
+                faqQ2: "Qual a precisão do mapeamento?",
+                faqA2: "Nosso método é baseado em décadas de pesquisa na Academia LiFE da Austrália e foi validado através de mais de 10.000 mapeamentos bem-sucedidos. A maioria dos usuários relata 90% de precisão na identificação de seus padrões, potenciais, qualidades e desafios. Não é diagnóstico médico, mas um guia prático para seu autoconhecimento.",
+                faqQ3: "Quanto tempo leva?",
+                faqA3: "Todo o processo de mapeamento leva cerca de 10 minutos. Você visualizará e classificará imagens, depois selecionará aquelas com maior impacto. Seus insights personalizados são gerados instantaneamente.",
+                faqQ4: "Meus dados estão seguros?",
+                faqA4: "Sim. Uso restrito para atendimento e melhoria do serviço. Você pode solicitar acesso ou exclusão a qualquer momento.",
+                finalTitle: "Pronto para começar?",
+                finalSubtitle: "Deixe a força vital das flores<br class=\"mobile-break\"> guiar seu processo.<br>E junte-se a milhares de pessoas que já fizeram o mapeamento e deram o próximo passo na realização de seu potencial.",
+                finalCtaText: "Fazer Auto-Mapeamento",
+                disclaimerText: "Este serviço não substitui acompanhamento médico ou psicológico. Em caso de sintomas persistentes, procure um profissional de saúde.",
+                trustSsl: "SSL Seguro",
+                trustNoCadastro: "Acesso imediato",
+                trustGratuito: "% Gratuito",
+                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=pt",
+                footerPrivacy: "Política de Privacidade",
+                footerTerms: "Termos de Serviço",
+                footerContact: "Contato",
+                footerCopyright: "© {year} Flavius Raymundo. Todos os direitos reservados."
+            },
+            en: {
+                companyName: "Life Flourish Consulting",
+                heroTitle: "Transform your mental and emotional wellbeing",
+                heroSubtitle: "Do your self-mapping online for free. Quick and deep method that indicates custom flower essences.",
+                actionTitle: "Start now",
+                ctaText: "Start Free Mapping →",
+                dividerText: "or resume session",
+                restoreText: "Recover",
+                bullet1: "Free assessment",
+                bullet2: "Personalized recommendations",
+                bullet3: "Based on proven methods",
+                bullet4: "Over 10,000 mappings completed",
+                processTitle: "How it works<br><span class=\"subtitle-steps\">(3 steps)</span>",
+                processSubtitle: "A simple and profound journey to self-discovery",
+                step1Title: "Visual assessment",
+                step1Desc: "You classify flower images by your immediate response — simple, direct and intuitive.",
+                step2Title: "Pattern analysis",
+                step2Desc: "Mapping method used in Flower Essence Therapy to identify central trends and patterns.",
+                step3Title: "Report",
+                step3Desc: "Receive instant insights and, if you want, <strong>your personalized formula</strong> prepared and sent to your home.",
+                whyTitle: "Why this method?",
+                whySubtitle: "Ancestral tradition meets modern precision",
+                benefitTradition: "Tradition + Science",
+                benefitTraditionDesc: "Ancestral knowledge (especially from Australian Aboriginals) combined with clinical practice.",
+                benefitEfficiency: "Efficiency",
+                benefitEfficiencyDesc: "Focuses on the root cause of problems, not just symptoms.",
+                benefitPersonalization: "Individual Journey",
+                benefitPersonalizationDesc: "Brings clarity about your moment and generates a tailor-made formula for you.",
+                benefitMapping: "Deep mapping",
+                benefitMappingDesc: "Visual mapping that accesses patterns beyond verbal reports.",
+                benefitConvenience: "Convenience",
+                benefitConvenienceDesc: "100% online, with home delivery.",                
+                benefitPrivacy: "Privacy & Clarity",
+                benefitPrivacyDesc: "Protected data under your control.",
+                feelTitle: "What you can feel",
+                feelSubtitle: "Benefits reported by users",
+                feel1: "Less stress and reactivity",
+                feel2: "More centering, focus and lightness",
+                feel3: "Courage to go through transitions",
+                feel4: "Reconnection with purpose and direction",
+                therapistTitle: "About the therapist",
+                therapistSubtitle: "Experience and specialized training",
+                credential1: "20+ years in Flower Therapy consulting (individuals and companies)",
+                credential2: "Postgraduate in Flower Therapy FACIS/IBEHE (2002)",
+                credential3: "Training at LiFE Australian Academy (2006)",
+                credential4: "Alaska Training (2001)",
+                credential5: "Professor of Advanced Diagnosis in Flower Therapy",                
+                testimonialsTitle: "Testimonials",
+                testimonialsSubtitle: "Real transformation experiences",
+                testimonial1: "Flavius has incredible sensitivity. He is a very careful person, very committed to his work, and also has great ability to raise deep questions in a very loving way. I recommend!",
+                testimonial2: "The mapping was precise and direct. It brought clarity, catalyzed changes, and opened new paths.",
+                testimonial3: "The benefits were immense in my personal process to the point that I decided to take basic training in applying the method. I have used it on family and friends bringing the same benefits that they brought me. I highly recommend it.",
+                job1: "Lawyer",
+                job2: "Real Estate Broker",
+                job3: "Entrepreneur",
+                faqTitle: "Frequently asked questions",
+                faqSubtitle: "",
+                faqQ1: "Is it really free?",
+                faqA1: "Yes, mapping and basic report are free. We offer the following complementary services: premium recommendations, dosage bottles and specialized consultations.",
+                faqQ2: "What is the accuracy of the mapping?",
+                faqA2: "Our method is based on decades of research at LiFE Academy in Australia and has been validated through over 10,000 successful mappings. Most users report 90% accuracy in identifying their patterns, potentials, qualities and challenges. It is not a medical diagnosis, but a practical guide for your self-knowledge.",
+                faqQ3: "How long does it take?",
+                faqA3: "The entire mapping process takes about 10 minutes. You will visualize and classify images, then select those with the greatest impact. Your personalized insights are generated instantly.",
+                faqQ4: "Is my data secure?",
+                faqA4: "Yes. Restricted use for service and service improvement. You can request access or deletion at any time.",
+                finalTitle: "Ready to start?",
+                finalSubtitle: "Let the vital force of flowers<br class=\"mobile-break\"> guide your process.<br>Join thousands of people<br class=\"mobile-break\">who have already done the mapping<br class=\"mobile-break\"> and taken the next step<br class=\"mobile-break\"> in realizing their potential.",
+                finalCtaText: "Do my Self-Mapping",
+                disclaimerText: "This service does not replace medical or psychological follow-up. In case of persistent symptoms, seek a health professional.",
+                trustSsl: "SSL Secure",
+                trustNoCadastro: "Instant access",
+                trustGratuito: "<span style='color: #dc2626;'>% Free</span>",
+                targetUrl: "https://terapiafloral.org/?ref=consultoria&lang=en",
+                footerPrivacy: "Privacy Policy",
+                footerTerms: "Terms of Service",
+                footerContact: "Contact",
+                footerCopyright: "© {year} Flavius Raymundo. All rights reserved."
+            }
+        };
+
+        let currentLang = 'pt'; // Default Portuguese for this domain
+
+        function switchLanguage(lang) {
+          currentLang = lang;
+          const t = translations[lang];
+                
+          // body class
+          document.body.className = lang === 'pt' ? 'pt-BR' : 'en-US';
+        
+          // buttons
+          document.querySelectorAll('.language-switcher button').forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+          });
+          const currentBtn = document.querySelector(`.lang-${lang}`);
+          if (currentBtn) {
+            currentBtn.classList.add('active');
+            currentBtn.setAttribute('aria-pressed', 'true');
+          }
+
+          // Torna acessível ao onclick="switchLanguage('en')"
+          window.switchLanguage = switchLanguage;
+        
+          // indicator
+          const switcher = document.querySelector('.language-switcher');
+          if (switcher) switcher.classList.toggle('is-en', lang === 'en');
+        
+          // textos principais
+          document.querySelector('.company-name').textContent = t.companyName;
+          document.querySelector('.hero-title').textContent  = t.heroTitle;
+        
+          const subEl     = document.querySelector('.hero-subtitle');
+          const bullet1El = document.querySelector('.bullet-1');
+        
+          if (lang === 'pt') {
+            // PT: 3 linhas fixas no subtítulo + bullet-1 em 2 linhas
+            if (subEl) {
+              subEl.innerHTML = `
+                <span class="l1">${t.heroSubtitleL1}</span>
+                <span class="l2">${t.heroSubtitleL2}</span>
+                <span class="l3">${t.heroSubtitleL3}</span>
+              `;
+            }
+            if (bullet1El) {
+              bullet1El.innerHTML = `
+                <span class="l1">${t.bullet1L1}</span>
+                <span class="l2">${t.bullet1L2 || ''}</span>
+              `;
+            }
+          } else {
+            // EN: mantém original
+            if (subEl)     subEl.textContent   = t.heroSubtitle;
+            if (bullet1El) bullet1El.innerHTML = t.bullet1;
+          }
+        
+          document.querySelector('.action-title').textContent   = t.actionTitle;
+          document.querySelector('.cta-text').textContent       = t.ctaText;
+          document.querySelector('.divider-text').textContent   = t.dividerText;
+          document.querySelector('.restore-text').textContent   = t.restoreText;
+        
+          // outros bullets
+          document.querySelector('.bullet-2').innerHTML = t.bullet2;
+          document.querySelector('.bullet-3').innerHTML = t.bullet3;
+          document.querySelector('.bullet-4').innerHTML = t.bullet4;
+        
+          // Process
+          document.querySelector('.process-title').innerHTML        = t.processTitle;
+          document.querySelector('.process-subtitle').textContent   = t.processSubtitle;
+          document.querySelector('.step-1-title').textContent       = t.step1Title;
+          document.querySelector('.step-1-desc').textContent        = t.step1Desc;
+          document.querySelector('.step-2-title').textContent       = t.step2Title;
+          document.querySelector('.step-2-desc').textContent        = t.step2Desc;
+          document.querySelector('.step-3-title').textContent       = t.step3Title;
+          document.querySelector('.step-3-desc').innerHTML          = t.step3Desc;
+        
+          // Why
+          const whySection  = document.querySelector('.why-method .section-header h2');
+          const whySubtitle = document.querySelector('.why-method .section-header p');
+          if (whySection)  whySection.textContent  = t.whyTitle;
+          if (whySubtitle) whySubtitle.innerHTML   = t.whySubtitle;
+        
+          // Benefits
+          const benefitCards = document.querySelectorAll('.benefit-card');
+          if (benefitCards.length >= 6) {
+            benefitCards[0].querySelector('h3').textContent = t.benefitTradition;
+            benefitCards[0].querySelector('p').textContent  = t.benefitTraditionDesc;
+            benefitCards[1].querySelector('h3').textContent = t.benefitEfficiency;
+            benefitCards[1].querySelector('p').textContent  = t.benefitEfficiencyDesc;
+            benefitCards[2].querySelector('h3').textContent = t.benefitPersonalization;
+            benefitCards[2].querySelector('p').textContent  = t.benefitPersonalizationDesc;
+            benefitCards[3].querySelector('h3').textContent = t.benefitMapping;
+            benefitCards[3].querySelector('p').textContent  = t.benefitMappingDesc;
+            benefitCards[4].querySelector('h3').textContent = t.benefitConvenience;
+            benefitCards[4].querySelector('p').textContent  = t.benefitConvenienceDesc;            
+            benefitCards[5].querySelector('h3').textContent = t.benefitPrivacy;
+            benefitCards[5].querySelector('p').textContent  = t.benefitPrivacyDesc;
+          }
+        
+          // Feel
+          const feelTitle    = document.querySelector('.feel-section .section-header h2');
+          const feelSubtitle = document.querySelector('.feel-section .section-header p');
+          if (feelTitle)    feelTitle.textContent    = t.feelTitle;
+          if (feelSubtitle) feelSubtitle.textContent = t.feelSubtitle;
+          const feelItems = document.querySelectorAll('.feel-item span');
+          if (feelItems.length >= 4) {
+            feelItems[0].textContent = t.feel1;
+            feelItems[1].textContent = t.feel2;
+            feelItems[2].textContent = t.feel3;
+            feelItems[3].textContent = t.feel4;
+          }
+        
+          // Therapist
+          const therapistTitle    = document.querySelector('.about-therapist .section-header h2');
+          const therapistSubtitle = document.querySelector('.about-therapist .section-header p');
+          if (therapistTitle)    therapistTitle.textContent    = t.therapistTitle;
+          if (therapistSubtitle) therapistSubtitle.textContent = t.therapistSubtitle;
+        
+          const credentialItems = document.querySelectorAll('.credential-item');
+          if (credentialItems.length >= 5) {
+            credentialItems[0].innerHTML = `<strong>${t.credential1.split(' ')[0]} ${t.credential1.split(' ')[1]}</strong> ${t.credential1.split(' ').slice(2).join(' ')}`;
+            credentialItems[1].innerHTML = `<strong>${t.credential2.split(' FACIS')[0]}</strong> FACIS/IBEHE (2002)`;
+            credentialItems[2].innerHTML = `<strong>${t.credential3.split(' (')[0]}</strong> (2006)`;
+            credentialItems[3].innerHTML = `<strong>${t.credential4.split(' (')[0]}</strong> (2001)`;
+            credentialItems[4].innerHTML = `<strong>${lang === 'pt' ? 'Professor' : 'Professor'}</strong> ${lang === 'pt' ? 'de Diagnóstico Avançado na Terapia Floral - autorizado pela Academia LiFE da Austrália' : 'of Advanced Diagnosis in Flower Therapy - authorized by LiFE Academy of Australia'}`;
+            const courseImg = document.querySelector('.credential-photo img');
+            if (courseImg) {
+              courseImg.alt = lang === 'pt' ? 'Curso de Terapia Floral' : 'Flower Therapy Course';
+            }
+          }
+        
+          // Testimonials
+          const testimonialsTitle    = document.querySelector('.testimonials .section-header h2');
+          const testimonialsSubtitle = document.querySelector('.testimonials .section-header p');
+          if (testimonialsTitle)    testimonialsTitle.textContent    = t.testimonialsTitle;
+          if (testimonialsSubtitle) testimonialsSubtitle.textContent = t.testimonialsSubtitle;
+        
+          const testimonialTexts = document.querySelectorAll('.testimonial-text');
+          const testimonialJobs  = document.querySelectorAll('.testimonial-author .author-info p');
+          if (testimonialTexts.length >= 3) {
+            testimonialTexts[0].textContent = `"${t.testimonial1}"`;
+            testimonialTexts[1].textContent = `"${t.testimonial2}"`;
+            testimonialTexts[2].textContent = `"${t.testimonial3}"`;
+          }
+          if (testimonialJobs.length >= 3) {
+            testimonialJobs[0].textContent = t.job1;
+            testimonialJobs[1].textContent = t.job2;
+            testimonialJobs[2].textContent = t.job3;
+          }
+        
+          // FAQ
+          const faqTitleEl    = document.querySelector('.faq .section-header h2');
+          const faqSubtitleEl = document.querySelector('.faq .section-header p');
+          if (faqTitleEl)    faqTitleEl.textContent    = t.faqTitle;
+          if (faqSubtitleEl) faqSubtitleEl.textContent = t.faqSubtitle;
+        
+          const faqQuestions = document.querySelectorAll('.faq-question span');
+          const faqAnswers   = document.querySelectorAll('.faq-answer span');
+          if (faqQuestions.length >= 4 && faqAnswers.length >= 4) {
+            faqQuestions[0].textContent = t.faqQ1;
+            faqAnswers[0].innerHTML     = t.faqA1;
+            faqQuestions[1].textContent = t.faqQ2;
+            faqAnswers[1].innerHTML     = t.faqA2;
+            faqQuestions[2].textContent = t.faqQ3;
+            faqAnswers[2].textContent   = t.faqA3;
+            faqQuestions[3].textContent = t.faqQ4;
+            faqAnswers[3].textContent   = t.faqA4;
+          }
+        
+          // Final CTA
+          const finalTitle    = document.querySelector('.final-cta h2');
+          const finalSubtitle = document.querySelector('.final-cta p');
+          const finalCtaBtn   = document.querySelector('.final-cta .cta-button');
+          const disclaimer    = document.querySelector('.disclaimer small');
+          if (finalTitle)    finalTitle.textContent    = t.finalTitle;
+          if (finalSubtitle) finalSubtitle.innerHTML   = t.finalSubtitle;
+          if (finalCtaBtn)   finalCtaBtn.textContent   = t.finalCtaText;
+          if (disclaimer)    disclaimer.textContent    = t.disclaimerText;
+
+          // Footer texts (preserva URLs)
+          const fp = document.getElementById('footer-privacy');
+          const ft = document.getElementById('footer-terms');
+          const fc = document.getElementById('footer-contact');
+          const fy = document.getElementById('footer-copy');
+          if (fp) fp.textContent = t.footerPrivacy;
+          if (ft) ft.textContent = t.footerTerms;
+          if (fc) fc.textContent = t.footerContact;
+          if (fy) fy.textContent = t.footerCopyright.replace('{year}', String(new Date().getFullYear()));
+        
+          // Trust indicators
+          const trustSsl       = document.querySelector('.trust-ssl');
+          const trustNoSignup  = document.querySelector('.trust-no-signup');
+          const trustFree      = document.querySelector('.trust-free');
+          if (trustSsl)      trustSsl.innerHTML      = `🔒 ${t.trustSsl}`;
+          if (trustNoSignup) trustNoSignup.innerHTML = `✨ ${t.trustNoCadastro}`;
+          if (trustFree)     trustFree.innerHTML     = `💯 ${t.trustGratuito}`;
+        
+          // Track
+          trackLandingEvent('language_changed', { new_language: lang });
+        }
+        
+        function startMapping() {
+          // preserva UTMs da landing, se existirem
+          const here = new URLSearchParams(window.location.search);
+          const utm = {
+            utm_source:  here.get('utm_source')  || 'landing',
+            utm_medium:  here.get('utm_medium')  || 'ref_consultoria',
+            utm_campaign:here.get('utm_campaign')|| (currentLang === 'pt' ? 'lp_pt' : 'lp_en')
+          };
+        
+          const params = new URLSearchParams({
+            ref: 'consultoria',
+            lang: currentLang,
+            skip_welcome: '1',
+            step: 'instruction',
+            ...utm
+          });
+        
+          trackLandingEvent('cta_clicked', { button_type: 'main_cta' });
+          window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+        }
+                
+        async function handleRestore(event) {
+          event.preventDefault();
+          const email = document.getElementById('email-input').value.trim();
+          if (!email) return;
+        
+          const params = new URLSearchParams({
+            ref: 'consultoria',
+            lang: currentLang,      // mantém idioma
+            action: 'restore',      // app detecta restauração
+            restore_email: email    // e-mail para lookup no backend
+          });
+        
+          trackLandingEvent('restore_attempted', { email_provided: true, mode: 'redirect_with_email' });
+          window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+        }
+
+        // FAQ functionality
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+            
+            const isOpen = faqItem.classList.contains('active');
+            trackLandingEvent('faq_toggled', { 
+                question: element.textContent.trim(),
+                action: isOpen ? 'opened' : 'closed'
+            });
+        }
+
+        // Scroll tracking
+        function setupScrollTracking() {
+            let scrollPercentages = [25, 50, 75, 90];
+            let trackedPercentages = [];
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+                scrollPercentages.forEach(percentage => {
+                    if (scrollPercent >= percentage && !trackedPercentages.includes(percentage)) {
+                        trackedPercentages.push(percentage);
+                        trackLandingEvent('page_scroll', { 
+                            scroll_percentage: percentage 
+                        });
+                    }
+                });
+            });
+        }
+
+        // Click tracking for important elements
+        function setupClickTracking() {
+            // Track footer links
+            document.querySelectorAll('.footer-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    trackLandingEvent('footer_link_clicked', {
+                        link_text: link.textContent.trim(),
+                        link_href: link.href
+                    });
+                });
+            });
+
+            // Track hero bullets interaction
+            document.querySelectorAll('.hero-bullets li').forEach((bullet, index) => {
+                bullet.addEventListener('click', () => {
+                    trackLandingEvent('benefit_clicked', {
+                        benefit_index: index,
+                        benefit_text: bullet.textContent.trim()
+                    });
+                });
+            });
+        }
+
+        // Initialize everything
+        function initializePage() {
+            // Initialize GA4 (without consent initially)
+            initializeGA();
+            
+            // Show cookie banner if consent not given
+            setTimeout(showCookieBanner, 1000);
+            
+            // Check if consent was previously given
+            const consent = localStorage.getItem('cookieConsent');
+            if (consent === 'all') {
+                updateGAConsent(true, true);
+            } else if (consent === 'essential') {
+                updateGAConsent(false, false);
+            }
+            
+            // Setup tracking
+            setupScrollTracking();
+            setupClickTracking();
+            
+            // Track initial page load
+            if (consentGiven) {
+                trackLandingEvent('page_loaded', {
+                    referrer: document.referrer,
+                    user_agent: navigator.userAgent,
+                    viewport_width: window.innerWidth,
+                    viewport_height: window.innerHeight
+                });
+            }
+        
+           // Preenche rodapé já no 1º load        
+           const t  = translations[currentLang];
+           const fp = document.getElementById('footer-privacy');
+           const ft = document.getElementById('footer-terms');
+           const fc = document.getElementById('footer-contact');
+           const fy = document.getElementById('footer-copy');
+           if (fp) fp.textContent = t.footerPrivacy;
+           if (ft) ft.textContent = t.footerTerms;
+           if (fc) fc.textContent = t.footerContact;
+           if (fy) fy.textContent = t.footerCopyright.replace('{year}', String(new Date().getFullYear()));
+        }             
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
+        }
+                
+        // Track page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                trackLandingEvent('page_hidden');
+            } else {
+                trackLandingEvent('page_visible');
+            }
+        });
+
+        // Track time on page when user leaves
+        let startTime = Date.now();
+        window.addEventListener('beforeunload', () => {
+            const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+            trackLandingEvent('page_exit', {
+                time_on_page: timeOnPage
+            });
+        });
+    </script>
+</body>
+</html>
