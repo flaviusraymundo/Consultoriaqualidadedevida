@@ -28,7 +28,8 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --primary-gradient: linear-gradient(135deg,#20b2aa 0%,#b3d9ff 100%);
+      /* same gradient as original */
+      --primary-gradient: linear-gradient(135deg, #20b2aa 0%, #b3d9ff 100%);
       --primary-color:#20b2aa;
       --text-dark:#1a202c;
       --text-gray:#4a5568;
@@ -53,7 +54,15 @@
     .language-switcher .flag{width:24px;height:16px;object-fit:cover}
     .language-switcher .label{font-size:11px;font-weight:600}
     /* active language marker */
-    .language-switcher a[aria-current="page"]{ box-shadow: inset 0 -4px 0 var(--primary-color) }
+    .language-switcher a::after{
+      content:'';
+      position:absolute;left:8px;right:8px;bottom:6px;height:4px;
+      background:var(--active-lang-color, var(--primary-color));
+      border-radius:2px;opacity:0;transition:opacity .15s ease;
+    }
+    .language-switcher a[aria-current="page"]::after{opacity:1}
+    html[lang="pt-BR"] .language-switcher a[data-lang="pt"]::after{opacity:1}
+    html[lang="en"]    .language-switcher a[data-lang="en"]::after{opacity:1}
 
     /* Hero */
     .hero{background:var(--primary-gradient);padding:120px 0 80px;position:relative;overflow:hidden}
@@ -153,8 +162,8 @@
     .final-cta{padding:100px 0;background:var(--primary-gradient);color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);text-align:center}
     .final-cta h2{font-size:3em;margin-bottom:20px;font-weight:700}
     .final-cta p{font-size:1.3em;margin-bottom:40px;opacity:.95;font-weight:400}
-    .final-cta .cta-button{background:#20b2aa;color:#fff!important;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.3);display:inline-block;padding:15px 40px;font-size:1.1em;text-decoration:none;border-radius:12px;transition:transform .3s,box-shadow .3s;margin-bottom:20px;max-width:400px;border:2px solid rgba(255,255,255,.6);box-shadow:0 4px 15px rgba(0,0,0,.25)}
-    .final-cta .cta-button:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.2)}
+    .final-cta .cta-button{background:var(--primary-gradient);color:#fff!important;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.3);display:inline-block;padding:15px 40px;font-size:1.1em;text-decoration:none;border-radius:12px;transition:transform .3s,box-shadow .3s;margin-bottom:20px;max-width:400px;border:2px solid rgba(255,255,255,.6);box-shadow:0 4px 15px rgba(32,178,170,.6)}
+    .final-cta .cta-button:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(32,178,170,.7)}
     .disclaimer{font-size:.9em;opacity:.9;margin-top:30px;max-width:680px;margin-left:auto;margin-right:auto}
 
     .pre-footer{background:#e5e7eb;color:#374151;padding:30px 0;text-align:center}
@@ -170,10 +179,11 @@
     .footer-links a:hover{opacity:1}
     footer,footer *{color:#fff!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
 
-    /* Readable text color on gradient */
-    .hero *:not(.cta-button):not(.cta-text):not(.step-number):not(.trust-free),
-    .hero h1,.hero p,.hero li,.hero-title,.hero-subtitle,.hero-bullets li,
-    .final-cta,.final-cta h2,.final-cta p { color:#334155 !important }
+    /* White text over gradient blocks */
+    .hero .hero-text h1,
+    .hero .hero-text p,
+    .hero .hero-bullets li { color:#fff !important; text-shadow:0 2px 6px rgba(0,0,0,.35) }
+    .final-cta, .final-cta h2, .final-cta p { color:#fff !important; text-shadow:0 2px 4px rgba(0,0,0,.6) }
 
     /* Mobile tweaks */
     @media (max-width:768px){
@@ -272,11 +282,11 @@
 
       <!-- Language flags -->
       <nav class="language-switcher" aria-label="Change language">
-        <a href="/" title="Portuguese (Brazil)" onclick="setLocale('pt');return false;">
+        <a href="/" data-lang="pt" title="Portuguese (Brazil)" onclick="setLocale('pt');return false;">
           <img src="/flags/br.png" alt="Portuguese (Brazil)" class="flag" />
           <span class="label">Português</span>
         </a>
-        <a href="/en/" aria-current="page" title="English" onclick="setLocale('en');return false;">
+        <a href="/en/" data-lang="en" aria-current="page" title="English" onclick="setLocale('en');return false;">
           <img src="/flags/us.png" alt="English" class="flag" />
           <span class="label">English</span>
         </a>
