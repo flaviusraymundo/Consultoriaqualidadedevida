@@ -44,9 +44,16 @@
 
     /* Language switcher */
     .language-switcher{display:inline-flex;gap:6px}
-    .language-switcher a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;text-decoration:none;color:#374151;background:#fff}
+    .language-switcher a{
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      padding:6px 10px 12px; /* room for underline bar */
+      border:1px solid #e5e7eb;border-radius:8px;text-decoration:none;
+      color:#374151;background:#fff;position:relative
+    }
     .language-switcher .flag{width:24px;height:16px;object-fit:cover}
     .language-switcher .label{font-size:11px;font-weight:600}
+    /* active language marker */
+    .language-switcher a[aria-current="page"]{ box-shadow: inset 0 -4px 0 var(--primary-color) }
 
     /* Hero */
     .hero{background:var(--primary-gradient);padding:120px 0 80px;position:relative;overflow:hidden}
@@ -78,7 +85,7 @@
     .trust-free{color:#dc2626!important;font-weight:600}
 
     /* Sections */
-    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq,.contact{padding:80px 0}
+    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:80px 0}
     .process{background:#f8f9fa}
     .section-header{text-align:center;max-width:700px;margin:0 auto 60px}
     .section-header h2{font-size:2.5em;margin-bottom:20px;color:var(--text-dark)}
@@ -96,8 +103,30 @@
     .benefit-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1)}
     .benefit-card h3{color:var(--primary-color);margin-bottom:15px;font-size:1.3em}
 
-    .feel-list,.credentials-list{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-    @media (min-width:900px){.feel-list,.credentials-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .feel-list,.credentials-list{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px;
+      display:grid;
+      gap:20px;
+      grid-template-columns:1fr; /* one per row, like the original */
+    }
+    /* "stars" on What you may feel */
+    .feel-item{
+      background:#fff;
+      padding:20px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 3px 12px rgba(0,0,0,.05);
+      border-left:4px solid var(--primary-color);
+    }
+    .feel-item::before{
+      content:'✨';
+      font-size:1.2em;
+      flex-shrink:0;
+    }
     .credential-item{padding:20px;background:#f8f9fa;border-radius:10px;border-left:4px solid var(--primary-color)}
     .credential-photo{grid-column:1/-1;padding:0;background:transparent;border:none;display:flex;justify-content:center;align-items:center}
     .credential-photo img{width:100%;max-width:280px;height:auto;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);border:3px solid var(--primary-color)}
@@ -181,7 +210,35 @@
       }
     })();
 
+    // Restore scroll after language switch
+    (function restoreLocaleScroll(){
+      try{
+        var ratioStr = sessionStorage.getItem('localeScrollRatio');
+        var yStr     = sessionStorage.getItem('localeScrollY');
+        if(ratioStr==null && yStr==null) return;
+        function apply(){
+          var doc  = document.documentElement;
+          var maxY = Math.max(0, (doc.scrollHeight - window.innerHeight));
+          var ratio = parseFloat(ratioStr || 'NaN');
+          var yPix  = parseInt(yStr || 'NaN', 10);
+          var y = !isNaN(ratio) ? Math.round(ratio * maxY) : (!isNaN(yPix) ? yPix : 0);
+          window.scrollTo(0, Math.max(0, Math.min(y, maxY)));
+          sessionStorage.removeItem('localeScrollRatio');
+          sessionStorage.removeItem('localeScrollY');
+        }
+        if(document.readyState === 'complete') { apply(); }
+        else { window.addEventListener('load', function(){ setTimeout(apply, 0); }); }
+      }catch(e){}
+    })();
     function setLocale(loc) {
+      try{
+        var doc  = document.documentElement;
+        var maxY = Math.max(1, (doc.scrollHeight - window.innerHeight));
+        var y    = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var ratio= Math.max(0, Math.min(1, y / maxY));
+        sessionStorage.setItem('localeScrollY', String(y));
+        sessionStorage.setItem('localeScrollRatio', String(ratio));
+      }catch(e){}
       document.cookie = "locale=" + loc + "; Max-Age=" + 60*60*24*180 + "; Path=/; SameSite=Lax";
       location.href = loc === "en" ? "/en/" : "/";
     }
@@ -401,19 +458,7 @@
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <div class="section-header">
-      <h2>Contact</h2>
-      <p>Questions about the process or advanced options? Get in touch.</p>
-    </div>
-    <div class="faq-container">
-      <div class="credential-item" style="padding:20px;background:#f8f9fa;border-radius:10px;border-left:4px solid var(--primary-color)">
-        <p>Email: <a href="mailto:contato@consultoriaqualidadedevida.com">contato@consultoriaqualidadedevida.com</a></p>
-        <p>WhatsApp: <a href="https://wa.me/5500000000000" rel="nofollow">+55 00 0000-0000</a></p>
-      </div>
-    </div>
-  </section>
+  <!-- Contact section removed to match the original -->
 
   <!-- Final CTA -->
   <section class="final-cta">
@@ -426,7 +471,6 @@
   <!-- Pre-footer -->
   <div class="pre-footer">
     <div class="pre-footer-content">
-      <div>Want to contact me or learn about programs and courses?</div>
       <div class="pre-footer-links">
         <a id="prefooter-contact" href="https://terapiafloral.org/contato.html">Contact me</a>
         <a id="prefooter-programs" href="https://terapiafloral.org/programas.html">Programs &amp; Courses</a>
