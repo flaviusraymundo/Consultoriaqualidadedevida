@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quality of Life Consulting — Flower Essence Self-Mapping</title>
+  <meta name="description" content="Free online self-mapping. A quick and in-depth method that recommends custom flower essences for your current moment." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="keywords" content="flower therapy, free online self-mapping, free flower mapping, australian flower essences, self-care, well-being, emotional balance, self-knowledge, online consultation, flower essences, dosage bottles, flower formula, Bach essences, Alaskan Essences" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Quality of Life Consulting — Flower Essence Self-Mapping" />
+  <meta property="og:description" content="Improve your mental and emotional well-being with personalized flower essence recommendations." />
+  <meta property="og:image" content="https://consultoriaqualidadedevida.com/images/og-image.jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:url" content="https://consultoriaqualidadedevida.com/en/" />
+
+  <!-- Canonical + Hreflang -->
+  <link rel="canonical" href="https://consultoriaqualidadedevida.com/en/" />
+  <link rel="alternate" href="https://consultoriaqualidadedevida.com/" hreflang="pt-BR" />
+  <link rel="alternate" href="https://consultoriaqualidadedevida.com/en/" hreflang="en" />
+  <link rel="alternate" href="https://consultoriaqualidadedevida.com/" hreflang="x-default" />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary-gradient: linear-gradient(135deg,#20b2aa 0%,#b3d9ff 100%);
+      --primary-color:#20b2aa;
+      --text-dark:#1a202c;
+      --text-gray:#4a5568;
+      --text-light:#718096;
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text-dark)}
+
+    /* Header */
+    .header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .header-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .logo-header{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--text-dark);min-width:0}
+    .logo-header img{width:40px;height:40px;object-fit:contain}
+
+    /* Language switcher */
+    .language-switcher{display:inline-flex;gap:6px}
+    .language-switcher a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;text-decoration:none;color:#374151;background:#fff}
+    .language-switcher .flag{width:24px;height:16px;object-fit:cover}
+    .language-switcher .label{font-size:11px;font-weight:600}
+
+    /* Hero */
+    .hero{background:var(--primary-gradient);padding:120px 0 80px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:0;left:-50%;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");animation:float 20s linear infinite}
+    @keyframes float{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .hero-content{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+    .hero-text{max-width:680px}
+    .hero-text h1{text-wrap:balance;hyphens:auto;font-size:clamp(2.2rem,4vw + 1rem,3.2rem);line-height:1.15;letter-spacing:-.01em}
+    .hero-subtitle{text-wrap:pretty}
+    .hero-subtitle .l1,.hero-subtitle .l2,.hero-subtitle .l3{display:block}
+    .hero-text p{font-size:1.3em;margin-bottom:30px;opacity:.95;animation:fadeInUp .8s ease-out .2s both}
+
+    .hero-bullets{list-style:none;margin:30px 0;padding-left:0}
+    .hero-bullets li{display:grid;grid-template-columns:24px 1fr;align-items:center;column-gap:12px;padding:10px 0;font-size:1.1em;line-height:1.4}
+    .hero-bullets li::before{content:'✓';background:rgba(255,255,255,.2);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+    .hero-action{background:#fff;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both}
+    .lotus-logo{width:200px;height:200px;margin:0 auto 30px;display:block}
+    .hero-action h2{color:var(--text-dark);font-size:2em;margin-bottom:20px;text-align:center}
+    .cta-button{width:100%;padding:18px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.2em;font-weight:600;cursor:pointer;transition:transform .3s, box-shadow .3s;margin-bottom:20px;box-shadow:0 4px 15px rgba(32,178,170,.6)!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
+    .cta-button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(32,178,170,.7)!important}
+    .divider{text-align:center;margin:20px 0;position:relative}
+    .divider:before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:#e0e0e0}
+    .divider span{background:#fff;padding:0 20px;position:relative;color:#888;font-size:.9em}
+    .restore-form{display:flex;gap:10px}
+    .restore-form input{flex:1;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1em}
+    .restore-form button{padding:12px 28px;background:#20b2aa;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4);border:0;border-radius:8px;font-weight:500;letter-spacing:.5px;cursor:pointer;line-height:1.3;box-shadow:0 4px 15px rgba(0,0,0,.25)}
+    .trust-indicators{display:flex;justify-content:center;gap:30px;margin-top:30px;padding-top:20px;border-top:1px solid #e0e0e0;color:var(--text-gray);font-size:.9em}
+    .trust-free{color:#dc2626!important;font-weight:600}
+
+    /* Sections */
+    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq,.contact{padding:80px 0}
+    .process{background:#f8f9fa}
+    .section-header{text-align:center;max-width:700px;margin:0 auto 60px}
+    .section-header h2{font-size:2.5em;margin-bottom:20px;color:var(--text-dark)}
+    .section-header p{font-size:1.2em;color:var(--text-gray)}
+
+    .process-steps{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+    .step-card{background:#fff;border-radius:15px;padding:30px;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,.08);transition:transform .3s, box-shadow .3s;border:3px solid var(--primary-color)}
+    .step-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
+    .step-number{width:50px;height:50px;background:var(--primary-gradient);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.5em;font-weight:700}
+    .step-card h3{margin-bottom:15px;color:var(--text-dark)}
+    .step-card p{color:var(--text-gray);line-height:1.6}
+
+    .benefits-grid{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .benefit-card{padding:30px;text-align:left;border-radius:15px;background:#f8f9fa;border:2px solid #e9ecef;transition:transform .3s, box-shadow .3s}
+    .benefit-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1)}
+    .benefit-card h3{color:var(--primary-color);margin-bottom:15px;font-size:1.3em}
+
+    .feel-list,.credentials-list{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+    @media (min-width:900px){.feel-list,.credentials-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .credential-item{padding:20px;background:#f8f9fa;border-radius:10px;border-left:4px solid var(--primary-color)}
+    .credential-photo{grid-column:1/-1;padding:0;background:transparent;border:none;display:flex;justify-content:center;align-items:center}
+    .credential-photo img{width:100%;max-width:280px;height:auto;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);border:3px solid var(--primary-color)}
+
+    .testimonials-grid{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px}
+    .testimonial-card{background:#fff;border:3px solid var(--primary-color);border-radius:15px;padding:30px;position:relative;box-shadow:0 6px 25px rgba(32,178,170,.12)}
+    .testimonial-card::before{content:'"';font-size:60px;color:var(--primary-color);opacity:.2;position:absolute;top:10px;left:20px}
+    .testimonial-text{margin-bottom:20px;line-height:1.7;color:var(--text-dark);position:relative;z-index:1}
+    .testimonial-author{display:flex;align-items:center;gap:15px}
+    .author-avatar{width:50px;height:50px;border-radius:50%;background:var(--primary-gradient);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.2em}
+    .author-info h4{color:var(--text-dark);margin-bottom:2px}
+    .author-info p{color:var(--text-light);font-size:.9em;margin-bottom:5px}
+    .stars{color:#fbbf24}
+
+    .faq-container{max-width:800px;margin:0 auto;padding:0 20px}
+    .faq-item{background:#f8f9fa;border-radius:12px;margin-bottom:15px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:var(--text-dark);transition:background .3s}
+    .faq-question:hover{background:#e9ecef}
+    .faq-question::after{content:'+';font-size:1.5em;color:var(--primary-color);transition:transform .3s}
+    .faq-item.active .faq-question::after{transform:rotate(45deg)}
+    .faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease-out,padding .3s;color:var(--text-gray);line-height:1.7}
+    .faq-item.active .faq-answer{padding:0 20px 20px;max-height:500px}
+
+    .final-cta{padding:100px 0;background:var(--primary-gradient);color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);text-align:center}
+    .final-cta h2{font-size:3em;margin-bottom:20px;font-weight:700}
+    .final-cta p{font-size:1.3em;margin-bottom:40px;opacity:.95;font-weight:400}
+    .final-cta .cta-button{background:#20b2aa;color:#fff!important;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.3);display:inline-block;padding:15px 40px;font-size:1.1em;text-decoration:none;border-radius:12px;transition:transform .3s,box-shadow .3s;margin-bottom:20px;max-width:400px;border:2px solid rgba(255,255,255,.6);box-shadow:0 4px 15px rgba(0,0,0,.25)}
+    .final-cta .cta-button:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.2)}
+    .disclaimer{font-size:.9em;opacity:.9;margin-top:30px;max-width:680px;margin-left:auto;margin-right:auto}
+
+    .pre-footer{background:#e5e7eb;color:#374151;padding:30px 0;text-align:center}
+    .pre-footer-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;gap:15px;align-items:center}
+    .pre-footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+    .pre-footer-links a{color:#374151;text-decoration:none;font-weight:600;transition:color .3s}
+    .pre-footer-links a:hover{color:#1f2937}
+
+    footer{background:#1a202c;color:#fff;padding:40px 0;text-align:center}
+    .footer-content{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-links{display:flex;justify-content:center;gap:30px;margin-bottom:20px}
+    .footer-links a{color:#fff;text-decoration:none;opacity:.85;transition:opacity .3s}
+    .footer-links a:hover{opacity:1}
+    footer,footer *{color:#fff!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
+
+    /* Readable text color on gradient */
+    .hero *:not(.cta-button):not(.cta-text):not(.step-number):not(.trust-free),
+    .hero h1,.hero p,.hero li,.hero-title,.hero-subtitle,.hero-bullets li,
+    .final-cta,.final-cta h2,.final-cta p { color:#334155 !important }
+
+    /* Mobile tweaks */
+    @media (max-width:768px){
+      .hero-content{grid-template-columns:1fr;gap:40px}
+      .hero-text h1{font-size:2.5em}
+      .process-steps,.benefits-grid,.testimonials-grid{grid-template-columns:1fr}
+      .restore-form{flex-direction:column}
+      .final-cta h2{font-size:2em}
+      .header{padding:8px 0}
+      .logo-header{font-size:.9rem}
+      .logo-header img{width:32px;height:32px}
+      .language-switcher{transform:scale(.9)}
+      .hero{padding:100px 0 60px}
+      .subtitle-steps{font-size:.8em;font-weight:400;opacity:.8}
+    }
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+
+  <!-- Language logic for /en/: if browser prefers PT and no cookie, redirect back to '/' -->
+  <script>
+    (function () {
+      var ua = navigator.userAgent || "";
+      if (/(Googlebot|Bingbot|DuckDuckBot|YandexBot|baiduspider|facebookexternalhit|Twitterbot)/i.test(ua)) return;
+
+      var m = document.cookie.match(/(?:^|;\s*)locale=(pt|en)/);
+      var saved = m && m[1];
+      var nav = (navigator.language || "").toLowerCase();
+      var want = saved || (nav.startsWith("en") ? "en" : "pt");
+
+      var clean = location.pathname.replace(/\/+$/, "");
+      if ((clean === "/en" || clean === "/en/index.html") && want === "pt") {
+        location.replace("/");
+      }
+    })();
+
+    function setLocale(loc) {
+      document.cookie = "locale=" + loc + "; Max-Age=" + 60*60*24*180 + "; Path=/; SameSite=Lax";
+      location.href = loc === "en" ? "/en/" : "/";
+    }
+  </script>
+</head>
+<body class="en">
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:rgba(26,32,44,.95);backdrop-filter:blur(10px);color:#fff;padding:20px;z-index:2000;transform:translateY(100%);transition:transform .3s ease-out">
+    <div class="cookie-content" style="max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div class="cookie-text" style="flex:1;min-width:300px">
+        <strong>🍪 Privacy first</strong><br/>
+        We use cookies to improve your experience and analyze site usage. You can choose which cookies to accept.
+      </div>
+      <div class="cookie-actions" style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-accept" onclick="acceptAllCookies()">Accept All</button>
+        <button class="btn-decline" onclick="declineAllCookies()">Essentials Only</button>
+        <button class="btn-settings" onclick="showCookieSettings()">Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-header">
+        <img src="/images/logo.png" alt="Logo" />
+        <span class="company-name">Quality of Life Consulting</span>
+      </div>
+
+      <a href="/blog" style="color:#1a202c;text-decoration:none;font-weight:500;margin-left:auto;margin-right:98px">Blog</a>
+
+      <!-- Language flags -->
+      <nav class="language-switcher" aria-label="Change language">
+        <a href="/" title="Portuguese (Brazil)" onclick="setLocale('pt');return false;">
+          <img src="/flags/br.png" alt="Portuguese (Brazil)" class="flag" />
+          <span class="label">Português</span>
+        </a>
+        <a href="/en/" aria-current="page" title="English" onclick="setLocale('en');return false;">
+          <img src="/flags/us.png" alt="English" class="flag" />
+          <span class="label">English</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Transform your mental and emotional well-being</h1>
+        <p class="hero-subtitle">
+          <span class="l1">Free online self-mapping.</span>
+          <span class="l2">A quick and in-depth method that</span>
+          <span class="l3">recommends custom flower essences.</span>
+        </p>
+        <ul class="hero-bullets">
+          <li class="bullet-1">Free assessment</li>
+          <li class="bullet-2">Personalized recommendations</li>
+          <li class="bullet-3">Based on proven methods</li>
+          <li class="bullet-4">10,000+ mappings completed</li>
+        </ul>
+      </div>
+
+      <div class="hero-action">
+        <img src="/images/lotus-logo.png" alt="Lotus flower mark" class="lotus-logo" />
+        <h2 class="action-title">Start now</h2>
+        <button class="cta-button" onclick="startMapping()">
+          <span class="cta-text">Start Free Mapping →</span>
+        </button>
+
+        <div class="divider"><span class="divider-text">or resume session</span></div>
+
+        <form class="restore-form" onsubmit="handleRestore(event)">
+          <input type="email" id="email-input" placeholder="your@email.com" required />
+          <button type="submit"><span class="restore-text">Recover</span></button>
+        </form>
+
+        <div id="message-container"></div>
+
+        <div class="trust-indicators">
+          <span class="trust-ssl">🔒 SSL Secure</span>
+          <span class="trust-no-signup">✨ Instant access</span>
+          <span class="trust-free">💯% Free</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process">
+    <div class="section-header">
+      <h2 class="process-title">How it works<br/><span class="subtitle-steps">(3 steps)</span></h2>
+      <p class="process-subtitle">A simple and deep journey of self-knowledge</p>
+    </div>
+    <div class="process-steps">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 class="step-1-title">Visual assessment</h3>
+        <p class="step-1-desc">You classify flower images by your immediate response — simple, direct, intuitive.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 class="step-2-title">Pattern analysis</h3>
+        <p class="step-2-desc">The system matches your choices with a mapping method used in Flower Therapy to reveal central tendencies and patterns.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 class="step-3-title">Report + next step</h3>
+        <p class="step-3-desc">Get instant insights and, if you wish, <strong>your personalized formula</strong> prepared and shipped to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Method -->
+  <section class="why-method">
+    <div class="section-header">
+      <h2>Why this method?</h2>
+      <p>Ancient tradition meets<br class="mobile-break">modern precision</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card"><h3>Tradition + Practice</h3><p>Ancestral knowledge (notably Australian Aboriginal traditions) combined with clinical practice.</p></div>
+      <div class="benefit-card"><h3>Efficiency</h3><p>Focuses on root causes, not only symptoms.</p></div>
+      <div class="benefit-card"><h3>Personalized Journey</h3><p>Clarifies your current moment and produces a tailor-made formula for you.</p></div>
+      <div class="benefit-card"><h3>Deep mapping</h3><p>Visual mapping that accesses patterns beyond verbal reporting.</p></div>
+      <div class="benefit-card"><h3>Convenience</h3><p>100% online, home delivery available.</p></div>
+      <div class="benefit-card"><h3>Privacy &amp; Clarity</h3><p>Your data is protected and under your control.</p></div>
+    </div>
+  </section>
+
+  <!-- Feel -->
+  <section class="feel-section">
+    <div class="section-header">
+      <h2>What you may feel</h2>
+      <p>Benefits often reported by users</p>
+    </div>
+    <div class="feel-list">
+      <div class="feel-item"><span>Less stress and reactivity</span></div>
+      <div class="feel-item"><span>More centeredness, focus, and lightness</span></div>
+      <div class="feel-item"><span>Courage to navigate transitions</span></div>
+      <div class="feel-item"><span>Reconnection with purpose and direction</span></div>
+    </div>
+  </section>
+
+  <!-- About Therapist -->
+  <section class="about-therapist">
+    <div class="section-header">
+      <h2>About the therapist</h2>
+      <p>Experience and specialized training</p>
+    </div>
+    <div class="therapist-content">
+      <div class="credentials-list">
+        <div class="credential-item"><strong>20+ years</strong> in Flower Therapy consulting (individuals and organizations)</div>
+        <div class="credential-item"><strong>Postgraduate in Flower Therapy</strong> FACIS/IBEHE (2002)</div>
+        <div class="credential-item"><strong>Training at the Australian LiFE Academy</strong> (2006)</div>
+        <div class="credential-item"><strong>Training in Alaska</strong> (2001)</div>
+        <div class="credential-item"><strong>Professor</strong> of Advanced Diagnosis in Flower Therapy — authorized by the <strong>LiFE Academy</strong> (Australia)</div>
+        <div class="credential-item credential-photo">
+          <img src="/images/curso.jpg" alt="Therapist teaching in a classroom" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="section-header">
+      <h2>Testimonials</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">“Flavius has incredible sensitivity. He is very caring and deeply committed to his work, and he has a remarkable ability to bring up profound questions in a loving way. I recommend him!”</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MC</div>
+          <div class="author-info"><h4>Maria C.</h4><p>Educational Psychologist</p><div class="stars">★★★★★</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">“The mapping was precise and straightforward. It brought clarity, catalyzed changes, and opened new paths.”</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JS</div>
+          <div class="author-info"><h4>João S.</h4><p>Real Estate Broker</p><div class="stars">★★★★★</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">“The benefits for my personal process were so great that I decided to train in the basic method. I’ve used it with family and friends and they’re seeing the same benefits I did. Highly recommended.”</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JM</div>
+          <div class="author-info"><h4>Jane M.</h4><p>Entrepreneur</p><div class="stars">★★★★★</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="section-header">
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)"><span>Is it really free?</span></div>
+        <div class="faq-answer"><span>Yes, the mapping and basic report are free. We also offer optional paid services: premium recommendations, dosage bottles, and professional consultations.</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)"><span>How accurate is the mapping?</span></div>
+        <div class="faq-answer"><span>Our method is based on decades of research at the Australian LiFE Academy and has been validated through 10,000+ successful mappings. It’s not a medical diagnosis, but a <strong>practical guide</strong> for your self-knowledge.</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)"><span>How long does it take?</span></div>
+        <div class="faq-answer"><span>The whole process takes about 10 minutes. You will view and classify images; your personalized insights are generated instantly.</span></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)"><span>Are my data safe?</span></div>
+        <div class="faq-answer"><span>Yes. Restricted use for service delivery and improvements. You can request data removal at any time.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="section-header">
+      <h2>Contact</h2>
+      <p>Questions about the process or advanced options? Get in touch.</p>
+    </div>
+    <div class="faq-container">
+      <div class="credential-item" style="padding:20px;background:#f8f9fa;border-radius:10px;border-left:4px solid var(--primary-color)">
+        <p>Email: <a href="mailto:contato@consultoriaqualidadedevida.com">contato@consultoriaqualidadedevida.com</a></p>
+        <p>WhatsApp: <a href="https://wa.me/5500000000000" rel="nofollow">+55 00 0000-0000</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <h2>Ready to begin?</h2>
+    <p>It only takes a few minutes. You can pause and resume anytime.</p>
+    <a class="cta-button" href="javascript:void(0)" onclick="startMapping()">Start Free Mapping →</a>
+    <div class="disclaimer"><small>This service does not replace medical or psychological care.</small></div>
+  </section>
+
+  <!-- Pre-footer -->
+  <div class="pre-footer">
+    <div class="pre-footer-content">
+      <div>Want to contact me or learn about programs and courses?</div>
+      <div class="pre-footer-links">
+        <a id="prefooter-contact" href="https://terapiafloral.org/contato.html">Contact me</a>
+        <a id="prefooter-programs" href="https://terapiafloral.org/programas.html">Programs &amp; Courses</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a id="footer-privacy" href="https://www.terapiafloral.org/politica-privacidade.html">Privacy Policy</a>
+        <a id="footer-terms" href="https://www.terapiafloral.org/termos-de-servico.html">Terms of Service</a>
+      </div>
+      <p id="footer-copy">© <span id="copy-year"></span> Flavius Raymundo. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // GA4
+    const GA_MEASUREMENT_ID = 'G-PQ6KTN7WQZ';
+    let analyticsInitialized = false;
+    let consentGiven = false;
+    const currentLang = 'en';
+
+    function initializeGA(){
+      if(analyticsInitialized) return;
+      const s=document.createElement('script');
+      s.async=true;
+      s.src=`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+      document.head.appendChild(s);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('consent','default',{
+        analytics_storage:'denied',
+        ad_storage:'denied',
+        functionality_storage:'granted',
+        personalization_storage:'denied',
+        security_storage:'granted',
+        wait_for_update:500
+      });
+      gtag('config', GA_MEASUREMENT_ID, { anonymize_ip:true, cookie_flags:'SameSite=Lax;Secure', send_page_view:false });
+      analyticsInitialized = true;
+    }
+
+    function updateGAConsent(analyticsConsent, marketingConsent){
+      if(!window.gtag) return;
+      gtag('consent','update',{
+        analytics_storage: analyticsConsent ? 'granted' : 'denied',
+        ad_storage:         marketingConsent ? 'granted' : 'denied',
+        personalization_storage: marketingConsent ? 'granted' : 'denied',
+      });
+      if(analyticsConsent){ trackPageView(); consentGiven = true; }
+    }
+
+    function trackPageView(page_title, page_location){
+      if(!window.gtag || !consentGiven) return;
+      gtag('event','page_view',{ page_title: page_title || document.title, page_location: page_location || window.location.href });
+    }
+
+    function trackEvent(eventName, eventParameters){
+      if(!window.gtag || !consentGiven) return;
+      const { custom_parameters, ...std } = eventParameters || {};
+      gtag('event', eventName, { ...std, ...custom_parameters });
+    }
+
+    function trackLandingEvent(action, properties = {}){
+      trackEvent('landing_page_action',{
+        event_category:'Landing Page',
+        event_label: action,
+        custom_parameters:{ page_type:'landing', language: currentLang, ...properties }
+      });
+    }
+
+    // Cookie banner
+    function showCookieBanner(){
+      const banner = document.getElementById('cookieBanner');
+      if(banner && !localStorage.getItem('cookieConsent')) banner.style.transform = 'translateY(0)';
+    }
+    function hideCookieBanner(){ const b=document.getElementById('cookieBanner'); if(b) b.style.transform='translateY(100%)' }
+    function acceptAllCookies(){ localStorage.setItem('cookieConsent','all'); updateGAConsent(true,true); hideCookieBanner(); trackEvent('consent_changed',{event_category:'Privacy',custom_parameters:{consent_type:'all'}}) }
+    function declineAllCookies(){ localStorage.setItem('cookieConsent','essential'); updateGAConsent(false,false); hideCookieBanner(); trackEvent('consent_changed',{event_category:'Privacy',custom_parameters:{consent_type:'essential'}}) }
+    function showCookieSettings(){ trackEvent('privacy_settings_clicked',{event_category:'Privacy'}) }
+
+    // CTA / Restore
+    function startMapping(){
+      const here = new URLSearchParams(window.location.search);
+      const utm = {
+        utm_source: here.get('utm_source') || 'landing',
+        utm_medium: here.get('utm_medium') || 'ref_consultoria',
+        utm_campaign: here.get('utm_campaign') || 'lp_en'
+      };
+      const params = new URLSearchParams({ ref:'consultoria', lang: currentLang, skip_welcome:'1', step:'instruction', ...utm });
+      trackLandingEvent('cta_clicked',{button_type:'main_cta'});
+      window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+    }
+
+    async function handleRestore(event){
+      event.preventDefault();
+      const email = (document.getElementById('email-input')||{}).value?.trim();
+      if(!email) return;
+      const params = new URLSearchParams({ ref:'consultoria', lang: currentLang, action:'restore', restore_email: email });
+      trackLandingEvent('restore_attempted',{ email_provided:true, mode:'redirect_with_email' });
+      window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+    }
+
+    // FAQ
+    function toggleFAQ(el){
+      const box = el.parentElement;
+      box.classList.toggle('active');
+      const isOpen = box.classList.contains('active');
+      trackLandingEvent('faq_toggled',{ question: el.textContent.trim(), action: isOpen ? 'opened' : 'closed' });
+    }
+
+    // Scroll/Click tracking
+    function setupScrollTracking(){
+      const marks=[25,50,75,90]; const sent=[];
+      window.addEventListener('scroll',()=>{
+        const st=window.pageYOffset;
+        const h=document.documentElement.scrollHeight - window.innerHeight;
+        const pct=Math.round((st/h)*100);
+        marks.forEach(p=>{ if(pct>=p && !sent.includes(p)){ sent.push(p); trackLandingEvent('page_scroll',{scroll_percentage:p}); }});
+      });
+    }
+    function setupClickTracking(){
+      document.querySelectorAll('.footer-links a').forEach(link=>{
+        link.addEventListener('click',()=>{ trackLandingEvent('footer_link_clicked',{ link_text: link.textContent.trim(), link_href: link.href }) })
+      });
+    }
+
+    // Boot
+    document.getElementById('copy-year').textContent = new Date().getFullYear();
+    initializeGA();
+    document.addEventListener('DOMContentLoaded', ()=>{
+      setupScrollTracking();
+      setupClickTracking();
+      showCookieBanner();
+      trackLandingEvent('page_loaded');
+    });
+  </script>
+</body>
+</html>
