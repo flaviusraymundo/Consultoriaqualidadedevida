@@ -4,8 +4,27 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/images/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Consultoria Qualidade de Vida</title>
-  
+
+  <title>Consultoria Qualidade de Vida – Auto-Mapeamento de Essências Florais</title>
+  <meta name="description" content="Auto-mapeamento online gratuito. Método rápido e profundo que indica essências florais sob medida para seu momento." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="keywords" content="terapia floral, auto-mapeamento online gratuito, mapeamento floral gratuito, florais australianos, autocuidado, bem-estar, equilíbrio emocional, autoconhecimento, consulta online, essências florais, frascos de dosagem, fórmula floral, florais de Bach, florais do Alaska" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Consultoria Qualidade de Vida – Auto-Mapeamento de Essências Florais" />
+  <meta property="og:description" content="Transforme seu bem-estar mental e emocional com recomendações personalizadas de essências florais." />
+  <meta property="og:image" content="https://consultoriaqualidadedevida.com/images/og-image.jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:url" content="https://consultoriaqualidadedevida.com/en/" />
+
+  <!-- Canonical + Hreflang -->
+  <link rel="canonical" href="https://consultoriaqualidadedevida.com/en/" />
+  <link rel="alternate" href="https://consultoriaqualidadedevida.com/" hreflang="pt-BR" />
+  <link rel="alternate" href="https://consultoriaqualidadedevida.com/en/" hreflang="en" />
+  <link rel="alternate" href="https://consultoriaqualidadedevida.com/" hreflang="x-default" />
+
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
@@ -13,358 +32,311 @@
       --primary-color:#20b2aa;
       --text-dark:#1a202c;
       --text-gray:#4a5568;
+      --text-light:#718096;
     }
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:var(--text-dark)}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text-dark)}
 
+    /* Header DOURADO com logo MAIOR */
     .header{position:fixed;top:0;left:0;right:0;background:rgba(218,165,32,.95);backdrop-filter:blur(10px);z-index:1000;padding:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
     .header-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
-    .logo-header{display:flex;align-items:center;gap:14px;font-weight:600;font-size:1.15rem;color:var(--text-dark)}
-    .logo-placeholder{width:56px;height:56px;background:var(--primary-gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:bold}
+    .logo-header{display:flex;align-items:center;gap:14px;font-weight:600;font-size:1.15rem;color:var(--text-dark);min-width:0}
+    .logo-header img{width:56px;height:56px;object-fit:contain}
 
+    /* Switcher vira links */
     .language-switcher{display:inline-flex;gap:6px}
-    .language-switcher a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 10px 12px;border:1px solid #e5e7eb;border-radius:8px;text-decoration:none;color:#374151;background:#fff;position:relative}
+    .language-switcher a{
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      padding:6px 10px 12px;
+      border:1px solid #e5e7eb;border-radius:8px;text-decoration:none;
+      color:#374151;background:#fff;position:relative
+    }
+    .language-switcher .flag{width:24px;height:16px;object-fit:cover}
     .language-switcher .label{font-size:11px;font-weight:600}
-    .language-switcher a::after{content:'';position:absolute;left:8px;right:8px;bottom:6px;height:4px;background:var(--primary-color);border-radius:2px;opacity:0;transition:opacity .15s}
-    .language-switcher a:first-child::after{opacity:1}
+    .language-switcher a::after{
+      content:'';
+      position:absolute;left:8px;right:8px;bottom:6px;height:4px;
+      background:var(--active-lang-color, var(--primary-color));
+      border-radius:2px;opacity:0;transition:opacity .15s ease;
+    }
+    html[lang="pt-BR"] .language-switcher a[data-lang="pt"]::after{opacity:1}
+    html[lang="en"]    .language-switcher a[data-lang="en"]::after{opacity:1}
 
+    /* Hero com IMAGEM DE FUNDO pinkever.jpg 60% opacidade */
     .hero{background:var(--primary-gradient);padding:140px 0 80px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(45deg,rgba(255,192,203,0.3) 0px,rgba(255,192,203,0.3) 10px,transparent 10px,transparent 20px);opacity:.6;z-index:0}
+    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/images/pinkever.jpg');background-size:cover;background-position:center;opacity:.6;z-index:0}
+    .hero::after{content:'';position:absolute;top:0;left:-50%;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");animation:float 20s linear infinite;z-index:1}
+    @keyframes float{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     .hero-content{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;position:relative;z-index:2}
-    .hero-text h1{font-size:clamp(2.2rem,4vw + 1rem,3.2rem);line-height:1.15;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.35)}
-    .hero-text p{font-size:1.3em;margin-bottom:30px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.35)}
+    .hero-text{max-width:680px}
+    .hero-text h1{text-wrap:balance;hyphens:auto;font-size:clamp(2.2rem,4vw + 1rem,3.2rem);line-height:1.15;letter-spacing:-.01em}
+    .hero-subtitle{text-wrap:pretty}
     .hero-subtitle .l1,.hero-subtitle .l2,.hero-subtitle .l3{display:block}
+    .hero-text p{font-size:1.3em;margin-bottom:30px;opacity:.95;animation:fadeInUp .8s ease-out .2s both}
+
     .hero-bullets{list-style:none;margin:30px 0;padding-left:0}
-    .hero-bullets li{display:grid;grid-template-columns:24px 1fr;align-items:center;column-gap:12px;padding:10px 0;font-size:1.1em;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.35)}
-    .hero-bullets li::before{content:'✓';background:rgba(255,255,255,.2);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-    
-    .hero-action{background:#fff;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.2);margin-top:160px}
+    .hero-bullets li{display:grid;grid-template-columns:24px 1fr;align-items:center;column-gap:12px;padding:10px 0;font-size:1.1em;line-height:1.4}
+    .hero-bullets li::before{content:'✓';background:rgba(255,255,255,.2);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+    /* Card ABAIXADO com margin-top 160px */
+    .hero-action{background:#fff;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both;margin-top:160px}
+    .lotus-logo{width:200px;height:200px;margin:0 auto 30px;display:block}
     .hero-action h2{color:var(--text-dark);font-size:2em;margin-bottom:20px;text-align:center}
-    .cta-button{width:100%;padding:18px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.2em;font-weight:600;cursor:pointer;margin-bottom:20px;box-shadow:0 4px 15px rgba(32,178,170,.6);text-shadow:0 2px 4px rgba(0,0,0,.3);transition:transform .3s}
-    .cta-button:hover{transform:translateY(-2px)}
+    .cta-button{width:100%;padding:18px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.2em;font-weight:600;cursor:pointer;transition:transform .3s, box-shadow .3s;margin-bottom:20px;box-shadow:0 4px 15px rgba(32,178,170,.6)!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
+    .cta-button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(32,178,170,.7)!important}
     .divider{text-align:center;margin:20px 0;position:relative}
     .divider:before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:#e0e0e0}
     .divider span{background:#fff;padding:0 20px;position:relative;color:#888;font-size:.9em}
     .restore-form{display:flex;gap:10px}
-    .restore-form input{flex:1;padding:12px;border:1px solid #ddd;border-radius:8px}
-    .restore-form button{padding:12px 28px;background:#20b2aa;color:#fff;border:0;border-radius:8px;cursor:pointer}
-    .trust-indicators{display:flex;justify-content:center;gap:30px;margin-top:30px;padding-top:20px;border-top:1px solid #e0e0e0;font-size:.9em}
-    .trust-free{color:#dc2626;font-weight:600}
+    .restore-form input{flex:1;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:1em}
+    .restore-form button{padding:12px 28px;background:#20b2aa;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4);border:0;border-radius:8px;font-weight:500;letter-spacing:.5px;cursor:pointer;line-height:1.3;box-shadow:0 4px 15px rgba(0,0,0,.25)}
+    .trust-indicators{display:flex;justify-content:center;gap:30px;margin-top:30px;padding-top:20px;border-top:1px solid #e0e0e0;color:var(--text-gray);font-size:.9em}
+    .trust-free{color:#dc2626!important;font-weight:600}
 
-    .process{padding:80px 20px;background:#f8f9fa}
+    /* Sections */
+    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:80px 0}
+    .process{background:#f8f9fa}
     .section-header{text-align:center;max-width:700px;margin:0 auto 60px}
-    .section-header h2{font-size:2.5em;margin-bottom:20px}
+    .section-header h2{font-size:2.5em;margin-bottom:20px;color:var(--text-dark)}
     .section-header p{font-size:1.2em;color:var(--text-gray)}
-    .process-steps{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
-    .step-card{background:#fff;border-radius:15px;padding:30px;text-align:center;border:3px solid var(--primary-color)}
-    .step-number{width:50px;height:50px;background:var(--primary-gradient);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.5em;font-weight:700}
 
-    .collapsible-section{padding:40px 20px}
-    .section-toggle{cursor:pointer;background:#f8f9fa;padding:12px 60px 12px 25px;border-radius:12px;position:relative;max-width:1200px;margin:0 auto;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:background .3s;text-align:center}
+    .process-steps{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+    .step-card{background:#fff;border-radius:15px;padding:30px;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,.08);transition:transform .3s, box-shadow .3s;border:3px solid var(--primary-color)}
+    .step-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.12)}
+    .step-number{width:50px;height:50px;background:var(--primary-gradient);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.5em;font-weight:700}
+    .step-card h3{margin-bottom:15px;color:var(--text-dark)}
+    .step-card p{color:var(--text-gray);line-height:1.6}
+
+    /* SEÇÕES COLAPSÁVEIS - barras finas, triângulo à direita */
+    .why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:40px 0}
+    .section-toggle{cursor:pointer;background:#f8f9fa;padding:12px 60px 12px 25px;border-radius:12px;position:relative;max-width:1200px;margin:0 auto 0;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:background .3s;text-align:center}
     .section-toggle:hover{background:#e9ecef}
     .section-toggle h2{margin:0;font-size:1.5em;display:inline-block}
     .section-toggle-icon{position:absolute;right:25px;top:50%;transform:translateY(-50%);font-size:1.5em;color:var(--primary-color);transition:transform .3s}
-    .collapsible-section.active .section-toggle-icon{transform:translateY(-50%) rotate(180deg)}
+    .section-collapsible.active .section-toggle-icon{transform:translateY(-50%) rotate(180deg)}
     .section-content-wrapper{max-height:0;overflow:hidden;transition:max-height .5s ease-out}
-    .collapsible-section.active .section-content-wrapper{max-height:4000px}
-    .section-content{padding:40px 0}
+    .section-collapsible.active .section-content-wrapper{max-height:4000px}
+    .section-inner{padding:40px 20px}
     .section-cta{text-align:center;margin-top:40px}
-    .section-cta-button{display:inline-block;padding:18px 40px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.2em;font-weight:600;text-decoration:none;box-shadow:0 4px 15px rgba(32,178,170,.6);text-shadow:0 2px 4px rgba(0,0,0,.3);transition:transform .3s;cursor:pointer}
-    .section-cta-button:hover{transform:translateY(-2px)}
+    .section-cta-button{display:inline-block;padding:18px 40px;background:var(--primary-gradient);color:#fff!important;border:0;border-radius:12px;font-size:1.2em;font-weight:600;cursor:pointer;transition:transform .3s,box-shadow .3s;text-decoration:none;box-shadow:0 4px 15px rgba(32,178,170,.6)!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
+    .section-cta-button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(32,178,170,.7)!important}
 
     .benefits-grid{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    .benefit-card{padding:30px;border-radius:15px;background:#fff;border:2px solid #e9ecef}
+    .benefit-card{padding:30px;text-align:left;border-radius:15px;background:#fff;border:2px solid #e9ecef;transition:transform .3s, box-shadow .3s}
+    .benefit-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1)}
     .benefit-card h3{color:var(--primary-color);margin-bottom:15px;font-size:1.3em}
-    
-    .feel-list,.credentials-list{max-width:800px;margin:0 auto;padding:0 20px;display:grid;gap:20px}
-    .feel-item{background:#fff;padding:20px;border-radius:10px;display:flex;align-items:center;gap:12px;border-left:4px solid var(--primary-color)}
-    .feel-item::before{content:'✨';font-size:1.2em}
-    .credential-item{padding:20px;background:#fff;border-radius:10px;border-left:4px solid var(--primary-color)}
-    .credential-photo{margin-top:20px;text-align:center}
-    .credential-photo-placeholder{width:280px;height:200px;background:var(--primary-gradient);border-radius:10px;border:3px solid var(--primary-color);margin:0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold}
 
-    .testimonials-grid{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px}
-    .testimonial-card{background:#fff;border:3px solid var(--primary-color);border-radius:15px;padding:30px;position:relative}
+    .feel-list,.credentials-list{
+      max-width:800px;
+      margin:0 auto;
+      padding:0 20px;
+      display:grid;
+      gap:20px;
+      grid-template-columns:1fr;
+    }
+    .feel-item{
+      background:#fff;
+      padding:20px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 3px 12px rgba(0,0,0,.05);
+      border-left:4px solid var(--primary-color);
+    }
+    .feel-item::before{
+      content:'✨';
+      font-size:1.2em;
+      flex-shrink:0;
+    }
+    .credential-item{padding:20px;background:#fff;border-radius:10px;border-left:4px solid var(--primary-color)}
+    .credential-photo{grid-column:1/-1;padding:0;background:transparent;border:none;display:flex;justify-content:center;align-items:center;margin-top:20px}
+    .credential-photo img{width:100%;max-width:280px;height:auto;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);border:3px solid var(--primary-color)}
+
+    .testimonials-grid{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px}
+    .testimonial-card{background:#fff;border:3px solid var(--primary-color);border-radius:15px;padding:30px;position:relative;box-shadow:0 6px 25px rgba(32,178,170,.12)}
     .testimonial-card::before{content:'"';font-size:60px;color:var(--primary-color);opacity:.2;position:absolute;top:10px;left:20px}
-    .testimonial-text{margin-bottom:20px;line-height:1.7;position:relative;z-index:1}
+    .testimonial-text{margin-bottom:20px;line-height:1.7;color:var(--text-dark);position:relative;z-index:1}
     .testimonial-author{display:flex;align-items:center;gap:15px}
     .author-avatar{width:50px;height:50px;border-radius:50%;background:var(--primary-gradient);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.2em}
+    .author-info h4{color:var(--text-dark);margin-bottom:2px}
+    .author-info p{color:var(--text-light);font-size:.9em;margin-bottom:5px}
     .stars{color:#fbbf24}
 
     .faq-container{max-width:800px;margin:0 auto;padding:0 20px}
-    .faq-item{background:#fff;border-radius:12px;margin-bottom:15px;overflow:hidden}
-    .faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;font-weight:600;transition:background .3s}
+    .faq-item{background:#fff;border-radius:12px;margin-bottom:15px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:var(--text-dark);transition:background .3s}
     .faq-question:hover{background:#e9ecef}
-    .faq-question::after{content:'+';font-size:1.5em;color:var(--primary-color)}
-    .faq-item.active .faq-question::after{content:'−'}
-    .faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease-out,padding .3s;color:var(--text-gray)}
-    .faq-item.active .faq-answer{padding:0 20px 20px;max-height:300px}
+    .faq-question::after{content:'+';font-size:1.5em;color:var(--primary-color);transition:transform .3s}
+    .faq-item.active .faq-question::after{transform:rotate(45deg)}
+    .faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease-out,padding .3s;color:var(--text-gray);line-height:1.7}
+    .faq-item.active .faq-answer{padding:0 20px 20px;max-height:500px}
 
-    .final-cta{padding:100px 20px;background:var(--primary-gradient);text-align:center}
-    .final-cta h2{font-size:3em;margin-bottom:20px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6)}
-    .final-cta p{font-size:1.3em;margin-bottom:40px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6)}
-    .disclaimer{font-size:.9em;margin-top:30px;color:#fff}
+    .final-cta{padding:100px 0;background:var(--primary-gradient);color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);text-align:center}
+    .final-cta h2{font-size:3em;margin-bottom:20px;font-weight:700}
+    .final-cta p{font-size:1.3em;margin-bottom:40px;opacity:.95;font-weight:400}
+    .final-cta .cta-button{background:var(--primary-gradient);color:#fff!important;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.3);display:inline-block;padding:15px 40px;font-size:1.1em;text-decoration:none;border-radius:12px;transition:transform .3s,box-shadow .3s;margin-bottom:20px;max-width:400px;border:2px solid rgba(255,255,255,.6);box-shadow:0 4px 15px rgba(32,178,170,.6)}
+    .final-cta .cta-button:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(32,178,170,.7)}
+    .disclaimer{font-size:.9em;opacity:.9;margin-top:30px;max-width:680px;margin-left:auto;margin-right:auto}
 
-    .pre-footer{background:#e5e7eb;padding:30px 20px;text-align:center}
-    .pre-footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-    .pre-footer-links a{color:#374151;text-decoration:none;font-weight:600}
+    .pre-footer{background:#e5e7eb;color:#374151;padding:30px 0;text-align:center}
+    .pre-footer-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;gap:15px;align-items:center}
+    .pre-footer-links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+    .pre-footer-links a{color:#374151;text-decoration:none;font-weight:600;transition:color .3s}
+    .pre-footer-links a:hover{color:#1f2937}
 
-    footer{background:#1a202c;color:#fff;padding:40px 20px;text-align:center}
-    .footer-links{display:flex;justify-content:center;gap:30px;margin-bottom:20px;flex-wrap:wrap}
-    .footer-links a{color:#fff;text-decoration:none}
+    footer{background:#1a202c;color:#fff;padding:40px 0;text-align:center}
+    .footer-content{max-width:1200px;margin:0 auto;padding:0 20px}
+    .footer-links{display:flex;justify-content:center;gap:30px;margin-bottom:20px}
+    .footer-links a{color:#fff;text-decoration:none;opacity:.85;transition:opacity .3s}
+    .footer-links a:hover{opacity:1}
+    footer,footer *{color:#fff!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
+
+    .hero .hero-text h1,
+    .hero .hero-text p,
+    .hero .hero-bullets li { color:#fff !important; text-shadow:0 2px 6px rgba(0,0,0,.35) }
+    .final-cta, .final-cta h2, .final-cta p { color:#fff !important; text-shadow:0 2px 4px rgba(0,0,0,.6) }
 
     @media (max-width:768px){
-      .hero-content{grid-template-columns:1fr}
+      .hero-content{grid-template-columns:1fr;gap:40px}
+      .hero-text h1{font-size:2.5em}
       .process-steps,.benefits-grid,.testimonials-grid{grid-template-columns:1fr}
       .restore-form{flex-direction:column}
       .final-cta h2{font-size:2em}
+      .header{padding:8px 0}
+      .logo-header{font-size:.9rem}
+      .logo-header img{width:32px;height:32px}
+      .language-switcher{transform:scale(.9)}
       .hero{padding:120px 0 60px}
+      .subtitle-steps{font-size:.8em;font-weight:400;opacity:.8}
     }
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
   </style>
+
+  <script>
+    (function () {
+      var ua = navigator.userAgent || "";
+      if (/(Googlebot|Bingbot|DuckDuckBot|YandexBot|baiduspider|facebookexternalhit|Twitterbot)/i.test(ua)) return;
+      var m = document.cookie.match(/(?:^|;\s*)locale=(pt|en)/);
+      var saved = m && m[1];
+      var nav = (navigator.language || "").toLowerCase();
+      var want = saved || (nav.startsWith("en") ? "en" : "pt");
+      var clean = location.pathname.replace(/\/+$/, "");
+      if ((clean === "" || clean === "/" || clean === "/index.html") && want === "en") {
+        location.replace("/en/");
+      }
+    })();
+    (function restoreLocaleScroll(){
+      try{
+        var ratioStr = sessionStorage.getItem('localeScrollRatio');
+        var yStr     = sessionStorage.getItem('localeScrollY');
+        if(ratioStr==null && yStr==null) return;
+        function apply(){
+          var doc  = document.documentElement;
+          var maxY = Math.max(0, (doc.scrollHeight - window.innerHeight));
+          var ratio = parseFloat(ratioStr || 'NaN');
+          var yPix  = parseInt(yStr || 'NaN', 10);
+          var y = !isNaN(ratio) ? Math.round(ratio * maxY) : (!isNaN(yPix) ? yPix : 0);
+          window.scrollTo(0, Math.max(0, Math.min(y, maxY)));
+          sessionStorage.removeItem('localeScrollRatio');
+          sessionStorage.removeItem('localeScrollY');
+        }
+        if(document.readyState === 'complete') { apply(); }
+        else { window.addEventListener('load', function(){ setTimeout(apply, 0); }); }
+      }catch(e){}
+    })();
+    function setLocale(loc) {
+      try{
+        var doc  = document.documentElement;
+        var maxY = Math.max(1, (doc.scrollHeight - window.innerHeight));
+        var y    = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var ratio= Math.max(0, Math.min(1, y / maxY));
+        sessionStorage.setItem('localeScrollY', String(y));
+        sessionStorage.setItem('localeScrollRatio', String(ratio));
+      }catch(e){}
+      document.cookie = "locale=" + loc + "; Max-Age=" + 60*60*24*180 + "; Path=/; SameSite=Lax";
+      location.href = loc === "en" ? "/en/" : "/";
+    }
+  </script>
 </head>
-<body>
+<body class="en">
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:rgba(26,32,44,.95);backdrop-filter:blur(10px);color:#fff;padding:20px;z-index:2000;transform:translateY(100%);transition:transform .3s ease-out">
+    <div class="cookie-content" style="max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div class="cookie-text" style="flex:1;min-width:300px">
+        <strong>🍪 Privacidade em primeiro lugar</strong><br/>
+        Usamos cookies para melhorar sua experiência e analisar o uso do site. Você pode escolher quais cookies aceitar.
+      </div>
+      <div class="cookie-actions" style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-accept" onclick="acceptAllCookies()">Aceitar Todos</button>
+        <button class="btn-decline" onclick="declineAllCookies()">Apenas Essenciais</button>
+        <button class="btn-settings" onclick="showCookieSettings()">Configurar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
   <header class="header">
     <div class="header-content">
       <div class="logo-header">
-        <div class="logo-placeholder">LOGO</div>
-        <span>Consultoria Qualidade de Vida</span>
+        <img src="/images/logo.png" alt="Logo" />
+        <span class="company-name">Consultoria Qualidade de Vida</span>
       </div>
-      <a href="#" style="color:#1a202c;text-decoration:none;font-weight:500;margin-left:auto;margin-right:20px">Blog</a>
-      <nav class="language-switcher">
-        <a href="#" title="Português">
-          <span>🇧🇷</span>
+
+      <a href="/blog" style="color:#1a202c;text-decoration:none;font-weight:500;margin-left:auto;margin-right:20px">Blog</a>
+
+      <nav class="language-switcher" aria-label="Change language">
+        <a href="/" data-lang="pt" aria-current="page" title="Português (Brasil)" onclick="setLocale('pt');return false;">
+          <img src="/flags/br.png" alt="Português (Brasil)" class="flag" />
           <span class="label">Português</span>
         </a>
-        <a href="#" title="English">
-          <span>🇺🇸</span>
+        <a href="/en/" data-lang="en" title="English" onclick="setLocale('en');return false;">
+          <img src="/flags/us.png" alt="English" class="flag" />
           <span class="label">English</span>
         </a>
       </nav>
     </div>
   </header>
 
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h1>Transforme seu bem-estar mental e emocional</h1>
+        <h1 class="hero-title">Transforme seu bem-estar mental e emocional</h1>
         <p class="hero-subtitle">
           <span class="l1">Florais sob medida podem ser indicados</span>
           <span class="l2">por este método profundo de</span>
           <span class="l3">Auto-mapeamento online.</span>
         </p>
         <ul class="hero-bullets">
-          <li>Avaliação gratuita</li>
-          <li>Recomendações personalizadas</li>
-          <li>Baseado em métodos tradicionais</li>
-          <li>Mais de 10.000 mapeamentos realizados</li>
+          <li class="bullet-1">Avaliação gratuita</li>
+          <li class="bullet-2">Recomendações personalizadas</li>
+          <li class="bullet-3">Baseado em métodos tradicionais</li>
+          <li class="bullet-4">Mais de 10.000 mapeamentos realizados</li>
         </ul>
       </div>
+
       <div class="hero-action">
-        <h2>Começar agora</h2>
-        <button class="cta-button">Começar Mapeamento Gratuito →</button>
-        <div class="divider"><span>ou retomar sessão</span></div>
-        <form class="restore-form" onsubmit="event.preventDefault()">
-          <input type="email" placeholder="seu@email.com" required />
-          <button type="submit">Recuperar</button>
+        <img src="/images/lotus-logo.png" alt="Flor de Lótus" class="lotus-logo" />
+        <h2 class="action-title">Começar agora</h2>
+        <button class="cta-button" onclick="startMapping()">
+          <span class="cta-text">Começar Mapeamento Gratuito →</span>
+        </button>
+
+        <div class="divider"><span class="divider-text">ou retomar sessão</span></div>
+
+        <form class="restore-form" onsubmit="handleRestore(event)">
+          <input type="email" id="email-input" placeholder="seu@email.com" required />
+          <button type="submit"><span class="restore-text">Recuperar</span></button>
         </form>
+
+        <div id="message-container"></div>
+
         <div class="trust-indicators">
-          <span>🔒 SSL Seguro</span>
-          <span>✨ Acesso imediato</span>
+          <span class="trust-ssl">🔒 SSL Seguro</span>
+          <span class="trust-no-signup">✨ Acesso imediato</span>
           <span class="trust-free">💯% Gratuito</span>
         </div>
       </div>
     </div>
   </section>
-
-  <section class="process">
-    <div class="section-header">
-      <h2>Como funciona<br/><span style="font-size:.8em;opacity:.8">(3 passos)</span></h2>
-      <p>Uma jornada simples e profunda para seu autoconhecimento</p>
-    </div>
-    <div class="process-steps">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h3>Avaliação visual</h3>
-        <p>Você classifica imagens de flores pela sua resposta imediata.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h3>Análise de padrões</h3>
-        <p>O sistema cruza suas escolhas com um método de mapeamento.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h3>Relatório + próximo passo</h3>
-        <p>Receba insights instantâneos e sua <strong>fórmula personalizada</strong>.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="collapsible-section" id="why-method">
-    <div class="section-toggle" onclick="toggleSection('why-method')">
-      <h2>Por que este método?</h2>
-      <span class="section-toggle-icon">▼</span>
-    </div>
-    <div class="section-content-wrapper">
-      <div class="section-content">
-        <div class="section-header"><p>Tradição ancestral encontra precisão moderna</p></div>
-        <div class="benefits-grid">
-          <div class="benefit-card"><h3>Tradição + Ciência</h3><p>Saberes ancestrais unidos à prática clínica.</p></div>
-          <div class="benefit-card"><h3>Eficiência</h3><p>Foca na causa-raiz dos problemas.</p></div>
-          <div class="benefit-card"><h3>Jornada Personalizada</h3><p>Fórmula sob medida para você.</p></div>
-          <div class="benefit-card"><h3>Mapeamento profundo</h3><p>Acessa padrões além do relato verbal.</p></div>
-          <div class="benefit-card"><h3>Conveniência</h3><p>100% online, com entrega em casa.</p></div>
-          <div class="benefit-card"><h3>Privacidade</h3><p>Dados protegidos.</p></div>
-        </div>
-        <div class="section-cta">
-          <a href="#" class="section-cta-button">Quero começar agora</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="collapsible-section" id="feel">
-    <div class="section-toggle" onclick="toggleSection('feel')">
-      <h2>O que você pode sentir</h2>
-      <span class="section-toggle-icon">▼</span>
-    </div>
-    <div class="section-content-wrapper">
-      <div class="section-content">
-        <div class="section-header"><p>Benefícios relatados pelos usuários</p></div>
-        <div class="feel-list">
-          <div class="feel-item"><span>Menos estresse e reatividade</span></div>
-          <div class="feel-item"><span>Mais centramento, foco e leveza</span></div>
-          <div class="feel-item"><span>Coragem para atravessar transições</span></div>
-          <div class="feel-item"><span>Reconexão com propósito e direção</span></div>
-        </div>
-        <div class="section-cta">
-          <a href="#" class="section-cta-button">Quero começar agora</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="collapsible-section" id="about">
-    <div class="section-toggle" onclick="toggleSection('about')">
-      <h2>Sobre o terapeuta</h2>
-      <span class="section-toggle-icon">▼</span>
-    </div>
-    <div class="section-content-wrapper">
-      <div class="section-content">
-        <div class="section-header"><p>Experiência e formação especializada</p></div>
-        <div class="credentials-list">
-          <div class="credential-item"><strong>20+ anos</strong> em consultoria de Terapia Floral</div>
-          <div class="credential-item"><strong>Pós-graduação em Terapia Floral</strong> FACIS/IBEHE (2002)</div>
-          <div class="credential-item"><strong>Formação na Academia LiFE Australiana</strong> (2006)</div>
-          <div class="credential-item"><strong>Formação no Alaska</strong> (2001)</div>
-          <div class="credential-item"><strong>Professor</strong> de Diagnóstico Avançado – Academia LiFE</div>
-          <div class="credential-photo">
-            <div class="credential-photo-placeholder">Foto do Terapeuta</div>
-          </div>
-        </div>
-        <div class="section-cta">
-          <a href="#" class="section-cta-button">Quero começar agora</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="collapsible-section" id="testimonials">
-    <div class="section-toggle" onclick="toggleSection('testimonials')">
-      <h2>Depoimentos</h2>
-      <span class="section-toggle-icon">▼</span>
-    </div>
-    <div class="section-content-wrapper">
-      <div class="section-content">
-        <div class="section-header"><p>Experiências reais de transformação</p></div>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Flavius tem uma sensibilidade incrível. Recomendo!"</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">MC</div>
-              <div><h4>Marina D.</h4><p style="color:#718096;font-size:.9em">Advogada</p><div class="stars">★★★★★</div></div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Trouxe clareza e catalisou mudanças."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">JS</div>
-              <div><h4>João S.</h4><p style="color:#718096;font-size:.9em">Corretor</p><div class="stars">★★★★★</div></div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Os benefícios foram imensos. Recomendo muito."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">JM</div>
-              <div><h4>Jane M.</h4><p style="color:#718096;font-size:.9em">Empresária</p><div class="stars">★★★★★</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="section-cta">
-          <a href="#" class="section-cta-button">Quero começar agora</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="collapsible-section" id="faq">
-    <div class="section-toggle" onclick="toggleSection('faq')">
-      <h2>Perguntas frequentes</h2>
-      <span class="section-toggle-icon">▼</span>
-    </div>
-    <div class="section-content-wrapper">
-      <div class="section-content">
-        <div class="faq-container">
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">É realmente gratuito?</div>
-            <div class="faq-answer">Sim, o mapeamento e o relatório básico são gratuitos.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Qual a precisão?</div>
-            <div class="faq-answer">Baseado em décadas de pesquisa e 10.000+ mapeamentos.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Quanto tempo leva?</div>
-            <div class="faq-answer">Cerca de 10 minutos. Insights instantâneos.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">Meus dados estão seguros?</div>
-            <div class="faq-answer">Sim. Uso restrito e você pode solicitar remoção.</div>
-          </div>
-        </div>
-        <div class="section-cta">
-          <a href="#" class="section-cta-button">Quero começar agora</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="final-cta">
-    <h2>Pronto para começar?</h2>
-    <p>Deixe a força vital das flores guiar seu processo.</p>
-    <button class="cta-button" style="max-width:400px;border:2px solid rgba(255,255,255,.6)">Começar Mapeamento Gratuito →</button>
-    <div class="disclaimer"><small>Este serviço não substitui acompanhamento médico ou psicológico.</small></div>
-  </section>
-
-  <div class="pre-footer">
-    <div class="pre-footer-links">
-      <a href="#">Blog</a>
-      <a href="#">Fale comigo</a>
-      <a href="#">Cursos</a>
-    </div>
-  </div>
-
-  <footer>
-    <div class="footer-links">
-      <a href="#">Política de Privacidade</a>
-      <a href="#">Termos de Serviço</a>
-    </div>
-    <p>© 2024 Flavius Raymundo. Todos os direitos reservados.</p>
-  </footer>
-
-  <script>
-    function toggleSection(id){
-      document.getElementById(id).classList.toggle('active');
-    }
-  </script>
-</body>
-</html>
