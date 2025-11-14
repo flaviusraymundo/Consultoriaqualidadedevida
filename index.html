@@ -38,10 +38,10 @@
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text-dark)}
 
     /* Header */
-    .header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .header{position:fixed;top:0;left:0;right:0;background:rgba(218,165,32,.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
     .header-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
     .logo-header{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--text-dark);min-width:0}
-    .logo-header img{width:40px;height:40px;object-fit:contain}
+    .logo-header img{width:56px;height:56px;object-fit:contain}
 
     /* Switcher vira links */
     .language-switcher{display:inline-flex;gap:6px}
@@ -65,9 +65,10 @@
 
     /* Hero */
     .hero{background:var(--primary-gradient);padding:120px 0 80px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:0;left:-50%;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");animation:float 20s linear infinite}
+    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/images/pinkever.jpg');background-size:cover;background-position:center;opacity:.6;z-index:0}
+    .hero::after{content:'';position:absolute;top:0;left:-50%;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");animation:float 20s linear infinite;z-index:1}
     @keyframes float{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .hero-content{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+    .hero-content{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;position:relative;z-index:2}
     .hero-text{max-width:680px}
     .hero-text h1{text-wrap:balance;hyphens:auto;font-size:clamp(2.2rem,4vw + 1rem,3.2rem);line-height:1.15;letter-spacing:-.01em}
     .hero-subtitle{text-wrap:pretty}
@@ -78,7 +79,7 @@
     .hero-bullets li{display:grid;grid-template-columns:24px 1fr;align-items:center;column-gap:12px;padding:10px 0;font-size:1.1em;line-height:1.4}
     .hero-bullets li::before{content:'✓';background:rgba(255,255,255,.2);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-    .hero-action{background:#fff;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both}
+    .hero-action{background:#fff;border-radius:20px;padding:40px;margin-top:160px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both}
     .lotus-logo{width:200px;height:200px;margin:0 auto 30px;display:block}
     .hero-action h2{color:var(--text-dark);font-size:2em;margin-bottom:20px;text-align:center}
     .cta-button{width:100%;padding:18px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.2em;font-weight:600;cursor:pointer;transition:transform .3s, box-shadow .3s;margin-bottom:20px;box-shadow:0 4px 15px rgba(32,178,170,.6)!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
@@ -93,7 +94,7 @@
     .trust-free{color:#dc2626!important;font-weight:600}
 
     /* Sections */
-    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:80px 0}
+    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:40px 0}
     .process{background:#f8f9fa}
     .section-header{text-align:center;max-width:700px;margin:0 auto 60px}
     .section-header h2{font-size:2.5em;margin-bottom:20px;color:var(--text-dark)}
@@ -157,6 +158,18 @@
     .faq-item.active .faq-question::after{transform:rotate(45deg)}
     .faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease-out,padding .3s;color:var(--text-gray);line-height:1.7}
     .faq-item.active .faq-answer{padding:0 20px 20px;max-height:500px}
+    
+    /* CSS para seções colapsáveis */
+    .section-toggle{cursor:pointer;background:#f8f9fa;padding:12px 60px 12px 25px;border-radius:12px;position:relative;max-width:1200px;margin:0 auto;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:background .3s;text-align:center}
+    .section-toggle:hover{background:#e9ecef}
+    .section-toggle h2{margin:0;font-size:1.5em;display:inline-block}
+    .section-toggle-icon{position:absolute;right:25px;top:50%;transform:translateY(-50%);font-size:1.5em;color:var(--primary-color);transition:transform .3s}
+    .section-collapsible.active .section-toggle-icon{transform:translateY(-50%) rotate(180deg)}
+    .section-content-wrapper{max-height:0;overflow:hidden;transition:max-height .5s ease-out}
+    .section-collapsible.active .section-content-wrapper{max-height:4000px}
+    .section-end-cta{text-align:center;margin-top:40px}
+    .section-end-cta button{padding:15px 40px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.1em;font-weight:600;cursor:pointer;transition:transform .3s, box-shadow .3s;box-shadow:0 4px 15px rgba(32,178,170,.6);text-shadow:0 2px 4px rgba(0,0,0,.3)}
+    .section-end-cta button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(32,178,170,.7)}
 
     .final-cta{padding:100px 0;background:var(--primary-gradient);color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);text-align:center}
     .final-cta h2{font-size:3em;margin-bottom:20px;font-weight:700}
@@ -186,6 +199,7 @@
 
     @media (max-width:768px){
       .hero-content{grid-template-columns:1fr;gap:40px}
+      .hero-action{margin-top:40px}
       .hero-text h1{font-size:2.5em}
       .process-steps,.benefits-grid,.testimonials-grid{grid-template-columns:1fr}
       .restore-form{flex-direction:column}
@@ -309,7 +323,6 @@
       </div>
 
       <div class="hero-action">
-        <img src="/images/lotus-logo.png" alt="Flor de Lótus" class="lotus-logo" />
         <h2 class="action-title">Começar agora</h2>
         <button class="cta-button" onclick="startMapping()">
           <span class="cta-text">Começar Mapeamento Gratuito →</span>
@@ -359,108 +372,158 @@
   </section>
 
   <!-- Why Method -->
-  <section class="why-method">
-    <div class="section-header">
+  <section class="why-method section-collapsible" id="why-section">
+    <div class="section-toggle" onclick="toggleCollapsible('why-section')">
       <h2>Por que este método?</h2>
-      <p>Tradição ancestral encontra<br class="mobile-break">precisão moderna</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="benefits-grid">
-      <div class="benefit-card"><h3>Tradição + Ciência</h3><p>Saberes ancestrais (com destaque aos Aborígenes Australianos) unidos à prática clínica.</p></div>
-      <div class="benefit-card"><h3>Eficiência</h3><p>Foca na causa-raiz dos problemas, não só nos sintomas.</p></div>
-      <div class="benefit-card"><h3>Jornada Personalizada</h3><p>Traz clareza sobre seu momento e gera fórmula sob medida para você.</p></div>
-      <div class="benefit-card"><h3>Mapeamento profundo</h3><p>Mapeamento visual que acessa padrões além do relato verbal.</p></div>
-      <div class="benefit-card"><h3>Conveniência</h3><p>100% online, com entrega em casa.</p></div>
-      <div class="benefit-card"><h3>Privacidade &amp; Clareza</h3><p>Dados protegidos e sob seu controle.</p></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Tradição ancestral encontra<br class="mobile-break">precisão moderna</p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card"><h3>Tradição + Ciência</h3><p>Saberes ancestrais (com destaque aos Aborígenes Australianos) unidos à prática clínica.</p></div>
+          <div class="benefit-card"><h3>Eficiência</h3><p>Foca na causa-raiz dos problemas, não só nos sintomas.</p></div>
+          <div class="benefit-card"><h3>Jornada Personalizada</h3><p>Traz clareza sobre seu momento e gera fórmula sob medida para você.</p></div>
+          <div class="benefit-card"><h3>Mapeamento profundo</h3><p>Mapeamento visual que acessa padrões além do relato verbal.</p></div>
+          <div class="benefit-card"><h3>Conveniência</h3><p>100% online, com entrega em casa.</p></div>
+          <div class="benefit-card"><h3>Privacidade &amp; Clareza</h3><p>Dados protegidos e sob seu controle.</p></div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">Quero começar agora</button>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Feel -->
-  <section class="feel-section">
-    <div class="section-header">
+  <section class="feel-section section-collapsible" id="feel-section">
+    <div class="section-toggle" onclick="toggleCollapsible('feel-section')">
       <h2>O que você pode sentir</h2>
-      <p>Benefícios relatados pelos usuários</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="feel-list">
-      <div class="feel-item"><span>Menos estresse e reatividade</span></div>
-      <div class="feel-item"><span>Mais centramento, foco e leveza</span></div>
-      <div class="feel-item"><span>Coragem para atravessar transições</span></div>
-      <div class="feel-item"><span>Reconexão com propósito e direção</span></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Benefícios relatados pelos usuários</p>
+        </div>
+        <div class="feel-list">
+          <div class="feel-item"><span>Menos estresse e reatividade</span></div>
+          <div class="feel-item"><span>Mais centramento, foco e leveza</span></div>
+          <div class="feel-item"><span>Coragem para atravessar transições</span></div>
+          <div class="feel-item"><span>Reconexão com propósito e direção</span></div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">Quero começar agora</button>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- About Therapist -->
-  <section class="about-therapist">
-    <div class="section-header">
+  <section class="about-therapist section-collapsible" id="about-section">
+    <div class="section-toggle" onclick="toggleCollapsible('about-section')">
       <h2>Sobre o terapeuta</h2>
-      <p>Experiência e formação especializada</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="therapist-content">
-      <div class="credentials-list">
-        <div class="credential-item"><strong>20+ anos</strong> em consultoria de Terapia Floral (indivíduos e empresas)</div>
-        <div class="credential-item"><strong>Pós-graduação em Terapia Floral</strong> FACIS/IBEHE (2002)</div>
-        <div class="credential-item"><strong>Formação na Academia LiFE Australiana</strong> (2006)</div>
-        <div class="credential-item"><strong>Formação no Alaska</strong> (2001)</div>
-        <div class="credential-item"><strong>Professor</strong> de Diagnóstico Avançado na Terapia Floral — autorizado pela <strong>Academia LiFE</strong> da Austrália</div>
-        <div class="credential-item credential-photo">
-          <img src="/images/curso.jpg" alt="Foto do terapeuta em sala de aula" />
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Experiência e formação especializada</p>
+        </div>
+        <div class="therapist-content">
+          <div class="credentials-list">
+            <div class="credential-item"><strong>20+ anos</strong> em consultoria de Terapia Floral (indivíduos e empresas)</div>
+            <div class="credential-item"><strong>Pós-graduação em Terapia Floral</strong> FACIS/IBEHE (2002)</div>
+            <div class="credential-item"><strong>Formação na Academia LiFE Australiana</strong> (2006)</div>
+            <div class="credential-item"><strong>Formação no Alaska</strong> (2001)</div>
+            <div class="credential-item"><strong>Professor</strong> de Diagnóstico Avançado na Terapia Floral — autorizado pela <strong>Academia LiFE</strong> da Austrália</div>
+            <div class="credential-item credential-photo">
+              <img src="/images/curso.jpg" alt="Foto do terapeuta em sala de aula" />
+            </div>
+          </div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">Quero começar agora</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Depoimentos -->
-  <section class="testimonials">
-    <div class="section-header">
+  <section class="testimonials section-collapsible" id="testimonials-section">
+    <div class="section-toggle" onclick="toggleCollapsible('testimonials-section')">
       <h2>Depoimentos</h2>
-      <p>Experiências reais de transformação</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Flavius tem uma sensibilidade incrível. É uma pessoa muito cuidadosa, muito comprometido com o seu trabalho, além disso tem grande habilidade para suscitar questões profundas de forma muito amorosa. Recomendo!"</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">MC</div>
-          <div class="author-info"><h4>Marina D.</h4><p>Advogada</p><div class="stars">★★★★★</div></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Experiências reais de transformação</p>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">"O mapeamento foi preciso e direto. Trouxe clareza, catalisou mudanças, e abriu novos caminhos."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">JS</div>
-          <div class="author-info"><h4>João S.</h4><p>Corretor de Imóveis</p><div class="stars">★★★★★</div></div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Flavius tem uma sensibilidade incrível. É uma pessoa muito cuidadosa, muito comprometido com o seu trabalho, além disso tem grande habilidade para suscitar questões profundas de forma muito amorosa. Recomendo!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">MC</div>
+              <div class="author-info"><h4>Marina D.</h4><p>Advogada</p><div class="stars">★★★★★</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"O mapeamento foi preciso e direto. Trouxe clareza, catalisou mudanças, e abriu novos caminhos."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">JS</div>
+              <div class="author-info"><h4>João S.</h4><p>Corretor de Imóveis</p><div class="stars">★★★★★</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Os benefícios foram imensos no meu processo pessoal a ponto de eu decidir fazer formação básica de aplicação do método. Tenho utilizado em familiares e amigos trazendo os mesmos benefícios que me aportaram. Recomendo muito."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">JM</div>
+              <div class="author-info"><h4>Jane M.</h4><p>Empresária</p><div class="stars">★★★★★</div></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">"Os benefícios foram imensos no meu processo pessoal a ponto de eu decidir fazer formação básica de aplicação do método. Tenho utilizado em familiares e amigos trazendo os mesmos benefícios que me aportaram. Recomendo muito."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">JM</div>
-          <div class="author-info"><h4>Jane M.</h4><p>Empresária</p><div class="stars">★★★★★</div></div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">Quero começar agora</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq">
-    <div class="section-header">
+  <section class="faq section-collapsible" id="faq-section">
+    <div class="section-toggle" onclick="toggleCollapsible('faq-section')">
       <h2>Perguntas frequentes</h2>
-      <p></p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>É realmente gratuito?</span></div>
-        <div class="faq-answer"><span>Sim, o mapeamento e o relatório básico são gratuitos. Oferecemos como serviços complementares: recomendações premium, frascos de dosagem e consultorias especializadas.</span></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>Qual a precisão do mapeamento?</span></div>
-        <div class="faq-answer"><span>Nosso método é baseado em décadas de pesquisa na Academia LiFE da Austrália e foi validado através de mais de 10.000 mapeamentos bem-sucedidos. Não é diagnóstico médico, mas um <strong>guia prático</strong> para seu autoconhecimento.</span></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>Quanto tempo leva?</span></div>
-        <div class="faq-answer"><span>Todo o processo leva cerca de 10 minutos. Você visualizará e classificará imagens; seus insights personalizados são gerados instantaneamente.</span></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>Meus dados estão seguros?</span></div>
-        <div class="faq-answer"><span>Sim. Uso restrito para atendimento e melhoria do serviço. Você pode solicitar a remoção dos dados quando quiser.</span></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p></p>
+        </div>
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>É realmente gratuito?</span></div>
+            <div class="faq-answer"><span>Sim, o mapeamento e o relatório básico são gratuitos. Oferecemos como serviços complementares: recomendações premium, frascos de dosagem e consultorias especializadas.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>Qual a precisão do mapeamento?</span></div>
+            <div class="faq-answer"><span>Nosso método é baseado em décadas de pesquisa na Academia LiFE da Austrália e foi validado através de mais de 10.000 mapeamentos bem-sucedidos. Não é diagnóstico médico, mas um <strong>guia prático</strong> para seu autoconhecimento.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>Quanto tempo leva?</span></div>
+            <div class="faq-answer"><span>Todo o processo leva cerca de 10 minutos. Você visualizará e classificará imagens; seus insights personalizados são gerados instantaneamente.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>Meus dados estão seguros?</span></div>
+            <div class="faq-answer"><span>Sim. Uso restrito para atendimento e melhoria do serviço. Você pode solicitar a remoção dos dados quando quiser.</span></div>
+          </div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">Quero começar agora</button>
+        </div>
       </div>
     </div>
   </section>
@@ -500,6 +563,11 @@
 
   <!-- Scripts -->
   <script>
+    // Função para toggle das seções colapsáveis
+    function toggleCollapsible(id){
+      document.getElementById(id).classList.toggle('active');
+    }
+    
     // GA4
     const GA_MEASUREMENT_ID = 'G-PQ6KTN7WQZ';
     let analyticsInitialized = false;
