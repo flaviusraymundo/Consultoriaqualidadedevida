@@ -222,8 +222,30 @@
     .section-content-wrapper{max-height:0;overflow:hidden;transition:max-height .5s ease-out}
     .section-collapsible.active .section-content-wrapper{max-height:4000px}
     .section-end-cta{text-align:center;margin-top:40px}
-    .section-end-cta button{padding:15px 40px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.1em;font-weight:600;cursor:pointer;transition:transform .3s, box-shadow .3s;box-shadow:0 4px 15px rgba(32,178,170,.6);text-shadow:0 2px 4px rgba(0,0,0,.3)}
-    .section-end-cta button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(32,178,170,.7)}
+    .section-end-cta button{
+      display:inline-block;
+      padding:16px 48px;
+      max-width:400px;
+    
+      background:#12b0a5;
+      color:#fff!important;
+      border-radius:999px;
+      border:none;
+    
+      font-size:1.1em;
+      font-weight:600;
+      text-decoration:none;
+      text-shadow:0 1px 2px rgba(0,0,0,0.35);
+    
+      box-shadow:0 12px 32px rgba(0,0,0,0.28);
+      transition:transform .18s ease-out, box-shadow .18s ease-out, background .18s;
+    }
+    
+    .section-end-cta button:hover{        
+      background:#10a79d;
+      transform:translateY(-2px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.34);
+    }
 
     .final-cta{
       padding:100px 0;
