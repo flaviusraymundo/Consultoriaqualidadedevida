@@ -38,10 +38,10 @@
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text-dark)}
 
     /* Header */
-    .header{position:fixed;top:0;left:0;right:0;background:rgba(218,165,32,.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .header{position:fixed;top:0;left:0;right:0;background:rgba(32,178,170,.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
     .header-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
     .logo-header{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--text-dark);min-width:0}
-    .logo-header img{width:56px;height:56px;object-fit:contain}
+    .logo-header img{width:64px;height:64px;object-fit:contain}
 
     /* Switcher vira links */
     .language-switcher{display:inline-flex;gap:6px}
@@ -64,12 +64,12 @@
     html[lang="en"]    .language-switcher a[data-lang="en"]::after{opacity:1}
 
     /* Hero */
-    .hero{background:var(--primary-gradient);padding:120px 0 80px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/images/pinkever.jpg');background-size:cover;background-position:center;opacity:.6;z-index:0}
+    .hero{padding:120px 0 80px;position:relative;overflow:hidden;background:transparent}
+    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/images/pinkever.jpg');background-size:cover;background-position:center;opacity:.3;z-index:0}
     .hero::after{content:'';position:absolute;top:0;left:-50%;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");animation:float 20s linear infinite;z-index:1}
     @keyframes float{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     .hero-content{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;position:relative;z-index:2}
-    .hero-text{max-width:680px}
+    .hero-text{max-width:680px;background:rgba(255,255,255,0.9);padding:30px;border-radius:15px;backdrop-filter:blur(10px)}
     .hero-text h1{text-wrap:balance;hyphens:auto;font-size:clamp(2.2rem,4vw + 1rem,3.2rem);line-height:1.15;letter-spacing:-.01em}
     .hero-subtitle{text-wrap:pretty}
     .hero-subtitle .l1,.hero-subtitle .l2,.hero-subtitle .l3{display:block}
@@ -77,7 +77,7 @@
 
     .hero-bullets{list-style:none;margin:30px 0;padding-left:0}
     .hero-bullets li{display:grid;grid-template-columns:24px 1fr;align-items:center;column-gap:12px;padding:10px 0;font-size:1.1em;line-height:1.4}
-    .hero-bullets li::before{content:'✓';background:rgba(255,255,255,.2);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .hero-bullets li::before{content:'✓';background:var(--primary-color);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
     .hero-action{background:#fff;border-radius:20px;padding:40px;margin-top:160px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both}
     .lotus-logo{width:200px;height:200px;margin:0 auto 30px;display:block}
@@ -190,12 +190,6 @@
     .footer-links a{color:#fff;text-decoration:none;opacity:.85;transition:opacity .3s}
     .footer-links a:hover{opacity:1}
     footer,footer *{color:#fff!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
-
-    /* Texto branco nos blocos com gradiente */
-    .hero .hero-text h1,
-    .hero .hero-text p,
-    .hero .hero-bullets li { color:#fff !important; text-shadow:0 2px 6px rgba(0,0,0,.35) }
-    .final-cta, .final-cta h2, .final-cta p { color:#fff !important; text-shadow:0 2px 4px rgba(0,0,0,.6) }
 
     @media (max-width:768px){
       .hero-content{grid-template-columns:1fr;gap:40px}
@@ -310,14 +304,14 @@
       <div class="hero-text">
         <h1 class="hero-title">Transforme seu bem-estar mental e emocional</h1>
         <p class="hero-subtitle">
-          <span class="l1">Auto-mapeamento online gratuito.</span>
-          <span class="l2">Método rápido e profundo que indica</span>
-          <span class="l3">essências florais sob medida.</span>
+          <span class="l1">Florais sob medida podem ser indicados</span>
+          <span class="l2">por este método profundo de</span>
+          <span class="l3">Auto-mapeamento online.</span>
         </p>
         <ul class="hero-bullets">
           <li class="bullet-1">Avaliação gratuita</li>
           <li class="bullet-2">Recomendações personalizadas</li>
-          <li class="bullet-3">Baseado em métodos comprovados</li>
+          <li class="bullet-3">Baseado em métodos tradicionais</li>
           <li class="bullet-4">Mais de 10.000 mapeamentos realizados</li>
         </ul>
       </div>
@@ -540,6 +534,7 @@
   <div class="pre-footer">
     <div class="pre-footer-content">
       <div class="pre-footer-links">
+        <a id="prefooter-blog" href="/blog">Blog</a>
         <a id="prefooter-contact"
            href="https://wa.me/5548988674471?text=Ol%C3%A1%20Flavius%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais."
            target="_blank" rel="noopener">Fale comigo</a>
