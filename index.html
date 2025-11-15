@@ -113,8 +113,31 @@
     .hero-action{background:rgba(255,255,255,0.74);border-radius:20px;padding:20px;margin-top:0px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both}
     .lotus-logo{width:200px;height:200px;margin:0 auto 30px;display:block}
     .hero-action h2{color:var(--text-dark);font-size:2em;margin-bottom:20px;text-align:center}
-    .cta-button{width:100%;padding:18px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.2em;font-weight:600;cursor:pointer;transition:transform .3s, box-shadow .3s;margin-bottom:20px;box-shadow:0 4px 15px rgba(32,178,170,.6)!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
-    .cta-button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(32,178,170,.7)!important}
+    .cta-button{
+      width:100%;
+      padding:18px;
+      background:#12b0a5;
+      color:#fff;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.7);
+      font-size:1.2em;
+      font-weight:600;
+      cursor:pointer;
+      margin-bottom:20px;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.05),
+        0 16px 32px rgba(0,0,0,0.32);
+      text-shadow:0 1px 2px rgba(0,0,0,0.35);
+      transition:transform .18s ease-out, box-shadow .18s ease-out, background .18s;
+    }
+    
+    .cta-button:hover{
+      background:#10a79d;
+      transform:translateY(-2px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.6),
+        0 18px 40px rgba(0,0,0,0.38);
+    }
     .divider{text-align:center;margin:20px 0;position:relative}
     .divider:before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:#e0e0e0}
     .divider span{background:#fff;padding:0 20px;position:relative;color:#888;font-size:.9em}
