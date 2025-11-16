@@ -779,11 +779,29 @@
     // Boot
     document.getElementById('copy-year').textContent = new Date().getFullYear();
     initializeGA();
-    document.addEventListener('DOMContentLoaded', ()=>{
+    document.addEventListener('DOMContentLoaded', () => {
       setupScrollTracking();
       setupClickTracking();
       showCookieBanner();
       trackLandingEvent('page_loaded');
+
+      // === Igualar largura dos botões de idioma ===
+      const buttons = document.querySelectorAll('.language-switcher a');
+      if (!buttons.length) return;
+
+      let maxWidth = 0;
+
+      // mede o maior
+      buttons.forEach((btn) => {
+        const w = btn.getBoundingClientRect().width;
+        if (w > maxWidth) maxWidth = w;
+      });
+
+      // aplica a mesma largura
+      buttons.forEach((btn) => {
+        btn.style.width = maxWidth + 'px';
+        btn.style.boxSizing = 'border-box';
+      });
     });
   </script>
 </body>
