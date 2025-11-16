@@ -28,7 +28,7 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      /* Same gradient as original */
+      /* Gradiente original */
       --primary-gradient: linear-gradient(135deg, #20b2aa 0%, #b3d9ff 100%);
       --primary-color:#20b2aa;
       --text-dark:#1a202c;
@@ -38,22 +38,36 @@
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text-dark)}
 
     /* Header */
-    .header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);z-index:1000;padding:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      background:linear-gradient(
+        to bottom,
+        rgba(190,230,255,0.96),  /* azul clarinho embaixo */
+        rgba(32,178,170,0.96)  /* turquesa */          
+      );
+      backdrop-filter:blur(10px);
+      z-index:1000;
+      padding:4px 0;           /* mantém a barra estreita */
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+    }
     .header-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
     .logo-header{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--text-dark);min-width:0}
-    .logo-header img{width:40px;height:40px;object-fit:contain}
+    .logo-header img{width:84px;height:84px;object-fit:contain}
 
-    /* Language switcher */
+    /* Switcher vira links */
     .language-switcher{display:inline-flex;gap:6px}
     .language-switcher a{
       display:flex;flex-direction:column;align-items:center;gap:6px;
-      padding:6px 10px 12px; /* room for underline bar */
+      padding:6px 10px 12px; /* espaço para a barra */
       border:1px solid #e5e7eb;border-radius:8px;text-decoration:none;
       color:#374151;background:#fff;position:relative
     }
     .language-switcher .flag{width:24px;height:16px;object-fit:cover}
     .language-switcher .label{font-size:11px;font-weight:600}
-    /* Active language marker (single) */
+    /* Indicador de idioma ativo (apenas um por vez) */
     .language-switcher a::after{
       content:'';
       position:absolute;left:8px;right:8px;bottom:6px;height:4px;
@@ -64,25 +78,66 @@
     html[lang="en"]    .language-switcher a[data-lang="en"]::after{opacity:1}
 
     /* Hero */
-    .hero{background:var(--primary-gradient);padding:120px 0 80px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:0;left:-50%;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");animation:float 20s linear infinite}
+    .hero{padding:120px 0 80px;position:relative;overflow:hidden;background:transparent}
+    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('/images/pinkever.jpg');background-size:cover;background-position:center;opacity:.2;z-index:0}
+    .hero::after{content:'';position:absolute;top:0;left:-50%;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");animation:float 20s linear infinite;z-index:1}
     @keyframes float{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .hero-content{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
-    .hero-text{max-width:680px}
-    .hero-text h1{text-wrap:balance;hyphens:auto;font-size:clamp(2.2rem,4vw + 1rem,3.2rem);line-height:1.15;letter-spacing:-.01em}
+    .hero-content{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;position:relative;z-index:2}
+    .hero-text{
+      position:relative;
+      max-width:680px;
+      background:rgba(255,255,255,0.33); /* ↓ bem mais transparente */
+      padding:32px;
+      border-radius:18px;
+      backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,0.7);
+      box-shadow:0 16px 40px rgba(0,0,0,0.18);
+    }
+          
+    .hero-text h1{
+      text-wrap:balance;
+      hyphens:auto;
+      font-size:clamp(2.2rem,4vw + 1rem,3.2rem);
+      line-height:1.15;
+      letter-spacing:-.01em;
+      text-shadow:0 2px 4px rgba(0,0,0,0.08); /* sombra mais leve */
+    }
     .hero-subtitle{text-wrap:pretty}
     .hero-subtitle .l1,.hero-subtitle .l2,.hero-subtitle .l3{display:block}
     .hero-text p{font-size:1.3em;margin-bottom:30px;opacity:.95;animation:fadeInUp .8s ease-out .2s both}
 
     .hero-bullets{list-style:none;margin:30px 0;padding-left:0}
     .hero-bullets li{display:grid;grid-template-columns:24px 1fr;align-items:center;column-gap:12px;padding:10px 0;font-size:1.1em;line-height:1.4}
-    .hero-bullets li::before{content:'✓';background:rgba(255,255,255,.2);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .hero-bullets li::before{content:'✓';background:var(--primary-color);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-    .hero-action{background:#fff;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both}
+    .hero-action{background:rgba(255,255,255,0.74);border-radius:20px;padding:20px;margin-top:0px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeInUp .8s ease-out .6s both}
     .lotus-logo{width:200px;height:200px;margin:0 auto 30px;display:block}
     .hero-action h2{color:var(--text-dark);font-size:2em;margin-bottom:20px;text-align:center}
-    .cta-button{width:100%;padding:18px;background:var(--primary-gradient);color:#fff;border:0;border-radius:12px;font-size:1.2em;font-weight:600;cursor:pointer;transition:transform .3s, box-shadow .3s;margin-bottom:20px;box-shadow:0 4px 15px rgba(32,178,170,.6)!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
-    .cta-button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(32,178,170,.7)!important}
+    .cta-button{
+      width:100%;
+      padding:18px;
+      background:#12b0a5;
+      color:#fff;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.7);
+      font-size:1.2em;
+      font-weight:600;
+      cursor:pointer;
+      margin-bottom:20px;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.05),
+        0 16px 32px rgba(0,0,0,0.32);
+      text-shadow:0 1px 2px rgba(0,0,0,0.35);
+      transition:transform .18s ease-out, box-shadow .18s ease-out, background .18s;
+    }
+    
+    .cta-button:hover{
+      background:#10a79d;
+      transform:translateY(-2px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.6),
+        0 18px 40px rgba(0,0,0,0.38);
+    }
     .divider{text-align:center;margin:20px 0;position:relative}
     .divider:before{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:#e0e0e0}
     .divider span{background:#fff;padding:0 20px;position:relative;color:#888;font-size:.9em}
@@ -93,7 +148,7 @@
     .trust-free{color:#dc2626!important;font-weight:600}
 
     /* Sections */
-    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:80px 0}
+    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:40px 0}
     .process{background:#f8f9fa}
     .section-header{text-align:center;max-width:700px;margin:0 auto 60px}
     .section-header h2{font-size:2.5em;margin-bottom:20px;color:var(--text-dark)}
@@ -112,14 +167,14 @@
     .benefit-card h3{color:var(--primary-color);margin-bottom:15px;font-size:1.3em}
 
     .feel-list,.credentials-list{
-      max-width:1200px;
+      max-width:800px;
       margin:0 auto;
       padding:0 20px;
       display:grid;
       gap:20px;
-      grid-template-columns:1fr; /* one per row, like the original */
+      grid-template-columns:1fr; /* um por linha, como no original */
     }
-    /* "stars" on What you may feel */
+    /* marca "estrelinhas" nos itens do sentir */
     .feel-item{
       background:#fff;
       padding:20px;
@@ -157,12 +212,74 @@
     .faq-item.active .faq-question::after{transform:rotate(45deg)}
     .faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease-out,padding .3s;color:var(--text-gray);line-height:1.7}
     .faq-item.active .faq-answer{padding:0 20px 20px;max-height:500px}
+    
+    /* CSS para seções colapsáveis */
+    .section-toggle{cursor:pointer;background:#f8f9fa;padding:12px 60px 12px 25px;border-radius:12px;position:relative;max-width:1200px;margin:0 auto;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:background .3s;text-align:center}
+    .section-toggle:hover{background:#e9ecef}
+    .section-toggle h2{margin:0;font-size:1.5em;display:inline-block}
+    .section-toggle-icon{position:absolute;right:25px;top:50%;transform:translateY(-50%);font-size:1.5em;color:var(--primary-color);transition:transform .3s}
+    .section-collapsible.active .section-toggle-icon{transform:translateY(-50%) rotate(180deg)}
+    .section-content-wrapper{max-height:0;overflow:hidden;transition:max-height .5s ease-out}
+    .section-collapsible.active .section-content-wrapper{max-height:4000px}
+    .section-end-cta{text-align:center;margin-top:40px}
+    .section-end-cta button{
+      display:inline-block;
+      padding:16px 48px;
+      max-width:400px;
+    
+      background:#12b0a5;
+      color:#fff!important;
+      border-radius:999px;
+      border:none;
+    
+      font-size:1.1em;
+      font-weight:600;
+      text-decoration:none;
+      text-shadow:0 1px 2px rgba(0,0,0,0.35);
+    
+      box-shadow:0 12px 32px rgba(0,0,0,0.28);
+      transition:transform .18s ease-out, box-shadow .18s ease-out, background .18s;
+    }
+    
+    .section-end-cta button:hover{        
+      background:#10a79d;
+      transform:translateY(-2px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.34);
+    }
 
-    .final-cta{padding:100px 0;background:var(--primary-gradient);color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);text-align:center}
+    .final-cta{
+      padding:100px 0;
+      background:linear-gradient(to bottom,#bfeff4,#e3fbff);
+      color:#0d3c3c;
+      text-shadow:none;
+      text-align:center;
+    }
     .final-cta h2{font-size:3em;margin-bottom:20px;font-weight:700}
     .final-cta p{font-size:1.3em;margin-bottom:40px;opacity:.95;font-weight:400}
-    .final-cta .cta-button{background:var(--primary-gradient);color:#fff!important;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.3);display:inline-block;padding:15px 40px;font-size:1.1em;text-decoration:none;border-radius:12px;transition:transform .3s,box-shadow .3s;margin-bottom:20px;max-width:400px;border:2px solid rgba(255,255,255,.6);box-shadow:0 4px 15px rgba(32,178,170,.6)}
-    .final-cta .cta-button:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(32,178,170,.7)}
+    .final-cta .cta-button{
+      display:inline-block;
+      padding:16px 48px;
+      max-width:400px;
+    
+      background:#12b0a5;
+      color:#fff!important;
+      border-radius:999px;
+      border:none;
+    
+      font-size:1.1em;
+      font-weight:600;
+      text-decoration:none;
+      text-shadow:0 1px 2px rgba(0,0,0,0.35);
+    
+      box-shadow:0 12px 32px rgba(0,0,0,0.28);
+      transition:transform .18s ease-out, box-shadow .18s ease-out, background .18s;
+    }
+    
+    .final-cta .cta-button:hover{
+      background:#10a79d;
+      transform:translateY(-2px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.34);
+    }
     .disclaimer{font-size:.9em;opacity:.9;margin-top:30px;max-width:680px;margin-left:auto;margin-right:auto}
 
     .pre-footer{background:#e5e7eb;color:#374151;padding:30px 0;text-align:center}
@@ -178,15 +295,9 @@
     .footer-links a:hover{opacity:1}
     footer,footer *{color:#fff!important;text-shadow:0 2px 4px rgba(0,0,0,.3)!important}
 
-    /* White text over gradient blocks */
-    .hero .hero-text h1,
-    .hero .hero-text p,
-    .hero .hero-bullets li { color:#fff !important; text-shadow:0 2px 6px rgba(0,0,0,.35) }
-    .final-cta, .final-cta h2, .final-cta p { color:#fff !important; text-shadow:0 2px 4px rgba(0,0,0,.6) }
-
-    /* Mobile tweaks */
     @media (max-width:768px){
       .hero-content{grid-template-columns:1fr;gap:40px}
+      .hero-action{margin-top:40px}
       .hero-text h1{font-size:2.5em}
       .process-steps,.benefits-grid,.testimonials-grid{grid-template-columns:1fr}
       .restore-form{flex-direction:column}
@@ -202,24 +313,22 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
   </style>
 
-  <!-- Language logic for /en/: if browser prefers PT and no cookie, redirect back to '/' -->
+  <!-- Scripts (EN fixo; sem engine de tradução) -->
   <script>
+    // Language logic for /en/: if browser prefers PT and no cookie, redirect back to '/'
     (function () {
       var ua = navigator.userAgent || "";
       if (/(Googlebot|Bingbot|DuckDuckBot|YandexBot|baiduspider|facebookexternalhit|Twitterbot)/i.test(ua)) return;
-
       var m = document.cookie.match(/(?:^|;\s*)locale=(pt|en)/);
       var saved = m && m[1];
       var nav = (navigator.language || "").toLowerCase();
       var want = saved || (nav.startsWith("en") ? "en" : "pt");
-
       var clean = location.pathname.replace(/\/+$/, "");
       if ((clean === "/en" || clean === "/en/index.html") && want === "pt") {
         location.replace("/");
       }
     })();
-
-    // Restore scroll after language switch
+    // Restaura rolagem após troca de idioma
     (function restoreLocaleScroll(){
       try{
         var ratioStr = sessionStorage.getItem('localeScrollRatio');
@@ -275,14 +384,12 @@
       <div class="logo-header">
         <img src="/images/logo.png" alt="Logo" />
         <span class="company-name">Life Flourish Consulting</span>
-      </div>
+      </div>     
 
-      <a href="/blog" style="color:#1a202c;text-decoration:none;font-weight:500;margin-left:auto;margin-right:98px">Blog</a>
-
-      <!-- Language flags -->
+      <!-- Bandeiras como links (salvam preferência) -->
       <nav class="language-switcher" aria-label="Change language">
-        <a href="/" data-lang="pt" title="Portuguese (Brazil)" onclick="setLocale('pt');return false;">
-          <img src="/flags/br.png" alt="Portuguese (Brazil)" class="flag" />
+        <a href="/" data-lang="pt" title="Português (Brasil)" onclick="setLocale('pt');return false;">
+          <img src="/flags/br.png" alt="Português (Brasil)" class="flag" />
           <span class="label">Português</span>
         </a>
         <a href="/en/" data-lang="en" aria-current="page" title="English" onclick="setLocale('en');return false;">
@@ -297,22 +404,21 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h1 class="hero-title">Transform your mental and emotional wellbeing</h1>
+        <h1 class="hero-title">Improve your mental and emotional well-being</h1>
         <p class="hero-subtitle">
-          <span class="l1">Do your self-mapping online for free.</span>
-          <span class="l2">Quick and deep method that indicates</span>
-          <span class="l3">custom flower essences.</span>
+          <span class="l1">Tailor-made flower essences are recommended</span>
+          <span class="l2">by this in-depth method of</span>
+          <span class="l3">online self-mapping.</span>
         </p>
         <ul class="hero-bullets">
-          <li class="bullet-1">Free assessment</li>
+          <li class="bullet-1">Free online evaluation</li>
           <li class="bullet-2">Personalized recommendations</li>
-          <li class="bullet-3">Based on proven methods</li>
-          <li class="bullet-4">10,000+ mappings completed</li>
+          <li class="bullet-3">Based on traditional methods</li>
+          <li class="bullet-4">More than 10,000 mappings performed</li>
         </ul>
       </div>
 
       <div class="hero-action">
-        <img src="/images/lotus-logo.png" alt="Lotus flower mark" class="lotus-logo" />
         <h2 class="action-title">Start now</h2>
         <button class="cta-button" onclick="startMapping()">
           <span class="cta-text">Start Free Mapping →</span>
@@ -328,9 +434,9 @@
         <div id="message-container"></div>
 
         <div class="trust-indicators">
-          <span class="trust-ssl">🔒 SSL Secure</span>
-          <span class="trust-no-signup">✨ Instant access</span>
-          <span class="trust-free">% Free</span>
+          <span class="trust-ssl">🔒 Secure SSL</span>
+          <span class="trust-no-signup">✨ Immediate access</span>
+          <span class="trust-free">💯% Free</span>
         </div>
       </div>
     </div>
@@ -340,12 +446,12 @@
   <section class="process">
     <div class="section-header">
       <h2 class="process-title">How it works<br/><span class="subtitle-steps">(3 steps)</span></h2>
-      <p class="process-subtitle">A simple and profound journey to self-discovery</p>
+      <p class="process-subtitle">A simple and in-depth journey for your self-knowledge</p>
     </div>
     <div class="process-steps">
       <div class="step-card">
         <div class="step-number">1</div>
-        <h3 class="step-1-title">Visual assessment</h3>
+        <h3 class="step-1-title">Visual evaluation</h3>
         <p class="step-1-desc">You classify flower images by your immediate response — simple, direct, intuitive.</p>
       </div>
       <div class="step-card">
@@ -355,125 +461,174 @@
       </div>
       <div class="step-card">
         <div class="step-number">3</div>
-        <h3 class="step-3-title">Report</h3>
+        <h3 class="step-3-title">Report + next step</h3>
         <p class="step-3-desc">Receive instant insights and, if you wish, <strong>your personalized formula</strong> prepared and sent to your home.</p>
       </div>
     </div>
   </section>
 
   <!-- Why Method -->
-  <section class="why-method">
-    <div class="section-header">
+  <section class="why-method section-collapsible" id="why-section">
+    <div class="section-toggle" onclick="toggleCollapsible('why-section')">
       <h2>Why this method?</h2>
-      <p>Ancestral tradition meets<br class="mobile-break">modern precision</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="benefits-grid">
-      <div class="benefit-card"><h3>Tradition + Science</h3><p>Ancestral knowledge (with emphasis on Australian Aboriginal peoples) united with clinical practice.</p></div>
-      <div class="benefit-card"><h3>Efficiency</h3><p>Focuses on root causes, not only symptoms.</p></div>
-      <div class="benefit-card"><h3>Individual Journey</h3><p>Brings clarity about your moment and generates a tailor-made formula for you.</p></div>
-      <div class="benefit-card"><h3>Deep mapping</h3><p>Visual mapping that accesses patterns beyond verbal reports.</p></div>
-      <div class="benefit-card"><h3>Convenience</h3><p>100% online, with home delivery.</p></div>
-      <div class="benefit-card"><h3>Privacy &amp; Clarity</h3><p>Protected data under your control.</p></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Ancestral tradition meets<br class="mobile-break">modern precision</p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card"><h3>Tradition + Science</h3><p>Ancestral knowledge (with emphasis on Australian Aboriginal peoples) united with clinical practice.</p></div>
+          <div class="benefit-card"><h3>Efficiency</h3><p>Focuses on root causes, not only symptoms.</p></div>
+          <div class="benefit-card"><h3>Individual Journey</h3><p>Brings clarity about your moment and generates a tailor-made formula for you.</p></div>
+          <div class="benefit-card"><h3>Deep mapping</h3><p>Visual mapping that accesses patterns beyond verbal reports.</p></div>
+          <div class="benefit-card"><h3>Convenience</h3><p>100% online, with home delivery.</p></div>
+          <div class="benefit-card"><h3>Privacy &amp; Clarity</h3><p>Protected data under your control.</p></div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">I want to start →</button>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Feel -->
-  <section class="feel-section">
-    <div class="section-header">
+  <section class="feel-section section-collapsible" id="feel-section">
+    <div class="section-toggle" onclick="toggleCollapsible('feel-section')">
       <h2>What you may feel</h2>
-      <p>Benefits often reported by users</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="feel-list">
-      <div class="feel-item"><span>Less stress and reactivity</span></div>
-      <div class="feel-item"><span>More centeredness, focus, and lightness</span></div>
-      <div class="feel-item"><span>Courage to navigate transitions</span></div>
-      <div class="feel-item"><span>Reconnection with purpose and direction</span></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Benefits often reported by users</p>
+        </div>
+        <div class="feel-list">
+          <div class="feel-item"><span>Less stress and reactivity</span></div>
+          <div class="feel-item"><span>More centeredness, focus, and lightness</span></div>
+          <div class="feel-item"><span>Courage to navigate transitions</span></div>
+          <div class="feel-item"><span>Reconnection with purpose and direction</span></div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">I want to start →</button>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- About Therapist -->
-  <section class="about-therapist">
-    <div class="section-header">
+  <section class="about-therapist section-collapsible" id="about-section">
+    <div class="section-toggle" onclick="toggleCollapsible('about-section')">
       <h2>About the therapist</h2>
-      <p>Experience and specialized training</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="therapist-content">
-      <div class="credentials-list">
-        <div class="credential-item"><strong>20+ years</strong> in Flower Therapy consulting (individuals and organizations)</div>
-        <div class="credential-item"><strong>Postgraduate in Flower Therapy</strong> FACIS/IBEHE (2002)</div>
-        <div class="credential-item"><strong>Training at the Australian LiFE Academy</strong> (2006)</div>
-        <div class="credential-item"><strong>Training in Alaska</strong> (2001)</div>
-        <div class="credential-item"><strong>Professor</strong> of Advanced Diagnosis in Flower Therapy — authorized by the <strong>LiFE Academy</strong> (Australia)</div>
-        <div class="credential-item credential-photo">
-          <img src="/images/curso.jpg" alt="Therapist teaching in a classroom" />
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Experience and specialized training</p>
+        </div>
+        <div class="therapist-content">
+          <div class="credentials-list">
+            <div class="credential-item"><strong>20+ years</strong> in Flower Therapy consulting (individuals and organizations)</div>
+            <div class="credential-item"><strong>Postgraduate in Flower Therapy</strong> FACIS/IBEHE (2002)</div>
+            <div class="credential-item"><strong>Training at the Australian LiFE Academy</strong> (2006)</div>
+            <div class="credential-item"><strong>Training in Alaska</strong> (2001)</div>
+            <div class="credential-item"><strong>Professor</strong> of Advanced Diagnosis in Flower Therapy — authorized by the <strong>LiFE Academy</strong> (Australia)</div>
+            <div class="credential-item credential-photo">
+              <img src="/images/curso.jpg" alt="Therapist teaching in a classroom" />
+            </div>
+          </div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">I want to start →</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <div class="section-header">
+  <!-- Depoimentos -->
+  <section class="testimonials section-collapsible" id="testimonials-section">
+    <div class="section-toggle" onclick="toggleCollapsible('testimonials-section')">
       <h2>Testimonials</h2>
-      <p>Real transformation experiences</p>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-text">“Flavius has incredible sensitivity. He is very caring and deeply committed to his work, and he has a remarkable ability to bring up profound questions in a loving way. I recommend him!”</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">MC</div>
-          <div class="author-info"><h4>Marina D.</h4><p>Lawyer</p><div class="stars">★★★★★</div></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p>Real transformation experiences</p>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">“The mapping was precise and straightforward. It brought clarity, catalyzed changes, and opened new paths.”</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">JS</div>
-          <div class="author-info"><h4>João S.</h4><p>Real Estate Broker</p><div class="stars">★★★★★</div></div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Flavius has incredible sensitivity. He is very caring and deeply committed to his work, and he has a remarkable ability to bring up profound questions in a loving way. I recommend him!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">MC</div>
+              <div class="author-info"><h4>Marina D.</h4><p>Lawyer</p><div class="stars">★★★★★</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"The mapping was precise and straightforward. It brought clarity, catalyzed changes, and opened new paths."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">JS</div>
+              <div class="author-info"><h4>João S.</h4><p>Real Estate Broker</p><div class="stars">★★★★★</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"The benefits for my personal process were so great that I decided to train in the basic method. I've used it with family and friends and they're seeing the same benefits I did. Highly recommended."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">JM</div>
+              <div class="author-info"><h4>Jane M.</h4><p>Entrepreneur</p><div class="stars">★★★★★</div></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-text">“The benefits for my personal process were so great that I decided to train in the basic method. I’ve used it with family and friends and they’re seeing the same benefits I did. Highly recommended.”</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">JM</div>
-          <div class="author-info"><h4>Jane M.</h4><p>Entrepreneur</p><div class="stars">★★★★★</div></div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">I want to start →</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq">
-    <div class="section-header">
+  <section class="faq section-collapsible" id="faq-section">
+    <div class="section-toggle" onclick="toggleCollapsible('faq-section')">
       <h2>Frequently asked questions</h2>
+      <span class="section-toggle-icon">▼</span>
     </div>
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>Is it really free?</span></div>
-        <div class="faq-answer"><span>Yes, mapping and basic report are free. We also offer: premium recommendations, dosage bottles and specialized consultations.</span></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>How accurate is the mapping?</span></div>
-        <div class="faq-answer"><span>Our method is based on decades of research at LiFE Academy (Australia) and has been validated through 10,000+ successful mappings. It is not a medical diagnosis, but a <strong>practical guide</strong> for your self-knowledge.</span></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>How long does it take?</span></div>
-        <div class="faq-answer"><span>The whole process takes about 10 minutes. You will view and classify images; your personalized insights are generated instantly.</span></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)"><span>Is my data secure?</span></div>
-        <div class="faq-answer"><span>Yes. Restricted use for service delivery and improvements. You can request data removal at any time.</span></div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">
+        <div class="section-header">
+          <p></p>
+        </div>
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>Is it really free?</span></div>
+            <div class="faq-answer"><span>Yes, mapping and basic report are free. We also offer: premium recommendations, dosage bottles and specialized consultations.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>How accurate is the mapping?</span></div>
+            <div class="faq-answer"><span>Our method is based on decades of research at LiFE Academy (Australia) and has been validated through 10,000+ successful mappings. It is not a medical diagnosis, but a <strong>practical guide</strong> for your self-knowledge.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>How long does it take?</span></div>
+            <div class="faq-answer"><span>The whole process takes about 10 minutes. You will view and classify images; your personalized insights are generated instantly.</span></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)"><span>Is my data secure?</span></div>
+            <div class="faq-answer"><span>Yes. Restricted use for service delivery and improvements. You can request data removal at any time.</span></div>
+          </div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">I want to start →</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact section removed to match the original -->
-
   <!-- Final CTA -->
   <section class="final-cta">
     <h2>Ready to start?</h2>
-    <p>Let the vital force of flowers<br class="mobile-break"> guide your process. Join thousands of people<br class="mobile-break"> who have already done their self-mapping and took the next step<br class="mobile-break"> in realizing their potential.</p>
-    <a class="cta-button" href="javascript:void(0)" onclick="startMapping()">Do my Self-Mapping</a>
+    <p>Let the vital force of flowers<br class="mobile-break"> guide your process.<br>Join thousands of people<br class="mobile-break"> who have already done their self-mapping and took the next step<br class="mobile-break"> in realizing their potential.</p>
+    <a class="cta-button" href="javascript:void(0)" onclick="startMapping()">Do my Self-Mapping →</a>
     <div class="disclaimer"><small>This service does not replace medical or psychological care.</small></div>
   </section>
 
@@ -481,6 +636,7 @@
   <div class="pre-footer">
     <div class="pre-footer-content">
       <div class="pre-footer-links">
+        <a id="prefooter-blog" href="/blog">Blog</a>
         <a id="prefooter-contact"
            href="https://wa.me/5548988674471?text=Hello%20Flavius%2C%20I%20came%20from%20the%20website%20and%20would%20like%20to%20learn%20more."
            target="_blank" rel="noopener">Contact me</a>
@@ -504,6 +660,11 @@
 
   <!-- Scripts -->
   <script>
+    // Função para toggle das seções colapsáveis
+    function toggleCollapsible(id){
+      document.getElementById(id).classList.toggle('active');
+    }
+    
     // GA4
     const GA_MEASUREMENT_ID = 'G-PQ6KTN7WQZ';
     let analyticsInitialized = false;
