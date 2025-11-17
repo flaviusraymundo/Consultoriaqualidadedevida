@@ -147,7 +147,7 @@
     .trust-free{color:#dc2626!important;font-weight:600}
 
     /* Sections */
-    .process,.why-method,.feel-section,.about-therapist,.testimonials,.faq{padding:40px 0}
+    .process,.why-method,.feel-section,#how-florals-section,.about-therapist,.testimonials,.faq{padding:40px 0}
     .process{background:#f8f9fa}
     .section-header{text-align:center;max-width:700px;margin:0 auto 60px}
     .section-header h2{font-size:2.5em;margin-bottom:20px;color:var(--text-dark)}
@@ -189,6 +189,24 @@
       font-size:1.2em;
       flex-shrink:0;
     }
+
+    /* marca "lotus" nos itens do floral */
+    .flower-item{
+      background:#fff;
+      padding:20px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 3px 12px rgba(0,0,0,.05);
+      border-left:4px solid var(--primary-color);
+    }
+    .flower-item::before{
+      content:'🪷';
+      font-size:1.2em;
+      flex-shrink:0;
+    }
+    
     .credential-item{padding:20px;background:#f8f9fa;border-radius:10px;border-left:4px solid var(--primary-color)}
     .credential-photo{grid-column:1/-1;padding:0;background:transparent;border:none;display:flex;justify-content:center;align-items:center}
     .credential-photo img{width:100%;max-width:280px;height:auto;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);border:3px solid var(--primary-color)}
@@ -486,7 +504,7 @@
           <div class="benefit-card"><h3>Privacy &amp; Clarity</h3><p>Your data secured and under your control.</p></div>
         </div>
         <div class="section-end-cta">
-          <button onclick="startMapping()">I want to start →</button>
+          <button onclick="startMapping()">Interested? →</button>
         </div>
       </div>
     </div>
@@ -511,7 +529,33 @@
           <div class="feel-item"><span>Reconnection with purpose and direction</span></div>
         </div>
         <div class="section-end-cta">
-          <button onclick="startMapping()">I want to start →</button>
+          <button onclick="startMapping()">Interested? →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How Flower Essences Work - COLLAPSIBLE -->
+  <section class="how-florals section-collapsible" id="how-florals-section">
+    <div class="section-toggle" onclick="toggleCollapsible('how-florals-section')">
+      <h2>How flower essences work</h2>
+      <span class="section-toggle-icon">▼</span>
+    </div>
+    <div class="section-content-wrapper">
+      <div style="padding: 40px 0;">      
+        <div class="feel-list">
+          <div class="flower-item">
+            <span>Flower essences work on a vibrational and energetic level, acting directly on emotional and mental patterns and catalyzing change.</span>
+          </div>
+          <div class="flower-item">
+            <span>Through resonance, these essences help dissolve blocks, bring clarity, and strengthen the positive qualities that already exist within you.</span>
+          </div>
+          <div class="flower-item">
+            <span>The process is natural and gentle, respects your unique pace of transformation, and has no contraindications.</span>
+          </div>
+        </div>
+        <div class="section-end-cta">
+          <button onclick="startMapping()">Start now →</button>
         </div>
       </div>
     </div>
@@ -534,14 +578,14 @@
             <div class="credential-item"><strong>Training in Alaskan Flower Essences</strong> (2001)</div>
             <div class="credential-item"><strong>Postgraduate in Flower Therapy</strong> — FACIS/IBEHE (2002)</div>
             <div class="credential-item"><strong>Training at the Australian LiFE Academy</strong> (2006)</div>
-            <div class="credential-item"><strong>Authorized Professor of Advanced Diagnosis</strong> by the Australian LiFE Academy</div>
+            <div class="Flowe-item"><strong>Authorized Professor of Advanced Diagnosis</strong> by the Australian LiFE Academy</div>
             <div class="credential-item credential-photo">
               <img src="/images/curso.jpg" alt="Therapist teaching in a classroom" />
             </div>
           </div>
         </div>
         <div class="section-end-cta">
-          <button onclick="startMapping()">I want to start →</button>
+          <button onclick="startMapping()">Interested? →</button>
         </div>
       </div>
     </div>
@@ -582,7 +626,7 @@
           </div>
         </div>
         <div class="section-end-cta">
-          <button onclick="startMapping()">I want to start →</button>
+          <button onclick="startMapping()">Interested? →</button>
         </div>
       </div>
     </div>
@@ -618,7 +662,7 @@
           </div>
         </div>
         <div class="section-end-cta">
-          <button onclick="startMapping()">I want to start →</button>
+          <button onclick="startMapping()">Interested? →</button>
         </div>
       </div>
     </div>
