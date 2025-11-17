@@ -209,6 +209,7 @@
       gap:20px;
       grid-template-columns:1fr; /* um por linha, como no original */
     }
+    
     /* marca "estrelinhas" nos itens do sentir */
     .feel-item{
       background:#fff;
@@ -225,6 +226,24 @@
       font-size:1.2em;
       flex-shrink:0;
     }
+
+    /* marca "lotus" nos itens do floral */
+    .flower-item{
+      background:#fff;
+      padding:20px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 3px 12px rgba(0,0,0,.05);
+      border-left:4px solid var(--primary-color);
+    }
+    .flower-item::before{
+      content:'🪷';
+      font-size:1.2em;
+      flex-shrink:0;
+    }
+    
     .credential-item{padding:20px;background:#f8f9fa;border-radius:10px;border-left:4px solid var(--primary-color)}
     .credential-photo{grid-column:1/-1;padding:0;background:transparent;border:none;display:flex;justify-content:center;align-items:center}
     .credential-photo img{width:100%;max-width:280px;height:auto;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);border:3px solid var(--primary-color)}
@@ -510,7 +529,7 @@
     </div>
     <div class="section-content-wrapper">
       <div style="padding: 40px 0;">
-        <div class="section-header" style="margin-bottom: 40px;">
+        <div class="section-header" style="margin-bottom: 0px;">
           <p>Tradição ancestral encontra<br class="mobile-break">precisão moderna</p>
         </div>
         <div class="benefits-grid">
@@ -536,7 +555,7 @@
     </div>
     <div class="section-content-wrapper">
       <div style="padding: 40px 0;">
-        <div class="section-header" style="margin-bottom: 40px;">
+        <div class="section-header" style="margin-bottom: 0px;">
           <p>Benefícios relatados pelos usuários</p>
         </div>
         <div class="feel-list">
@@ -562,14 +581,14 @@
     <div class="section-content-wrapper">
       <div style="padding: 40px 0;">
         <div class="feel-list">
-          <div class="feel-item">
-            <span>🪷 As essências florais trabalham no nível vibracional e energético, atuando sutilmente em padrões emocionais e mentais.</span>
+          <div class="flower-item">
+            <span>As essências florais trabalham no nível vibracional e energético, atuando sutilmente em padrões emocionais e mentais.</span>
           </div>
-          <div class="feel-item">
-            <span>🪷 Através da ressonância, as essências ajudam a dissolver bloqueios, trazer clareza e fortalecer qualidades positivas que já existem em você.</span>
+          <div class="flower-item">
+            <span>Através da ressonância, as essências ajudam a dissolver bloqueios, trazer clareza e fortalecer qualidades positivas que já existem em você.</span>
           </div>
-          <div class="feel-item">
-            <span>🪷 O processo é natural, gentil, respeita seu ritmo único de transformação e não possui contraindicações.</span>
+          <div class="flower-item">
+            <span>O processo é natural, gentil, respeita seu ritmo único de transformação e não possui contraindicações.</span>
           </div>
         </div>
         <div class="section-end-cta">
@@ -587,7 +606,7 @@
     </div>
     <div class="section-content-wrapper">
       <div style="padding: 40px 0;">
-        <div class="section-header" style="margin-bottom: 40px;">
+        <div class="section-header" style="margin-bottom: 0px;">
           <p>Experiência e formação especializada</p>
         </div>
         <div class="therapist-content">
@@ -617,7 +636,7 @@
     </div>
     <div class="section-content-wrapper">
       <div style="padding: 40px 0;">
-        <div class="section-header" style="margin-bottom: 40px;">
+        <div class="section-header" style="margin-bottom: 0px;">
           <p>Experiências reais de transformação</p>
         </div>
         <div class="testimonials-grid">
