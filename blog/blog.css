@@ -1,64 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;800&display=swap');
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  margin: 0;
-  background: #fff;
+  font-family: 'Merriweather', 'Georgia', serif;
+  background: #fcf8f3;
+  color: #212022;
+  font-size: 1.07rem;
+  line-height: 1.82;
 }
-.container {
-  display: flex;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 16px 48px;
+h1, h2, h3 {
+  font-family: 'Merriweather', 'Georgia', serif;
+  color: #735221;
 }
-.main {
-  flex: 3;
-  padding-right: 32px;
-}
-.sidebar {
-  flex: 1.15;
-  background: #f7fcfa;
-  padding: 24px 20px;
-  border-radius: 10px;
-  margin-top: 15px;
-  height: fit-content;
-  box-shadow: 0 2px 12px #e1ede5;
-}
-h1, h2 {
-  color: #56806f;
+h1 {
+  font-size: 2.1rem;
+  margin-top: 0.6em;
+  font-weight: 800;
 }
 h2 {
-  margin-top: 26px;
+  font-size: 1.18rem;
+  margin-top: 2.5em;
+  font-weight: 600;
+  border-bottom: 1px solid #fae8c2;
+  padding-bottom: 4px;
 }
-.sidebar h3 {
-  color: #44574e;
-  margin-top: 0;
+.container, .blog-container {
+  background: #fffefb;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px #e0d7ca9a;
+  padding: 28px 18px;
+  max-width: 1100px;
+  margin: 46px auto 56px auto;
 }
-.divider {
-  border: none;
-  border-top: 2px solid #eee;
-  margin: 38px 0;
-}
-.cta {
-  background: #56806f;
+a.cta, .cta {
+  display: block;
+  margin: 32px auto 0 auto;
+  text-align: center;
+  background: #38b6ff;
   color: #fff;
-  padding: 15px 25px;
+  padding: 15px 28px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  display: inline-block;
-  margin-top: 24px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+  box-shadow: 0 1px 7px #a2c7e4a8;
+  border: none;
+  width: fit-content;
 }
-ul {
-  padding-left: 18px;
+a.cta:hover, .cta:hover {
+  background: #229edb;
+  color: #fff;
 }
-@media (max-width: 850px) {
-  .container {
-    flex-direction: column;
-  }
-  .sidebar {
-    margin-top: 28px;
-    padding: 18px 10px;
-  }
-  .main {
-    padding-right: 0;
+@media (max-width: 900px) {
+  .container, .blog-container {
+    max-width: 98vw;
+    padding: 10vw 2vw;
   }
 }
