@@ -93,8 +93,10 @@
         A pergunta não é se as essências florais funcionam — centenas de milhares de pessoas ao redor do mundo atestam sua eficácia. A pergunta verdadeira é: você está pronto para permitir que sua própria sabedoria interior emerja e guie sua transformação?
       </p>
       <p>
-        <strong>Quer experimentar como as essências florais podem apoiar sua jornada específica?</strong>
-        <a class="cta" href="#CTA">Faça seu auto-mapeamento online gratuíto agora</a>
+        <strong>Quer experimentar como as essências florais podem apoiar sua jornada?</strong>
+        <button class="cta" type="button" onclick="startMapping()">
+          Faça seu auto-mapeamento online gratuíto agora
+        </button>
       </p>
     </div>
 
@@ -107,5 +109,41 @@
       </ul>
     </aside>
   </div>
+
+  <!-- Script para o CTA ter o mesmo comportamento da landing -->
+  <script>
+    function startMapping() {
+      const here = new URLSearchParams(window.location.search);
+
+      // Ajuste livre: defaults diferentes para o blog
+      const utm = {
+        utm_source: here.get('utm_source') || 'blog',
+        utm_medium: here.get('utm_medium') || 'ref_consultoria',
+        utm_campaign: here.get('utm_campaign') || 'blog_pt'
+      };
+
+      // lingua: usa lang do <html> ou currentLang se existir
+      const htmlLang = (document.documentElement.lang || '').toLowerCase();
+      const lang =
+        htmlLang.startsWith('en') ? 'en' :
+        htmlLang.startsWith('pt') ? 'pt' :
+        (typeof window.currentLang === 'string' ? window.currentLang : 'pt');
+
+      const params = new URLSearchParams({
+        ref: 'consultoria',
+        lang,
+        skip_welcome: '1',
+        step: 'instruction',
+        ...utm
+      });
+
+      // Só dispara tracking se a função existir (para não quebrar o blog se não tiver script de analytics carregado aqui)
+      if (typeof window.trackLandingEvent === 'function') {
+        window.trackLandingEvent('cta_clicked', { button_type: 'blog_cta' });
+      }
+
+      window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+    }
+  </script>
 </body>
 </html>
