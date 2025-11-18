@@ -9,6 +9,7 @@
     body {
       background: #fcf8f3;
     }
+
     .blog-container {
       max-width: 100vw;
       margin: 0;
@@ -17,6 +18,7 @@
       border-radius: 0;
       box-shadow: none;
     }
+
     .blog-header {
       max-width: 1200px;
       margin: 44px auto 36px auto;
@@ -26,6 +28,7 @@
       padding: 48px 8vw 32px 8vw;
       text-align: center;
     }
+
     .blog-header h1 {
       text-align: center;
       margin-bottom: 0.4em;
@@ -34,21 +37,24 @@
       font-family: 'Merriweather', Georgia, serif;
       font-weight: 800;
     }
+
     .blog-header > p {
       text-align: center;
       font-size: 1.18rem;
       color: #735221;
       margin-bottom: 0;
     }
+
     .post-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 38px;
-      justify-content: flex-start;
+      justify-content: center; /* centraliza quando há 1 ou poucos cards */
       max-width: 1200px;
       margin: 0 auto;
-      padding-bottom: 48px;
+      padding: 0 2vw 48px 2vw;
     }
+
     .post-card {
       background: #f9f6f1;
       border-radius: 12px;
@@ -57,14 +63,24 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: box-shadow 0.2s, transform 0.2s;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
       padding-bottom: 18px;
       margin-top: 0;
+      overflow: hidden;
     }
+
     .post-card:hover {
       box-shadow: 0 8px 30px #e4ceac69;
       transform: translateY(-3px) scale(1.025);
     }
+
+    .post-card-link {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
     .post-card img {
       display: block;
       width: 88%;
@@ -77,11 +93,13 @@
       height: auto;
       max-height: 155px;
     }
+
     .post-card-content {
       padding: 14px 24px 0 24px;
       width: 100%;
       box-sizing: border-box;
     }
+
     .post-card-title {
       font-size: 1.09rem;
       margin: 13px 0 3px 0;
@@ -89,14 +107,22 @@
       color: #735221;
       font-family: 'Merriweather', Georgia, serif;
     }
+
     .post-card-title a {
       text-decoration: none;
       color: #735221;
-      transition: color 0.17s;
+      transition: color 0.17s ease;
     }
+
     .post-card-title a:hover {
       color: #38b6ff;
     }
+
+    .post-card-title a:focus-visible {
+      outline: 2px solid #38b6ff;
+      outline-offset: 3px;
+    }
+
     .post-card-meta {
       color: #b6a47e;
       font-size: 0.99rem;
@@ -104,50 +130,83 @@
       border-bottom: 1px solid #f0e0bd;
       padding-bottom: 4px;
     }
+
     .post-card-excerpt {
       color: #6d5d46;
       font-size: 1.03rem;
       margin-bottom: 0;
     }
+
     @media (max-width: 1080px) {
-      .blog-header, .post-grid { max-width:97vw; padding-left: 2vw; padding-right: 2vw;}
-      .post-card { width: 92vw; max-width: 380px;}
+      .blog-header,
+      .post-grid {
+        max-width: 97vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+      }
+      .post-card {
+        width: 92vw;
+        max-width: 380px;
+      }
     }
+
     @media (max-width: 700px) {
-      .blog-header, .post-grid { max-width:99vw; padding-left:1vw; padding-right:1vw;}
-      .post-card { max-width: 98vw; width: 100%;}
-      .post-card-content {padding:10px 6vw 0 6vw;}
+      .blog-header,
+      .post-grid {
+        max-width: 99vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+      }
+      .post-card {
+        max-width: 98vw;
+        width: 100%;
+      }
+      .post-card-content {
+        padding: 10px 6vw 0 6vw;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .post-card {
+        transition: box-shadow 0.01s linear;
+      }
+      .post-card:hover {
+        transform: none;
+      }
     }
   </style>
 </head>
 <body>
   <div class="blog-container">
-    <div class="blog-header">
+    <header class="blog-header">
       <h1>Blog sobre Terapia Floral</h1>
       <p>
         Textos aprofundados sobre essências florais, auto-mapeamento e desenvolvimento interior.
       </p>
-    </div>
-    <div class="post-grid">
+    </header>
+
+    <main class="post-grid" aria-label="Lista de artigos do blog">
       <article class="post-card">
-        <a href="blog.html">
-          <img src="blog1.jpg" alt="Como Funcionam as Essências Florais">
+        <a class="post-card-link" href="blog.html">
+          <img src="blog1.jpg" alt="Ilustração para o texto Como Funcionam as Essências Florais">
+          <div class="post-card-content">
+            <h2 class="post-card-title">
+              <a href="blog.html">
+                Como Funcionam as Essências Florais: Uma Jornada de Transformação Vibracional
+              </a>
+            </h2>
+            <p class="post-card-meta">18/11/2025 · leitura longa</p>
+            <p class="post-card-excerpt">
+              Entenda, em linguagem acessível, como as essências florais atuam em níveis sutis
+              para apoiar processos profundos de cura e autoconhecimento.
+            </p>
+          </div>
         </a>
-        <div class="post-card-content">
-          <h2 class="post-card-title">
-            <a href="blog.html">
-              Como Funcionam as Essências Florais: Uma Jornada de Transformação Vibracional
-            </a>
-          </h2>
-          <p class="post-card-meta">18/11/2025 · leitura longa</p>
-          <p class="post-card-excerpt">
-            Entenda, em linguagem acessível, como as essências florais atuam em níveis sutis
-            para apoiar processos profundos de cura e autoconhecimento.
-          </p>
-        </div>
       </article>
-      <!-- Para mais posts, basta duplicar o bloco <article> -->
-    </div>
+
+      <!-- Para mais posts, basta duplicar o bloco <article> acima,
+           trocando imagem, links, datas e textos. -->
+    </main>
   </div>
 </body>
 </html>
