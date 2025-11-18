@@ -37,6 +37,11 @@ h2 {
   display: block;      /* força ir para a linha de baixo */
 }
 
+/* recuo na primeira linha de cada parágrafo do conteúdo principal */
+.main p {
+  text-indent: 2em;   /* ajuste o valor até ficar do jeito que você gosta */
+}
+
 .container,
 .blog-container {
   background: #fffefb;
