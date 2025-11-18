@@ -55,8 +55,42 @@
       z-index:1000;
       padding:4px 0;           /* mantém a barra estreita */
       box-shadow:0 2px 10px rgba(0,0,0,.05);
+    }    
+    .header-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+        .header-right{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    .header-content{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+
+    .blog-link-top{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:4px 14px;             /* mais achatado verticalmente */
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,0.12);
+      background:rgba(255,255,255,0.9);
+      font-size:.9rem;
+      font-weight:600;
+      color:#1f2937;
+      text-decoration:none;
+      white-space:nowrap;
+      box-shadow:0 1px 6px rgba(15,23,42,0.16);
+    }
+    .blog-link-top::before{
+      content:"📖";
+      margin-right:6px;
+    }
+    .blog-link-top:hover{
+      background:#e0f7ff;
+      border-color:#38b6ff;
+      color:#0f172a;
+    }
+    .blog-link-top:focus-visible{
+      outline:2px solid #38b6ff;
+      outline-offset:2px;
+    }
     .logo-header{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1rem;color:var(--text-dark);min-width:0}
     .logo-header img{width:84px;height:84px;object-fit:contain}
 
@@ -209,6 +243,33 @@
       font-size:1.2em;
       flex-shrink:0;
     }
+    .how-florals-blog-link{
+      margin-top:28px;
+      text-align:center;
+    }
+    .how-florals-blog-link a{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.96);
+      color:#0f766e;
+      border:1px solid rgba(15,118,110,0.35);
+      font-weight:600;
+      text-decoration:none;
+      box-shadow:0 1px 6px rgba(15,23,42,0.12);
+      font-size:.95rem;
+      white-space:nowrap;
+    }
+    .how-florals-blog-link a::before{
+      content:"📖";
+      font-size:1rem;
+    }
+    .how-florals-blog-link a:hover{
+      background:#ecfdf5;
+      border-color:#0f766e;
+    }
     
     .credential-item{padding:20px;background:#f8f9fa;border-radius:10px;border-left:4px solid var(--primary-color)}
     .credential-photo{grid-column:1/-1;padding:0;background:transparent;border:none;display:flex;justify-content:center;align-items:center}
@@ -326,6 +387,10 @@
       .logo-header{font-size:.9rem}
       .logo-header img{width:32px;height:32px}
       .language-switcher{transform:scale(.9)}
+      .blog-link-top{
+        font-size:.8rem;
+        padding:3px 10px;  /* ainda mais achatado no mobile */
+      }
       .hero{padding:100px 0 60px}
       .subtitle-steps{font-size:.8em;font-weight:400;opacity:.8}
     }
@@ -403,20 +468,28 @@
     <div class="header-content">
       <div class="logo-header">
         <img src="/images/logo.png" alt="Logo" />
-        <span class="company-name">Life Flourish Consulting</span>
-      </div>     
-
-      <!-- Bandeiras como links (salvam preferência) -->
-      <nav class="language-switcher" aria-label="Change language">
-        <a href="/" data-lang="pt" title="Português (Brasil)" onclick="setLocale('pt');return false;">
-          <img src="/flags/br.png" alt="Português (Brasil)" class="flag" />
-          <span class="label">Português</span>
+        <span class="company-name">Consultoria Qualidade de Vida</span>
+      </div>
+  
+      <div class="header-right">
+        <a class="blog-link-top" href="/blog/index.html">
+          Blog
         </a>
-        <a href="/en/" data-lang="en" aria-current="page" title="English" onclick="setLocale('en');return false;">
-          <img src="/flags/us.png" alt="English" class="flag" />
-          <span class="label">English</span>
-        </a>
-      </nav>
+  
+        <!-- Bandeiras como links (salvam preferência) -->
+        <nav class="language-switcher" aria-label="Change language">
+          <a href="/" data-lang="pt" aria-current="page"
+             title="Português (Brasil)" onclick="setLocale('pt');return false;">
+            <img src="/flags/br.png" alt="Português (Brasil)" class="flag" />
+            <span class="label">Português</span>
+          </a>
+          <a href="/en/" data-lang="en"
+             title="English" onclick="setLocale('en');return false;">
+            <img src="/flags/us.png" alt="English" class="flag" />
+            <span class="label">English</span>
+          </a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -538,34 +611,49 @@
     </div>
   </section>
 
-  <!-- How Flower Essences Work - COLLAPSIBLE -->
+  <!-- Como os Florais Funcionam - COLAPSÁVEL -->
   <section class="how-florals section-collapsible" id="how-florals-section">
     <div class="section-toggle" onclick="toggleCollapsible('how-florals-section')">
-      <h2>How flower essences work</h2>
+      <h2>Como os florais funcionam</h2>
       <span class="section-toggle-icon">▼</span>
     </div>
     <div class="section-content-wrapper">
-      <div style="padding: 40px 0;">      
+      <div style="padding: 40px 0;">
         <div class="feel-list">
           <div class="flower-item">
-            <span>Flower essences act on vibrational and informational levels, preserving the subtle energetic pattern of flowers. When ingested, this biophysical information resonates with your mental and emotional patterns, promoting reorganization and facilitating profound changes in a gradual way that respects your individual process.</span>
+            <span>
+              Flower essences act on vibrational and informational levels, preserving the subtle energetic pattern of flowers. When ingested, this biophysical information resonates with your mental and emotional patterns, promoting reorganization and facilitating profound changes in a gradual way that respects your individual process.
+            </span>
           </div>
           <div class="flower-item">
-            <span>Through resonance, the essence identifies and harmonizes mental patterns that block your potential. The process dissolves mental habits — the root of unhealthy emotions and physical diseases —, expands awareness of your automatic patterns, strengthens internal resources, and reorganizes your energetic field. This internal reorganization naturally attracts, through resonance, external experiences that are more aligned, creating a cycle of transformation at all levels.</span>
+            <span>
+              Through resonance, the essence identifies and harmonizes mental patterns that block your potential. The process dissolves mental habits — the root of unhealthy emotions and physical diseases —, expands awareness of your automatic patterns, strengthens internal resources, and reorganizes your energetic field. This internal reorganization naturally attracts, through resonance, external experiences that are more aligned, creating a cycle of transformation at all levels.
+            </span>
           </div>
           <div class="flower-item">
-            <span>Flower therapy doesn't impose changes, but facilitates profound recognitions: by dissolving crystallized patterns of thought and unhealthy emotions, allowing your own inner wisdom to emerge and resume command, returning to you the conscious protagonism over your process of healing, flourishing, and journey toward fulfillment.</span>
+            <span>
+              Flower therapy doesn't impose changes, but facilitates profound recognitions: by dissolving crystallized patterns of thought and unhealthy emotions, allowing your own inner wisdom to emerge and resume command, returning to you the conscious protagonism over your process of healing, flourishing, and journey toward fulfillment.
+            </span>
           </div>
           <div class="flower-item">
-            <span>The process is natural, gentle, and non-invasive: it works as a fine adjustment in the organizational patterns of the vital field, respects your unique rhythm of transformation, and integrates harmoniously with other therapeutic approaches. By not acting through chemical substances that depend on quantity to take effect — like conventional medicines —, it presents no contraindications, side effects, or drug interactions.</span>
+            <span>
+              The process is natural, gentle, and non-invasive: it works as a fine adjustment in the organizational patterns of the vital field, respects your unique rhythm of transformation, and integrates harmoniously with other therapeutic approaches. By not acting through chemical substances that depend on quantity to take effect — like conventional medicines —, it presents no contraindications, side effects, or drug interactions.
+            </span>
           </div>
         </div>
+  
+        <p class="how-florals-blog-link">
+          <a href="/blog/index.html" target="_blank" rel="noopener">
+            Ler artigo completo no blog
+          </a>
+        </p>
+  
         <div class="section-end-cta">
-          <button onclick="startMapping()">Interested? →</button>
+          <button onclick="startMapping()">Quero começar →</button>
         </div>
       </div>
     </div>
-  </section>
+  </section>  
 
   <!-- About Therapist -->
   <section class="about-therapist section-collapsible" id="about-section">
