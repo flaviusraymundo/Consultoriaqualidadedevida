@@ -96,15 +96,19 @@ a.cta:hover,
 
 .post-card img {
   width: 100%;
-  max-width: none;         /* Remove limite de largura */
-  height: 320px;           /* Ajuste a altura que preferir */
-  max-height: none;        /* Remove o limite de altura */
-  object-fit: cover;       /* Preenche sem distorcer */
-  object-position: center center; /* Centraliza imagem sempre */
+  max-width: none;
+  height: 320px;              /* Ou ajuste para o valor desejado */
+  max-height: none;
+  object-fit: cover;
+  object-position: center center; /* Centraliza ponto focal */
   display: block;
   border-radius: 8px;
   box-shadow: 0 1px 7px #d1c8b2b0;
   background: #eceae6;
+}
+
+.post-card {
+  height: auto; /* Garante que o card cresça junto com a imagem */
 }
 
 .post-card-content {
