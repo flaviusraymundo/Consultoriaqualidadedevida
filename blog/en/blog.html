@@ -94,7 +94,9 @@
       </p>
       <p>
         <strong>Want to know more about how flower essences can support your specific journey?</strong>
-        <a class="cta" href="#CTA">Start your auto-mapping for free now</a>
+        <button class="cta" type="button" onclick="startMapping()">
+          Start your auto-mapping for free now
+        </button>
       </p>
     </div>
 
@@ -102,10 +104,42 @@
       <h3>Latest posts</h3>
       <ul>
         <li><strong>How Flower Essences Work</strong><br>
-        <span style="color:#588473;font-size:0.98em;">18/11/2025</span></li>
+        <span style="color:#588473;font-size:0.98em;">11/18/2025</span></li>
         <!-- When you have new texts, add them here as links to the respective post files -->
       </ul>
     </aside>
   </div>
+
+  <script>
+    function startMapping() {
+      const here = new URLSearchParams(window.location.search);
+
+      const utm = {
+        utm_source: here.get('utm_source') || 'blog',
+        utm_medium: here.get('utm_medium') || 'ref_consultoria',
+        utm_campaign: here.get('utm_campaign') || 'blog_en'
+      };
+
+      const htmlLang = (document.documentElement.lang || '').toLowerCase();
+      const lang =
+        htmlLang.startsWith('en') ? 'en' :
+        htmlLang.startsWith('pt') ? 'pt' :
+        (typeof window.currentLang === 'string' ? window.currentLang : 'en');
+
+      const params = new URLSearchParams({
+        ref: 'consultoria',
+        lang,
+        skip_welcome: '1',
+        step: 'instruction',
+        ...utm
+      });
+
+      if (typeof window.trackLandingEvent === 'function') {
+        window.trackLandingEvent('cta_clicked', { button_type: 'blog_cta_en' });
+      }
+
+      window.location.href = `https://terapiafloral.org/?${params.toString()}`;
+    }
+  </script>
 </body>
 </html>
