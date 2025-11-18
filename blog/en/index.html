@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Blog | Terapia Floral</title>
+  <link rel="stylesheet" href="../blog.css">
+  <style>
+    body {
+      background: #fcf8f3;
+    }
+
+    .blog-container {
+      max-width: 100vw;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .blog-header {
+      max-width: 1200px;
+      margin: 44px auto 36px auto;
+      background: #fffefb;
+      border-radius: 16px;
+      box-shadow: 0 2px 9px #ece5d492;
+      padding: 48px 8vw 32px 8vw;
+      text-align: center;
+    }
+
+    .blog-header h1 {
+      text-align: center;
+      margin-bottom: 0.4em;
+      font-size: 2.1rem;
+      color: #735221;
+      font-family: 'Merriweather', Georgia, serif;
+      font-weight: 800;
+    }
+
+    .blog-header > p {
+      text-align: center;
+      font-size: 1.18rem;
+      color: #735221;
+      margin-bottom: 0;
+    }
+
+    .post-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 38px;
+      justify-content: center; /* centraliza quando há 1 ou poucos cards */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2vw 48px 2vw;
+    }
+
+    .post-card {
+      background: #f9f6f1;
+      border-radius: 12px;
+      box-shadow: 0 1px 12px #ede6d24d;
+      width: 370px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      padding-bottom: 18px;
+      margin-top: 0;
+      overflow: hidden;
+    }
+
+    .post-card:hover {
+      box-shadow: 0 8px 30px #e4ceac69;
+      transform: translateY(-3px) scale(1.025);
+    }
+
+    .post-card-link {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .post-card img {
+      display: block;
+      width: 88%;
+      max-width: 230px;
+      margin: 22px auto 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 1px 7px #d1c8b2b0;
+      background: #eceae6;
+      object-fit: contain;
+      height: auto;
+      max-height: 155px;
+    }
+
+    .post-card-content {
+      padding: 14px 24px 0 24px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .post-card-title {
+      font-size: 1.09rem;
+      margin: 13px 0 3px 0;
+      font-weight: 700;
+      color: #735221;
+      font-family: 'Merriweather', Georgia, serif;
+    }
+
+    .post-card-title a {
+      text-decoration: none;
+      color: #735221;
+      transition: color 0.17s ease;
+    }
+
+    .post-card-title a:hover {
+      color: #38b6ff;
+    }
+
+    .post-card-title a:focus-visible {
+      outline: 2px solid #38b6ff;
+      outline-offset: 3px;
+    }
+
+    .post-card-meta {
+      color: #b6a47e;
+      font-size: 0.99rem;
+      margin-bottom: 9px;
+      border-bottom: 1px solid #f0e0bd;
+      padding-bottom: 4px;
+    }
+
+    .post-card-excerpt {
+      color: #6d5d46;
+      font-size: 1.03rem;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 1080px) {
+      .blog-header,
+      .post-grid {
+        max-width: 97vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+      }
+      .post-card {
+        width: 92vw;
+        max-width: 380px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .blog-header,
+      .post-grid {
+        max-width: 99vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+      }
+      .post-card {
+        max-width: 98vw;
+        width: 100%;
+      }
+      .post-card-content {
+        padding: 10px 6vw 0 6vw;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .post-card {
+        transition: box-shadow 0.01s linear;
+      }
+      .post-card:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blog-container">
+    <header class="blog-header">
+      <h1>Blog sobre Terapia Floral</h1>
+      <p>
+        Textos aprofundados sobre essências florais, auto-mapeamento e desenvolvimento interior.
+      </p>
+    </header>
+
+    <main class="post-grid" aria-label="Lista de artigos do blog">
+      <article class="post-card">
+        <a class="post-card-link" href="blog.html">
+          <img src="../blog1.jpg" alt="Ilustração para o texto Como Funcionam as Essências Florais">
+          <div class="post-card-content">
+            <h2 class="post-card-title">
+              <a href="blog.html">
+                How Flower Essences Work: A Journey of Vibrational Transformation
+              </a>
+            </h2>
+            <p class="post-card-meta">11/18/2025 · long read</p>
+            <p class="post-card-excerpt">
+              Understand, in accessible language, how flower essences work at subtle levels
+              to support profound processes of healing and self-knowledge.
+            </p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Para mais posts, basta duplicar o bloco <article> acima,
+           trocando imagem, links, datas e textos. -->
+    </main>
+  </div>
+</body>
+</html>
