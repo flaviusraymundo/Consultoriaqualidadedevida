@@ -31,7 +31,7 @@ h2 {
 
 .blog-logo {
   display: block;
-  width: 100px;           /* ← Tamanho fixo */
+  width: 80px;           /* ← Tamanho fixo */
   height: auto;
   margin: 0 auto 24px auto;
   transition: transform 0.2s ease;
@@ -172,6 +172,21 @@ a.cta:hover,
 .post-card-excerpt {
   font-size: 0.96rem;
   margin: 0;
+}
+
+@media (max-width: 600px) {
+  .blog-header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .blog-header-text {
+    text-align: center;
+  }
+  
+  .blog-logo-inline {
+    max-width: 60px;
+  }
 }
 
 @media (max-width: 900px) {
