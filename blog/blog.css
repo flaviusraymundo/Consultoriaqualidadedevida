@@ -55,6 +55,7 @@ h2 {
 .cta-intro {
   text-align: center;
   text-indent: 0 !important; /* Remove o recuo automático dos parágrafos */
+  margin-top: 2.5em;
   margin-bottom: 0;
 }
 
