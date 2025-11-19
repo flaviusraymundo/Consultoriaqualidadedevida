@@ -1,0 +1,37 @@
+# robots.txt para consultoriaqualidadedevida.com
+# Atualizado em: 18/11/2025
+
+# Permitir acesso a todos os buscadores
+User-agent: *
+Allow: /
+
+# Bloquear acesso a diretórios administrativos/privados (se houver)
+# Descomente as linhas abaixo se você tiver essas pastas:
+# Disallow: /admin/
+# Disallow: /private/
+# Disallow: /cgi-bin/
+# Disallow: /tmp/
+
+# Bloquear acesso a arquivos específicos (opcional)
+# Disallow: /*.pdf$
+# Disallow: /backup/
+
+# Sitemap
+Sitemap: https://consultoriaqualidadedevida.com/sitemap.xml
+
+# Tempo de espera entre requisições (opcional - em segundos)
+# Crawl-delay: 1
+
+# Regras específicas para buscadores (opcional)
+# User-agent: Googlebot
+# Allow: /
+
+# User-agent: Bingbot
+# Allow: /
+
+# Bloquear bots indesejados (opcional)
+# User-agent: BadBot
+# Disallow: /
+
+# User-agent: SemrushBot
+# Crawl-delay: 5
