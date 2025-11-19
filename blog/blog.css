@@ -52,6 +52,12 @@ h2 {
   margin: 46px auto 56px auto;
 }
 
+.cta-intro {
+  text-align: center;
+  text-indent: 0 !important; /* Remove o recuo automático dos parágrafos */
+  margin-bottom: 0;
+}
+
 a.cta,
 .cta {
   display: block;
