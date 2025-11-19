@@ -41,11 +41,6 @@ h2 {
   transform: scale(1.05);
 }
 
-@media (max-width: 700px) {
-  .blog-logo {
-    width: 80px;          /* ← Menor no mobile */
-    margin-bottom: 20px;
-  }
 }
 
 .blog-title {
@@ -174,7 +169,7 @@ a.cta:hover,
   margin: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .blog-header-content {
     flex-direction: column;
     text-align: center;
@@ -187,7 +182,12 @@ a.cta:hover,
   .blog-logo-inline {
     max-width: 60px;
   }
-}
+
+@media (max-width: 700px) {
+  .blog-logo {
+    width: 80px;          /* ← Menor no mobile */
+    margin-bottom: 20px;
+  }
 
 @media (max-width: 900px) {
   .container,
