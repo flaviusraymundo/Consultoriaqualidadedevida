@@ -161,4 +161,12 @@ a.cta:hover,
     max-width: 98vw;
     padding: 10vw 2vw;
   }
+
+@media (max-width: 700px) {
+  a.cta,
+  .cta {
+    width: 100%;
+    padding: 18px;
+  }
+}
 }
