@@ -31,9 +31,21 @@ h2 {
 
 .blog-logo {
   display: block;
-  max-width: 90px;
+  width: 100px;           /* ← Tamanho fixo */
   height: auto;
   margin: 0 auto 24px auto;
+  transition: transform 0.2s ease;
+}
+
+.blog-logo:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 700px) {
+  .blog-logo {
+    width: 80px;          /* ← Menor no mobile */
+    margin-bottom: 20px;
+  }
 }
 
 .blog-title {
