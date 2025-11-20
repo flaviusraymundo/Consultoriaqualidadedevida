@@ -17,7 +17,7 @@ Allow: /
 # Disallow: /backup/
 
 # Sitemap
-Sitemap: https://consultoriaqualidadedevida.com/sitemap.xml
+Sitemap: https://consultoriaqualidadedevida.com/sitemap.xml/sitemap.xml
 
 # Tempo de espera entre requisições (opcional - em segundos)
 # Crawl-delay: 1
