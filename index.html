@@ -285,12 +285,7 @@
       box-shadow:0 3px 12px rgba(0,0,0,.05);
       border-left:4px solid var(--primary-color);
     }
-    .feel-item::before{
-      content:'✨';
-      font-size:1.2em;
-      flex-shrink:0;
-    }
-
+    
     /* marca "lotus" nos itens do floral */
     .flower-item{
       background:#fff;
@@ -302,11 +297,7 @@
       box-shadow:0 3px 12px rgba(0,0,0,.05);
       border-left:4px solid var(--primary-color);
     }
-    .flower-item::before{
-      content:'🪷';
-      font-size:1.2em;
-      flex-shrink:0;
-    }
+    
     .how-florals-blog-link{
       margin-top:28px;
       text-align:center;
@@ -684,17 +675,19 @@
     <div class="section-content-wrapper">
       <div style="padding: 40px 0;">
         <div class="feel-list">
-          <span>
-            Essências florais são preparados naturais que capturam o padrão vibracional das flores em água. Utilizadas há milênios por povos ancestrais e trazidas para a medicina ocidental moderna pelo médico inglês Dr. Edward Bach no século XX, representam uma abordagem vibracional de cuidado integral que trabalha na dimensão da energia vital e informacional de todo o ser.
-          </span>
-        </div>          
+          <div class="flower-item">
+            <span>
+              Essências florais são preparados naturais que capturam o padrão vibracional das flores em água. Utilizadas há milênios por povos ancestrais e trazidas para a medicina ocidental moderna pelo médico inglês Dr. Edward Bach no século XX, representam uma abordagem vibracional de cuidado integral que trabalha na dimensão da energia vital e informacional de todo o ser.
+            </span>
+          </div>          
+        </div>
           
         <div class="section-end-cta">
           <button onclick="startMapping()">Quero começar →</button>
         </div>
       </div>
     </div>
-  </section> 
+  </section>
 
   <!-- Como os Florais Funcionam - COLAPSÁVEL -->
   <section class="how-florals section-collapsible" id="how-florals-section">
@@ -704,27 +697,28 @@
     </div>
     <div class="section-content-wrapper">
       <div style="padding: 40px 0;">
-        <div class="feel-list">          
-          <span>
-            As essências florais atuam em nível vibracional e informacional, preservando o padrão energético sutil das flores. Quando ingeridas, essa informação biofísica entra em ressonância com seus padrões mentais e emocionais, promovendo reorganização e facilitando mudanças profundas de forma gradual e respeitosa ao seu processo individual.
-          </span>
-        </div>
-        <div class="flower-item">
-          <span>
-            Por ressonância, a essência identifica e harmoniza padrões mentais que estejam bloqueiando suas potencialidades. O processo dissolve hábitos mentais — raiz das emoções não saudáveis e doenças físicas —, trazendo consciência sobre seus automatismos, fortalecendo recursos internos e reorganizando seu campo energético. Essa reorganização interna atrai naturalmente, por ressonância, experiências externas mais alinhadas com seus propósitos, criando um ciclo de transformação em todos os níveis.
-          </span>
-        </div>
-        <div class="flower-item">
-          <span>
-            A terapia floral não impõe mudanças, mas facilita reconhecimentos profundos: ao dissolver padrões de pensamentos cristalizados e emoções não saudáveis, permitindo que sua própria sabedoria interior emerja e retome o comando, devolvendo a você o protagonismo consciente sobre seu processo de cura, florescimento e caminhada rumo à plenitude.
-          </span>
+        <div class="feel-list">   
+          <div class="flower-item">
+           <span>
+             As essências florais atuam em nível vibracional e informacional, preservando o padrão energético sutil das flores. Quando ingeridas, essa informação biofísica entra em ressonância com seus padrões mentais e emocionais, promovendo reorganização e facilitando mudanças profundas de forma gradual e respeitosa ao seu processo individual.
+           </span>
          </div>
-        <div class="flower-item">
-          <span>
-           O processo é natural, gentil e não invasivo: funciona como um ajuste fino nos padrões de organização do campo vital, respeita seu ritmo único de transformação e integra-se harmoniosamente a outras abordagens terapêuticas. Por não atuar através de substâncias químicas que dependem de quantidade para fazer efeito — como remédios convencionais —, não apresenta contraindicações, efeitos colaterais ou interações medicamentosas.
-          </span>
-        </div>        
-  
+         <div class="flower-item">
+           <span>
+             Por ressonância, a essência identifica e harmoniza padrões mentais que estejam bloqueiando suas potencialidades. O processo dissolve hábitos mentais — raiz das emoções não saudáveis e doenças físicas —, trazendo consciência sobre seus automatismos, fortalecendo recursos internos e reorganizando seu campo energético. Essa reorganização interna atrai naturalmente, por ressonância, experiências externas mais alinhadas com seus propósitos, criando um ciclo de transformação em todos os níveis.
+           </span>
+         </div>
+         <div class="flower-item">
+           <span>
+             A terapia floral não impõe mudanças, mas facilita reconhecimentos profundos: ao dissolver padrões de pensamentos cristalizados e emoções não saudáveis, permitindo que sua própria sabedoria interior emerja e retome o comando, devolvendo a você o protagonismo consciente sobre seu processo de cura, florescimento e caminhada rumo à plenitude.
+           </span>
+          </div>
+         <div class="flower-item">
+           <span>
+            O processo é natural, gentil e não invasivo: funciona como um ajuste fino nos padrões de organização do campo vital, respeita seu ritmo único de transformação e integra-se harmoniosamente a outras abordagens terapêuticas. Por não atuar através de substâncias químicas que dependem de quantidade para fazer efeito — como remédios convencionais —, não apresenta contraindicações, efeitos colaterais ou interações medicamentosas.
+           </span>
+         </div>  
+        </div>   
         <!--<p class="how-florals-blog-link">
           <a href="/blog/blog.html" target="_blank" rel="noopener">
             Ler artigo completo no blog
