@@ -960,11 +960,11 @@
     function startMapping(){
       const here = new URLSearchParams(window.location.search);
       const utm = {
-        utm_source: here.get('utm_source') || 'landing',
-        utm_medium: here.get('utm_medium') || 'ref_consultoria',
-        utm_campaign: here.get('utm_campaign') || 'lp_en'
+        utm_source: here.get('utm_source') || 'direct',
+        utm_medium: here.get('utm_medium') || 'landing_page',
+        utm_campaign: here.get('utm_campaign') || 'organic_landing'
       };
-      const params = new URLSearchParams({ ref:'consultoria', lang: currentLang, skip_welcome:'1', step:'instruction', ...utm });
+      const params = new URLSearchParams({ ref:'landing_page', lang: currentLang, skip_welcome:'1', step:'instruction', ...utm });
       trackLandingEvent('cta_clicked',{button_type:'main_cta'});
       window.location.href = `https://terapiafloral.org/?${params.toString()}`;
     }
